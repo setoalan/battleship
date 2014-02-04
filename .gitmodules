@@ -1,0 +1,3 @@
+[submodule "ASKLibrary"]
+	path = ASKLibrary
+	url = git@bitbucket.org:chriscm/ask-scanning-library.git
