@@ -3,5 +3,15 @@
 
     <string name="app_name">Battleship</string>
     <string name="action_settings">Settings</string>
+    <string name="fleet">Fleet</string>
+    <string name="carrier">Carrier (5)</string>
+    <string name="battleship">Battleship (4)</string>
+    <string name="cruiser">Cruiser (3)</string>
+    <string name="submarine">Submarine (3)</string>
+    <string name="destroyer">Destroyer (2)</string>
+    <string name="you">You</string>
+    <string name="opponent">Opponent</string>
+    <string name="floating">O</string>
+    <string name="sank">X</string>
 
 </resources>

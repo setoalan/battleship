@@ -6,11 +6,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
-public class BattleshipAdapter extends BaseAdapter {
+public class BattleshipAdapterSide extends BaseAdapter {
 
 	private Context mContext;
 	
-	public BattleshipAdapter(Context context) {
+	public BattleshipAdapterSide(Context context) {
 		mContext = context;
 	}
 	
@@ -34,7 +34,7 @@ public class BattleshipAdapter extends BaseAdapter {
 		LayoutInflater inflater = (LayoutInflater) mContext
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		
-		View v = inflater.inflate(R.layout.view_square, parent, false);
+		View v = inflater.inflate(R.layout.view_square_side, parent, false);
 		
 		return v;
 	}

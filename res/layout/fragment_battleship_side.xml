@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    
+    <TextView 
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="30sp"
+        android:text="@string/app_name" />
+    
+   	<GridView 
+        android:id="@+id/gridViewSide"
+        android:layout_width="350dp"
+        android:layout_height="350dp"
+        android:layout_gravity="center"
+        android:numColumns="10"
+		android:horizontalSpacing="1dp"
+		android:verticalSpacing="1dp"
+		android:background="@android:color/holo_green_light" >
+    </GridView>
+    
+	<TextView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center"
+		android:text="@string/fleet" />
+    
+	<LinearLayout
+	    android:layout_width="match_parent"
+   	    android:layout_height="match_parent"
+   	    android:orientation="horizontal"
+   	    android:baselineAligned="false" >
+   	    
+		<LinearLayout 
+	   	    android:layout_width="0dp"
+	   	    android:layout_height="match_parent"
+	   	    android:layout_weight="1"
+	   	    android:orientation="vertical" >
+	   	    
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center"
+				android:text="@string/you" />
+		    
+			<TextView
+			    android:id="@+id/youCarrier"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center"
+				android:text="@string/floating" />
+		    			
+			<TextView
+			    android:id="@+id/youBattleship"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center"
+				android:text="@string/floating" />
+			
+			<TextView
+			    android:id="@+id/youCruiser"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center"
+				android:text="@string/floating" />
+			
+			<TextView
+			    android:id="@+id/youSubmarine"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center"
+				android:text="@string/floating" />
+			
+			<TextView
+			    android:id="@+id/youDestroyer"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center"
+				android:text="@string/floating" />
+	   	    
+	   	</LinearLayout>
+	   	
+	   	<LinearLayout 
+	   	    android:layout_width="0dp"
+	   	    android:layout_height="match_parent"
+	   	    android:layout_weight="1"
+	   	    android:orientation="vertical" >
+			
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center" />
+	   	    
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center"
+				android:text="@string/carrier" />
+			
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center"
+				android:text="@string/battleship" />
+			
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center"
+				android:text="@string/cruiser" />
+			
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center"
+				android:text="@string/submarine" />
+			
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center"
+				android:text="@string/destroyer" />
+	   	    
+	   	</LinearLayout>
+	   	
+		<LinearLayout 
+	   	    android:layout_width="0dp"
+	   	    android:layout_height="match_parent"
+	   	    android:layout_weight="1"
+	   	    android:orientation="vertical" >
+			
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center"
+				android:text="@string/opponent" />
+			
+			<TextView
+			    android:id="@+id/oppoCarrier"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center"
+				android:text="@string/floating" />
+		    			
+			<TextView
+			    android:id="@+id/oppoBattleship"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center"
+				android:text="@string/floating" />
+			
+			<TextView
+			    android:id="@+id/oppoCruiser"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center"
+				android:text="@string/sank" />
+			
+			<TextView
+			    android:id="@+id/oppoSubmarine"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center"
+				android:text="@string/floating" />
+			
+			<TextView
+			    android:id="@+id/oppoDestroyer"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center"
+				android:text="@string/sank" />
+   	    
+   		</LinearLayout>
+   		
+   	</LinearLayout>
+
+</LinearLayout>

@@ -1,19 +1,22 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="5dp"
-    android:paddingLeft="5dp"
-    tools:context=".BattleshipActivity" >
+    android:orientation="horizontal"
+    android:baselineAligned="true" >
+    
+    <fragment 
+        android:id="@+id/sideFragment"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        class="com.hasbrobeta.battleship.BattleshipFragmentSide" />
+    
+    <fragment 
+        android:id="@+id/detailFragment"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="3"
+        class="com.hasbrobeta.battleship.BattleshipFragment" />
 
-    <GridView
-        android:id="@+id/gridView"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_gravity="center"
-        android:horizontalSpacing="5dp"
-        android:numColumns="10"
-        android:verticalSpacing="5dp" >
-    </GridView>
-
-</RelativeLayout>
+</LinearLayout>
