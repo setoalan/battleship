@@ -5,7 +5,6 @@
     android:orientation="vertical">
     
     <TextView 
-        android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -13,7 +12,7 @@
         android:text="@string/app_name" />
     
    	<GridView 
-        android:id="@+id/gridViewSide"
+        android:id="@+id/grid_view_side"
         android:layout_width="350dp"
         android:layout_height="350dp"
         android:layout_gravity="center"
@@ -48,35 +47,35 @@
 				android:text="@string/you" />
 		    
 			<TextView
-			    android:id="@+id/youCarrier"
+			    android:id="@+id/you_carrier"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_gravity="center"
 				android:text="@string/floating" />
 		    			
 			<TextView
-			    android:id="@+id/youBattleship"
+			    android:id="@+id/you_battleship"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_gravity="center"
 				android:text="@string/floating" />
 			
 			<TextView
-			    android:id="@+id/youCruiser"
+			    android:id="@+id/you_cruiser"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_gravity="center"
 				android:text="@string/floating" />
 			
 			<TextView
-			    android:id="@+id/youSubmarine"
+			    android:id="@+id/you_submarine"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_gravity="center"
 				android:text="@string/floating" />
 			
 			<TextView
-			    android:id="@+id/youDestroyer"
+			    android:id="@+id/you_destroyer"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_gravity="center"
@@ -140,35 +139,35 @@
 				android:text="@string/opponent" />
 			
 			<TextView
-			    android:id="@+id/oppoCarrier"
+			    android:id="@+id/oppo_carrier"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_gravity="center"
 				android:text="@string/floating" />
 		    			
 			<TextView
-			    android:id="@+id/oppoBattleship"
+			    android:id="@+id/oppo_battleship"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_gravity="center"
 				android:text="@string/floating" />
 			
 			<TextView
-			    android:id="@+id/oppoCruiser"
+			    android:id="@+id/oppo_cruiser"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_gravity="center"
 				android:text="@string/sank" />
 			
 			<TextView
-			    android:id="@+id/oppoSubmarine"
+			    android:id="@+id/oppo_submarine"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_gravity="center"
 				android:text="@string/floating" />
 			
 			<TextView
-			    android:id="@+id/oppoDestroyer"
+			    android:id="@+id/oppo_destroyer"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_gravity="center"
