@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+<!--     <GridView  -->
+<!--         android:id="@+id/grid_view" -->
+<!--         android:layout_width="400dp" -->
+<!--         android:layout_height="415dp" -->
+<!--         android:layout_gravity="center" -->
+<!--         android:layout_toRightOf="@+id/buttonA" -->
+<!--         android:layout_below="@+id/button01" -->
+<!--         android:numColumns="10" -->
+<!-- 		android:horizontalSpacing="1dp" -->
+<!-- 		android:verticalSpacing="1dp" -->
+<!-- 		android:columnWidth="45dp" -->
+<!-- 		android:background="@android:color/holo_blue_bright"> -->
+<!--     </GridView> -->
+
+	<GridLayout 
+        android:id="@+id/grid_view"
+        android:layout_width="400dp"
+        android:layout_height="400dp"
+        android:layout_gravity="center"
+        android:layout_toRightOf="@+id/buttonA"
+        android:layout_below="@+id/button01"
+        android:columnCount="10"
+        android:rowCount="10"
+		android:horizontalSpacing="1dp"
+		android:verticalSpacing="1dp"
+		android:columnWidth="45dp"
+		android:background="@android:color/holo_blue_bright">
+    </GridLayout>
+
+    <Button
+        android:id="@+id/buttonA"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/button01"
+        android:enabled="false"
+        android:onClick="letterCoordSelectA"
+        android:text="A" />
+
+    <Button
+        android:id="@+id/buttonB"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/buttonA"
+        android:enabled="false"
+        android:onClick="letterCoordSelectB"
+        android:text="B" />
+    
+    <Button
+        android:id="@+id/buttonC"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/buttonB"
+        android:enabled="false"
+        android:onClick="letterCoordSelectC"
+        android:text="C" />
+    
+    <Button
+        android:id="@+id/buttonD"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/buttonC"
+        android:enabled="false"
+        android:onClick="letterCoordSelectD"
+        android:text="D" />
+    
+    <Button
+        android:id="@+id/buttonE"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/buttonD"
+        android:enabled="false"
+        android:onClick="letterCoordSelectE"
+        android:text="E" />
+    
+    <Button
+        android:id="@+id/buttonF"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/buttonE"
+        android:enabled="false"
+        android:onClick="letterCoordSelectF"
+        android:text="F" />
+    
+    <Button
+        android:id="@+id/buttonG"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/buttonF"
+        android:enabled="false"
+        android:onClick="letterCoordSelectG"
+        android:text="G" />
+    
+    <Button
+        android:id="@+id/buttonH"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/buttonG"
+        android:enabled="false"
+        android:onClick="letterCoordSelectH"
+        android:text="H" />
+    
+    <Button
+        android:id="@+id/buttonI"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/buttonH"
+        android:enabled="false"
+        android:onClick="letterCoordSelectI"
+        android:text="I" />
+    
+    <Button
+        android:id="@+id/buttonJ"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/buttonI"
+        android:enabled="false"
+        android:onClick="letterCoordSelectJ"
+        android:text="J" />
+    
+    <Button
+        android:id="@+id/button01"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/buttonA"
+        android:enabled="false"
+        android:onClick="numberCoordSelect01"
+        android:text="1" />
+
+    <Button
+        android:id="@+id/button02"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_toRightOf="@+id/button01"
+        android:enabled="false"
+        android:onClick="numberCoordSelect02"
+        android:text="2" />
+    
+    <Button
+        android:id="@+id/button03"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_toRightOf="@+id/button02"
+        android:enabled="false"
+        android:onClick="numberCoordSelect03"
+        android:text="3" />
+    
+    <Button
+        android:id="@+id/button04"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_toRightOf="@+id/button03"
+        android:enabled="false"
+        android:onClick="numberCoordSelect04"
+        android:text="4" />
+    
+    <Button
+        android:id="@+id/button05"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_toRightOf="@+id/button04"
+        android:enabled="false"
+        android:onClick="numberCoordSelect05"
+        android:text="5" />
+    
+    <Button
+        android:id="@+id/button06"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_toRightOf="@+id/button05"
+        android:enabled="false"
+        android:onClick="numberCoordSelect06"
+        android:text="6" />
+    
+    <Button
+        android:id="@+id/button07"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_toRightOf="@+id/button06"
+        android:enabled="false"
+        android:onClick="numberCoordSelect07"
+        android:text="7" />
+    
+    <Button
+        android:id="@+id/button08"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_toRightOf="@+id/button07"
+        android:enabled="false"
+        android:onClick="numberCoordSelect8"
+        android:text="8" />
+    
+    <Button
+        android:id="@+id/button09"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_toRightOf="@+id/button08"
+        android:enabled="false"
+        android:onClick="numberCoordSelect09"
+        android:text="9" />
+    
+    <Button
+        android:id="@+id/button10"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_toRightOf="@+id/button09"
+        android:enabled="false"
+        android:onClick="numberCoordSelect10"
+        android:text="10" />
+
+<!--     <ImageView -->
+<!--         android:id="@+id/imageView1" -->
+<!--         android:layout_width="400dp"  -->
+<!--         android:layout_height="400dp"  -->
+<!--         android:layout_gravity="center"  -->
+<!--         android:layout_toRightOf="@+id/buttonA"  -->
+<!--         android:layout_below="@+id/button01"  -->
+<!--         android:src="@drawable/grid" /> -->
+    
+</RelativeLayout>

@@ -14,7 +14,7 @@
         android:label="@string/app_name"
         android:theme="@android:style/Theme.NoTitleBar" >
         <activity
-            android:name="com.hasbrobeta.battleship.BattleshipActivity"
+            android:name="com.hasbrobeta.battleship.PlacementActivity"
             android:label="@string/app_name"
             android:screenOrientation="landscape" >
             <intent-filter>
