@@ -22,7 +22,7 @@
 	</string-array>
 	<string name="LetterButton">Select Letter</string>
 	<string name="NumberButton">Select Number</string>
-	<string name="ConfirmButton">FIRE!</string>
+	<string name="ConfirmButton">Place Ship</string>
 	<string name="A">A</string>
 	<string name="directionButton">Select Direction</string>
 
