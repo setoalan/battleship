@@ -75,7 +75,7 @@ public class PlacementActivity extends Activity {
 				//setText(""+n,""+l);
 				TextView tv = (TextView) findViewById(R.id.textView3);
 				tv.setText(""+num);
-		        ncoord = num;
+		        ncoord = num - 1;
 		        tv = (TextView) findViewById(R.id.textView1);
 				tv.setText(""+l);
 		        lcoord = le;
