@@ -90,17 +90,6 @@ public class PlacementActivity extends Activity {
 		@Override
 		public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
 			Toast.makeText(PlacementActivity.this, position + "", Toast.LENGTH_SHORT).show();
-//			int num = position%10;
-//			char n = (char) num;
-//			int le = position/10;
-//			char l = (char) ('a' + le);
-//			//setText(""+n,""+l);
-//			TextView tv = (TextView) findViewById(R.id.textView3);
-//			tv.setText(n);
-//	        ncoord = num;
-//	        tv = (TextView) findViewById(R.id.textView1);
-//			tv.setText(l);
-//	        lcoord = le;
 		}
 	}
 	
@@ -181,12 +170,13 @@ public class PlacementActivity extends Activity {
 			i = 4;
 		else if (this.shipType == 4)
 			i = 5;
-		
+		//int test = coord - i;
+		//int test2 = 10*((int)(coord/10));
 		if (this.board.squares[coord].isOccupied == false &&
 				coord+(i-1)*adjust < 99 &&
 				coord+(i-1)*adjust > 0 &&
-				(this.direction!= 0 || coord - i >= 10*((int)(coord/10))) &&
-				(this.direction!= 2 || coord + i <= 10+10*((int)(coord/10)))) {	
+				(this.direction!= 0 || coord - i + 1 >= 10*((int)(coord/10))) &&//need + 1 to allow ships along left edge (PB E1E2 for example)
+				(this.direction!= 2 || coord + i <= 10+10*((int)(coord/10)))) {//+1 or -1 apparently not needed here, seems to be working fine
 			for (int k = 0; k < i; k++) {
 				if (this.board.squares[coord+k*adjust].isOccupied == true) {
 					TextView tv = (TextView) findViewById(R.id.textView5);
