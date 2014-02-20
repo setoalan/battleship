@@ -6,9 +6,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 public class BattleshipFragment extends Fragment {
 
@@ -27,6 +28,7 @@ public class BattleshipFragment extends Fragment {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
 				Toast.makeText(getActivity(), "" + position, Toast.LENGTH_SHORT).show();
+				
 			}
 		});
 		
