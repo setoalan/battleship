@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 
 public class BattleshipAdapter extends BaseAdapter {
 
@@ -31,12 +32,15 @@ public class BattleshipAdapter extends BaseAdapter {
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		LayoutInflater inflater = (LayoutInflater) mContext
-				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		//LayoutInflater inflater = (LayoutInflater) mContext
+		//		.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		
-		View v = inflater.inflate(R.layout.unoccupied_square, parent, false);
+		ImageView imageView = new ImageView(mContext);
+		imageView.setImageResource(R.drawable.bg);
+		return imageView;
+		//View v = inflater.inflate(R.layout.unoccupied_square, parent, false);
 		
-		return v;
+		//return v;
 	}
 
 }
