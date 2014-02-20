@@ -6,10 +6,12 @@ import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.GridLayout;
+import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,6 +22,7 @@ public class PlacementActivity extends Activity {
 	private String[] mNavigation;
 	private DrawerLayout mDrawerLayout;
 	private ListView mDrawerList;
+	private GridView mGridView;
 	
 	public class Square {
 		boolean isOccupied;
@@ -57,10 +60,29 @@ public class PlacementActivity extends Activity {
 		mNavigation = getResources().getStringArray(R.array.navigation_array);
 		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 		mDrawerList = (ListView) findViewById(R.id.left_drawer);
+		mGridView = (GridView) findViewById(R.id.grid_view);
 		
 		mDrawerList.setAdapter(new ArrayAdapter<String>(this,
 				R.layout.drawer_list_item, mNavigation));
 		mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
+		mGridView.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+				//Toast.makeText(getActivity(), "" + position, Toast.LENGTH_SHORT).show();
+				int num = 1+position%10;
+				int le = position/10;
+				char l = (char) ('A' + le);
+				//setText(""+n,""+l);
+				TextView tv = (TextView) findViewById(R.id.textView3);
+				tv.setText(""+num);
+		        ncoord = num - 1;
+		        tv = (TextView) findViewById(R.id.textView1);
+				tv.setText(""+l);
+		        lcoord = le;
+			}
+		}
+		);
+		
 		board = new Board();
 	}
 	
@@ -69,6 +91,14 @@ public class PlacementActivity extends Activity {
 		public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
 			Toast.makeText(PlacementActivity.this, position + "", Toast.LENGTH_SHORT).show();
 		}
+	}
+	
+	public void setText(String n, String l)
+	{
+		TextView tv = (TextView) findViewById(R.id.textView3);
+		tv.setText(n);
+        tv = (TextView) findViewById(R.id.textView1);
+		tv.setText(l);
 	}
 	
 	public void ship2(View view) {
@@ -114,126 +144,6 @@ public class PlacementActivity extends Activity {
 		tv.setText("Down");
         this.direction = 3;
 	}
-
-	public void letterCoordSelectA(View view) {
-		TextView tv = (TextView) findViewById(R.id.textView1);
-		tv.setText("A");
-        this.lcoord = 0;
-	}
-	
-	public void letterCoordSelectB(View view) {
-		TextView tv = (TextView) findViewById(R.id.textView1);
-		tv.setText("B");
-        this.lcoord = 1;
-	}
-	
-	public void letterCoordSelectC(View view) {
-		TextView tv = (TextView) findViewById(R.id.textView1);
-		tv.setText("C");
-        this.lcoord = 2;
-	}
-	
-	public void letterCoordSelectD(View view) {
-		TextView tv = (TextView) findViewById(R.id.textView1);
-		tv.setText("D");
-        this.lcoord = 3;
-	}
-	
-	public void letterCoordSelectE(View view) {
-		TextView tv = (TextView) findViewById(R.id.textView1);
-		tv.setText("E");
-        this.lcoord = 4;
-	}
-	
-	public void letterCoordSelectF(View view) {
-		TextView tv = (TextView) findViewById(R.id.textView1);
-		tv.setText("F");
-        this.lcoord = 5;
-	}
-	
-	public void letterCoordSelectG(View view) {
-		TextView tv = (TextView) findViewById(R.id.textView1);
-		tv.setText("G");
-        this.lcoord = 6;
-	}
-	
-	public void letterCoordSelectH(View view) {
-		TextView tv = (TextView) findViewById(R.id.textView1);
-		tv.setText("H");
-        this.lcoord = 7;
-	}
-	
-	public void letterCoordSelectI(View view) {
-		TextView tv = (TextView) findViewById(R.id.textView1);
-		tv.setText("I");
-        this.lcoord = 8;
-	}
-	
-	public void letterCoordSelectJ(View view) {
-		TextView tv = (TextView) findViewById(R.id.textView1);
-		tv.setText("J");
-        this.lcoord = 9;
-	}
-	
-	public void numberCoordSelect01(View view) {
-		TextView tv = (TextView) findViewById(R.id.textView3);
-		tv.setText("1");
-        this.ncoord = 0;
-	}
-	
-	public void numberCoordSelect02(View view) {
-		TextView tv = (TextView) findViewById(R.id.textView3);
-		tv.setText("2");
-        this.ncoord = 1;
-	}
-	
-	public void numberCoordSelect03(View view) {
-		TextView tv = (TextView) findViewById(R.id.textView3);
-		tv.setText("3");
-        this.ncoord = 2;
-	}
-	
-	public void numberCoordSelect04(View view) {
-		TextView tv = (TextView) findViewById(R.id.textView3);
-		tv.setText("4");
-        this.ncoord = 3;
-	}
-	
-	public void numberCoordSelect05(View view) {
-		TextView tv = (TextView) findViewById(R.id.textView3);
-		tv.setText("5");
-        this.ncoord = 4;
-	}
-	
-	public void numberCoordSelect06(View view) {
-		TextView tv = (TextView) findViewById(R.id.textView3);
-		tv.setText("6");
-        this.ncoord = 5;
-	}
-	
-	public void numberCoordSelect07(View view) {
-		TextView tv = (TextView) findViewById(R.id.textView3);
-		tv.setText("7");
-        this.ncoord = 6;
-	}
-	
-	public void numberCoordSelect08(View view) {
-		TextView tv = (TextView) findViewById(R.id.textView3);
-		tv.setText("8");
-        this.ncoord = 7;
-	}
-	
-	public void numberCoordSelect09(View view) {
-		TextView tv = (TextView) findViewById(R.id.textView3);
-		tv.setText("9");
-        this.ncoord = 8;
-	}
-	
-	public void numberCoordSelect10(View view) {
-		TextView tv = (TextView) findViewById(R.id.textView3);
-		tv.setText("10");
-        this.ncoord = 9;
-	}
 	
 	public void placeShip(View v) {
 		if (shipType == -1) {
@@ -260,19 +170,19 @@ public class PlacementActivity extends Activity {
 			i = 4;
 		else if (this.shipType == 4)
 			i = 5;
-		
+		//int test = coord - i;
+		//int test2 = 10*((int)(coord/10));
 		if (this.board.squares[coord].isOccupied == false &&
 				coord+(i-1)*adjust < 99 &&
 				coord+(i-1)*adjust > 0 &&
-				(this.direction!= 0 || coord - i >= 10*((int)(coord/10))) &&
-				(this.direction!= 2 || coord + i <= 10+10*((int)(coord/10)))) {	
+				(this.direction!= 0 || coord - i + 1 >= 10*((int)(coord/10))) &&//need + 1 to allow ships along left edge (PB E1E2 for example)
+				(this.direction!= 2 || coord + i <= 10+10*((int)(coord/10)))) {//+1 or -1 apparently not needed here, seems to be working fine
 			for (int k = 0; k < i; k++) {
 				if (this.board.squares[coord+k*adjust].isOccupied == true) {
 					TextView tv = (TextView) findViewById(R.id.textView5);
 					tv.setText("Your cannot place your ship that way!");
 				}
 			}
-			//if (this.direction == 0 && )
 			for (int j = 0; j < i; j++) {
 				this.board.squares[coord+j*adjust].isOccupied = true;
 				this.board.squares[coord+j*adjust].shipNum = this.shipType;
@@ -281,9 +191,10 @@ public class PlacementActivity extends Activity {
 				ImageView shipbit = new ImageView(this);//(ImageView) findViewById(R.layout.fragment_battleship);
 				Drawable drawable = getResources().getDrawable(R.drawable.yellow);
 				shipbit.setImageDrawable(drawable);
-				GridLayout g = (GridLayout) findViewById(R.id.grid_view);
-				g.removeViewAt(coord+j*adjust);
-				g.addView(shipbit,coord+j*adjust);
+				GridView g = (GridView) findViewById(R.id.grid_view);
+				LinearLayout nv = (LinearLayout) g.getChildAt(coord+j*adjust);
+				ImageView nvv = (ImageView) nv.findViewById(R.id.usquare);
+				nvv.setImageDrawable(drawable);
 			}
 			//this looks like only the button call is separate in terms of the logic. Unless there's an unaccounted for
 			//else condition that for a ship type that matches none of them, much of this logic could be called after
@@ -341,4 +252,6 @@ public class PlacementActivity extends Activity {
 			tv.setText("Your cannot place your ship that way!");
 		}
 	}
+	
+	
 }

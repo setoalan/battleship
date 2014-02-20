@@ -4,34 +4,34 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
     
-<!--     <GridView  -->
-<!--         android:id="@+id/grid_view" -->
-<!--         android:layout_width="400dp" -->
-<!--         android:layout_height="415dp" -->
-<!--         android:layout_gravity="center" -->
-<!--         android:layout_toRightOf="@+id/buttonA" -->
-<!--         android:layout_below="@+id/button01" -->
-<!--         android:numColumns="10" -->
-<!-- 		android:horizontalSpacing="1dp" -->
-<!-- 		android:verticalSpacing="1dp" -->
-<!-- 		android:columnWidth="45dp" -->
-<!-- 		android:background="@android:color/holo_blue_bright"> -->
-<!--     </GridView> -->
-
-	<GridLayout 
+    <GridView 
         android:id="@+id/grid_view"
         android:layout_width="400dp"
-        android:layout_height="400dp"
+        android:layout_height="415dp"
         android:layout_gravity="center"
         android:layout_toRightOf="@+id/buttonA"
         android:layout_below="@+id/button01"
-        android:columnCount="10"
-        android:rowCount="10"
+        android:numColumns="10"
 		android:horizontalSpacing="1dp"
 		android:verticalSpacing="1dp"
 		android:columnWidth="45dp"
 		android:background="@android:color/holo_blue_bright">
-    </GridLayout>
+    </GridView>
+
+<!-- 	<GridLayout  -->
+<!--         android:id="@+id/grid_view" -->
+<!--         android:layout_width="400dp" -->
+<!--         android:layout_height="400dp" -->
+<!--         android:layout_gravity="center" -->
+<!--         android:layout_toRightOf="@+id/buttonA" -->
+<!--         android:layout_below="@+id/button01" -->
+<!--         android:columnCount="10" -->
+<!--         android:rowCount="10" -->
+<!-- 		android:horizontalSpacing="1dp" -->
+<!-- 		android:verticalSpacing="1dp" -->
+<!-- 		android:columnWidth="45dp" -->
+<!-- 		android:background="@android:color/holo_blue_bright"> -->
+<!--     </GridLayout> -->
 
     <Button
         android:id="@+id/buttonA"
