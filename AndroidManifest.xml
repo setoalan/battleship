@@ -14,13 +14,25 @@
         android:label="@string/app_name"
         android:theme="@android:style/Theme.NoTitleBar" >
         <activity
-            android:name="com.hasbrobeta.battleship.PlacementActivity"
-            android:label="@string/app_name"
+            android:name=".BattleshipMenu"
             android:screenOrientation="landscape" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+           	android:name="com.hasbrobeta.battleship.PlacementActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="landscape" >
+        </activity>
+        <activity
+            android:name=".BattleshipActivity"
+            android:screenOrientation="landscape" >
+        </activity>
+		<activity
+            android:name=".BattleshipSettingsActivity"
+            android:screenOrientation="landscape" >
         </activity>
     </application>
 

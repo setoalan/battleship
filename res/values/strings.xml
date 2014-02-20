@@ -25,5 +25,9 @@
 	<string name="ConfirmButton">FIRE!</string>
 	<string name="A">A</string>
 	<string name="directionButton">Select Direction</string>
+	<string name="start_game">Start Game</string>
+	<string name="ask_settings">ASK Settings</string>
+	<string name="ask_speed">ASK Speed</string>
+	<string name="placement">Placement</string>
 
 </resources>

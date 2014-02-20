@@ -1,6 +1,5 @@
 package com.hasbrobeta.battleship;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.view.View;
@@ -8,8 +7,9 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
+import ask.scanninglibrary.ASKActivity;
 
-public class BattleshipActivity extends Activity {
+public class BattleshipActivity extends ASKActivity {
 
 	private String[] mNavigation;
 	private DrawerLayout mDrawerLayout;
