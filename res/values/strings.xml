@@ -21,5 +21,7 @@
 		<item>Setting4</item>
 	</string-array>
 	<string name="start_game">Start Game</string>
+	<string name="ask_settings">ASK Settings</string>
+	<string name="ask_speed">ASK Speed</string>
 
 </resources>
