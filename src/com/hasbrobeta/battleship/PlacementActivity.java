@@ -1,6 +1,9 @@
 package com.hasbrobeta.battleship;
 
 import android.app.Activity;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
@@ -90,17 +93,6 @@ public class PlacementActivity extends Activity {
 		@Override
 		public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
 			Toast.makeText(PlacementActivity.this, position + "", Toast.LENGTH_SHORT).show();
-//			int num = position%10;
-//			char n = (char) num;
-//			int le = position/10;
-//			char l = (char) ('a' + le);
-//			//setText(""+n,""+l);
-//			TextView tv = (TextView) findViewById(R.id.textView3);
-//			tv.setText(n);
-//	        ncoord = num;
-//	        tv = (TextView) findViewById(R.id.textView1);
-//			tv.setText(l);
-//	        lcoord = le;
 		}
 	}
 	
@@ -156,6 +148,91 @@ public class PlacementActivity extends Activity {
         this.direction = 3;
 	}
 	
+	public int getPic(int ship, int direction, int bit)
+	{
+		if (ship == 0)
+		{
+			
+			if (bit == 0)
+			{
+				return R.drawable.patrol_1;
+			}
+			if (bit == 1)
+			{
+				return R.drawable.patrol_2;
+			}
+		}
+		else if (ship == 1)
+		{
+			if (bit == 0)
+			{
+				return R.drawable.destroyer_1;
+			}
+			if (bit == 1)
+			{
+				return R.drawable.destroyer_2;
+			}
+			if (bit == 2)
+			{
+				return R.drawable.destroyer_3;
+			}
+		}
+		else if (ship == 2)
+		{
+			if (bit == 0)
+			{
+				return R.drawable.sub_1;
+			}
+			if (bit == 1)
+			{
+				return R.drawable.sub_2;
+			}
+			if (bit == 2)
+			{
+				return R.drawable.sub_3;
+			}
+		}
+		else if (ship == 3)
+		{
+			if (bit == 0)
+			{
+				return R.drawable.battleship_1;
+			}
+			if (bit == 1)
+			{
+				return R.drawable.battleship_2;
+			}
+			if (bit == 2)
+			{
+				return R.drawable.battleship_3;
+			}
+			if (bit == 3)
+			{
+				return R.drawable.battleship_4;
+			}
+		}
+		else if (ship == 4)
+		{
+			if (bit == 0)
+			{
+				return R.drawable.carrier_1;
+			}
+			if (bit == 1)
+			{
+				return R.drawable.carrier_2;
+			}
+			if (bit == 2)
+			{
+				return R.drawable.carrier_3;
+			}
+			if (bit == 3)
+			{
+				return R.drawable.carrier_4;
+			}
+		}
+		return -1;
+	}
+	
 	public void placeShip(View v) {
 		if (shipType == -1) {
 			TextView tv = (TextView) findViewById(R.id.textView5);
@@ -181,12 +258,13 @@ public class PlacementActivity extends Activity {
 			i = 4;
 		else if (this.shipType == 4)
 			i = 5;
-		
+		int test = coord - i;
+		int test2 = 10*((int)(coord/10));
 		if (this.board.squares[coord].isOccupied == false &&
-				coord+(i-1)*adjust < 99 &&
-				coord+(i-1)*adjust > 0 &&
-				(this.direction!= 0 || coord - i >= 10*((int)(coord/10))) &&
-				(this.direction!= 2 || coord + i <= 10+10*((int)(coord/10)))) {	
+				coord+(i-1)*adjust <= 99 &&
+				coord+(i-1)*adjust >= 0 &&
+				(this.direction!= 0 || coord - i + 1 >= 10*((int)(coord/10))) &&//need + 1 to allow ships along left edge (PB E1E2 for example)
+				(this.direction!= 2 || coord + i <= 10+10*((int)(coord/10)))) {//+1 or -1 apparently not needed here, seems to be working fine
 			for (int k = 0; k < i; k++) {
 				if (this.board.squares[coord+k*adjust].isOccupied == true) {
 					TextView tv = (TextView) findViewById(R.id.textView5);
@@ -198,9 +276,20 @@ public class PlacementActivity extends Activity {
 				this.board.squares[coord+j*adjust].shipNum = this.shipType;
 				this.board.squares[coord+j*adjust].shipDirection = this.direction%2;//0 if horizontal, 1 if vertical
 				this.board.squares[coord+j*adjust].shipSegmentNum = j;
-				ImageView shipbit = new ImageView(this);//(ImageView) findViewById(R.layout.fragment_battleship);
-				Drawable drawable = getResources().getDrawable(R.drawable.yellow);
-				shipbit.setImageDrawable(drawable);
+				ImageView shipbit = new ImageView(this);
+				Drawable drawable = getResources().getDrawable(getPic(shipType, i, j));
+				//shipbit.setImageDrawable(drawable);
+				
+				Matrix mat = new Matrix();
+				Bitmap bMap = BitmapFactory.decodeResource(getResources(),getPic(shipType,i,j));
+				if (direction == 1 || direction == 3)
+				{
+					mat.postRotate(90);
+				}
+				Bitmap bMapRotate = Bitmap.createBitmap(bMap, 0, 0,bMap.getWidth(),bMap.getHeight(), mat, true);
+				shipbit.setImageBitmap(bMapRotate);
+				
+				
 				GridView g = (GridView) findViewById(R.id.grid_view);
 				LinearLayout nv = (LinearLayout) g.getChildAt(coord+j*adjust);
 				ImageView nvv = (ImageView) nv.findViewById(R.id.usquare);

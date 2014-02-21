@@ -34,16 +34,7 @@ public class PlacementAdapter extends BaseAdapter {
 		LayoutInflater inflater = (LayoutInflater) mContext
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		
-		View v = inflater.inflate(R.layout.view_square, parent, false);
-		v.setFocusable(false);
-		v.setFocusableInTouchMode(false);
-		v.setEnabled(false);
-		v.setClickable(false);
-		/*BattleshipActivity.Board board = BattleshipActivity.getBoard();
-		if (board.squares[position].isOccupied = true)
-		{
-			v = inflater.inflate(R.layout.occupied_square, parent, false);
-		}*/
+		View v = inflater.inflate(R.layout.unoccupied_square, parent, false);
 		return v;
 	}
 
