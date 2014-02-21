@@ -280,17 +280,7 @@ public class PlacementActivity extends Activity {
 				this.board.squares[coord+j*adjust].shipNum = this.shipType;
 				this.board.squares[coord+j*adjust].shipDirection = this.direction%2;//0 if horizontal, 1 if vertical
 				this.board.squares[coord+j*adjust].shipSegmentNum = j;
-//				ImageView shipbit = new ImageView(this);
-//				Drawable drawable = getResources().getDrawable(getPic(shipType, i, j));
-//				shipbit.setImageDrawable(drawable);
-				
-//				if (direction == 1 || direction == 3)
-//				{
-//					Matrix matrix = new Matrix();
-//					shipbit.setScaleType(ScaleType.MATRIX);
-//					matrix.postRotate(90f,shipbit.getDrawable().getBounds().width()/2,shipbit.getDrawable().getBounds().height()/2);
-//					shipbit.setImageMatrix(matrix);
-//				}
+
 				Bitmap bmpOriginal = BitmapFactory.decodeResource(getResources(),getPic(shipType,direction,j));
 				Bitmap bmpunoc = BitmapFactory.decodeResource(getResources(),R.drawable.bg);
 				Bitmap bmResult = Bitmap.createBitmap(bmpOriginal.getWidth(), bmpOriginal.getHeight(), Bitmap.Config.ARGB_8888);
@@ -309,19 +299,10 @@ public class PlacementActivity extends Activity {
 				}
 				tempCanvas.drawBitmap(bmpunoc,0,0,null);
 				tempCanvas.drawBitmap(bmpOriginal, 0, 0, null);
-
-//				if (direction == 1 || direction == 3)
-//				{
-//					mat.postRotate(90);
-//				}
-//				Bitmap bMapRotate = Bitmap.createBitmap(bMap, 0, 0,bMap.getWidth(),bMap.getHeight(), mat, true);
-//				shipbit.setImageBitmap(bMapRotate);
-				
 				
 				GridView g = (GridView) findViewById(R.id.grid_view);
 				LinearLayout nv = (LinearLayout) g.getChildAt(coord+j*adjust);
 				ImageView nvv = (ImageView) nv.findViewById(R.id.usquare);
-				//nvv.setImageDrawable(drawable);
 				nvv.setImageBitmap(bmResult);
 			}
 			//this looks like only the button call is separate in terms of the logic. Unless there's an unaccounted for
