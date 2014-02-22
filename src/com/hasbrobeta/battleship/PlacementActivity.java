@@ -1,6 +1,7 @@
 package com.hasbrobeta.battleship;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -23,13 +24,16 @@ public class PlacementActivity extends Activity {
 	public int ncoord = 0;
 	public int direction = 0;
 	public int shipType = -1;
-	public Board board;
+	
+	private int playerNum;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_placement);
 
+		playerNum = getIntent().getIntExtra("PLAYER_NUM", 0);
+		
 		mGridView = (GridView) findViewById(R.id.grid_view);
 		
 		mGridView.setOnItemClickListener(new OnItemClickListener() {
@@ -49,8 +53,6 @@ public class PlacementActivity extends Activity {
 			}
 		}
 		);
-		
-		board = new Board();
 	}
 	
 	public void setText(String n, String l)
@@ -220,22 +222,22 @@ public class PlacementActivity extends Activity {
 		else if (this.shipType == 4)
 			i = 5;
 
-		if (this.board.getSquares()[coord].isOccupied() == false &&
+		if (BattleshipFragment.sb.getPlayers()[playerNum].getSquares()[coord].isOccupied() == false &&
 				coord+(i-1)*adjust <= 99 &&
 				coord+(i-1)*adjust >= 0 &&
 				(this.direction!= 0 || coord - i + 1 >= 10*((int)(coord/10))) &&//need + 1 to allow ships along left edge (PB E1E2 for example)
 				(this.direction!= 2 || coord + i <= 10+10*((int)(coord/10)))) {//+1 or -1 apparently not needed here, seems to be working fine
 			for (int k = 0; k < i; k++) {
-				if (this.board.getSquares()[coord+k*adjust].isOccupied()) {
+				if (BattleshipFragment.sb.getPlayers()[playerNum].getSquares()[coord+k*adjust].isOccupied()) {
 					TextView tv = (TextView) findViewById(R.id.textView5);
 					tv.setText("Your cannot place your ship that way!");
 				}
 			}
 			for (int j = 0; j < i; j++) {
-				this.board.getSquares()[coord+j*adjust].setOccupied(true);
-				this.board.getSquares()[coord+j*adjust].setShipNum(this.shipType);
-				this.board.getSquares()[coord+j*adjust].setShipDirection(this.direction%2);//0 if horizontal, 1 if vertical
-				this.board.getSquares()[coord+j*adjust].setShipSegmentNum(j);
+				BattleshipFragment.sb.getPlayers()[playerNum].getSquares()[coord+j*adjust].setOccupied(true);
+				BattleshipFragment.sb.getPlayers()[playerNum].getSquares()[coord+j*adjust].setShipNum(this.shipType);
+				BattleshipFragment.sb.getPlayers()[playerNum].getSquares()[coord+j*adjust].setShipDirection(this.direction%2);//0 if horizontal, 1 if vertical
+				BattleshipFragment.sb.getPlayers()[playerNum].getSquares()[coord+j*adjust].setShipSegmentNum(j);
 
 				Bitmap bmpOriginal = BitmapFactory.decodeResource(getResources(),getPic(shipType,direction,j));
 				Bitmap bmpunoc = BitmapFactory.decodeResource(getResources(),R.drawable.bg);
@@ -272,6 +274,7 @@ public class PlacementActivity extends Activity {
 				char n = '1'; for (int x = 0; x < ncoord; x++) n++;
 				if (n != ':') tv.setText("Patrol Boat placed starting at "+ l + n + "!");
 				else tv.setText("Patrol Boat placed starting at "+ l + "10!");
+				BattleshipFragment.sb.getPlayers()[playerNum].addNumShipsPlaced();
 			} else if (this.shipType == 1) {
 				Button button = (Button) findViewById(R.id.d3);
 			    button.setEnabled(false);
@@ -280,6 +283,7 @@ public class PlacementActivity extends Activity {
 				char n = '1'; for (int x = 0; x < ncoord; x++) n++;
 				if (n != ':') tv.setText("Destroyer placed starting at "+ l + n + "!");
 				else tv.setText("Destroyer placed starting at "+ l + "10!");
+				BattleshipFragment.sb.getPlayers()[playerNum].addNumShipsPlaced();
 			} else if (this.shipType == 2) {
 				Button button = (Button) findViewById(R.id.s3);
 			    button.setEnabled(false);
@@ -288,6 +292,7 @@ public class PlacementActivity extends Activity {
 				char n = '1'; for (int x = 0; x < ncoord; x++) n++;
 				if (n != ':') tv.setText("Submarine placed starting at "+ l + n + "!");
 				else tv.setText("Submarine placed starting at "+ l + "10!");
+				BattleshipFragment.sb.getPlayers()[playerNum].addNumShipsPlaced();
 			} else if (this.shipType == 3) {
 				Button button = (Button) findViewById(R.id.b4);
 			    button.setEnabled(false);
@@ -296,6 +301,7 @@ public class PlacementActivity extends Activity {
 				char n = '1'; for (int x = 0; x < ncoord; x++) n++;
 				if (n != ':') tv.setText("Battleship placed starting at "+ l + n + "!");
 				else tv.setText("Battleship placed starting at "+ l + "10!");
+				BattleshipFragment.sb.getPlayers()[playerNum].addNumShipsPlaced();
 			} else if (this.shipType == 4) {
 				Button button = (Button) findViewById(R.id.ac5);
 			    button.setEnabled(false);
@@ -304,11 +310,18 @@ public class PlacementActivity extends Activity {
 				char n = '1'; for (int x = 0; x < ncoord; x++) n++;
 				if (n != ':') tv.setText("Aircraft Carrier placed starting at "+ l + n + "!");
 				else tv.setText("Aircraft Carrier placed starting at "+ l + "10!");
+				BattleshipFragment.sb.getPlayers()[playerNum].addNumShipsPlaced();
 			}
 			this.shipType = -1;
-			if (this.board.getNumShipsPlaced() == 5) {
+			if (BattleshipFragment.sb.getPlayers()[playerNum].getNumShipsPlaced() == 5) {
 				//leave this activity go to next one,
 				//since we got all ships placed
+				Intent returnIntent = new Intent();
+				if (playerNum == 0)
+					setResult(BattleshipFragment.PLAYER_ONE, returnIntent);
+				else
+					setResult(BattleshipFragment.PLAYER_TWO, returnIntent);
+				finish();
 			}
 		} else {
 			//print some kind of message
