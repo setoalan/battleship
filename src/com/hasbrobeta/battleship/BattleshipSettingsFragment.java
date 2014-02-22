@@ -15,7 +15,6 @@ public class BattleshipSettingsFragment extends PreferenceFragment {
 		addPreferencesFromResource(R.layout.fragment_settings);	
 		
 		sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
-		String s = sharedPref.getString("ask_speed", "5000");
 		
 	}
 	

@@ -5,68 +5,33 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.os.Bundle;
-import android.support.v4.widget.DrawerLayout;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 //public class PlacementActivity extends ASKActivity {
 public class PlacementActivity extends Activity {
 
-	private String[] mNavigation;
-	private DrawerLayout mDrawerLayout;
-	private ListView mDrawerList;
 	private GridView mGridView;
-	
-	public class Square {
-		boolean isOccupied;
-		int shipNum;
-		int shipSegmentNum;
-		int shipDirection;
-		boolean isShot;
-		public Square() { isOccupied = false; shipNum = -1; shipSegmentNum = -1; shipDirection = -1; isShot = false;}
-	}
-	public class Board {
-		public int numShipsPlaced = 0;
-		public Square[] squares;// = new Square[100];
-		public Board() {
-			this.squares = new Square[100]; 
-			for (int i = 0; i < 100; i++) 
-				this.squares[i] = new Square();
-			}
-	}
 	
 	public int lcoord = 0;
 	public int ncoord = 0;
 	public int direction = 0;
 	public int shipType = -1;
-	public Board board;// = Board();// = new Board();
-	
-	/*public static Board getBoard() {
-		return board;
-	}*/
+	public Board board;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_placement);
-		
-		mNavigation = getResources().getStringArray(R.array.navigation_array);
-		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-		mDrawerList = (ListView) findViewById(R.id.left_drawer);
+
 		mGridView = (GridView) findViewById(R.id.grid_view);
 		
-		mDrawerList.setAdapter(new ArrayAdapter<String>(this,
-				R.layout.drawer_list_item, mNavigation));
-		mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
 		mGridView.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
@@ -86,13 +51,6 @@ public class PlacementActivity extends Activity {
 		);
 		
 		board = new Board();
-	}
-	
-	private class DrawerItemClickListener implements ListView.OnItemClickListener {
-		@Override
-		public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-			Toast.makeText(PlacementActivity.this, position + "", Toast.LENGTH_SHORT).show();
-		}
 	}
 	
 	public void setText(String n, String l)
@@ -262,24 +220,22 @@ public class PlacementActivity extends Activity {
 		else if (this.shipType == 4)
 			i = 5;
 
-		int test = coord - i;
-		int test2 = 10*((int)(coord/10));
-		if (this.board.squares[coord].isOccupied == false &&
+		if (this.board.getSquares()[coord].isOccupied() == false &&
 				coord+(i-1)*adjust <= 99 &&
 				coord+(i-1)*adjust >= 0 &&
 				(this.direction!= 0 || coord - i + 1 >= 10*((int)(coord/10))) &&//need + 1 to allow ships along left edge (PB E1E2 for example)
 				(this.direction!= 2 || coord + i <= 10+10*((int)(coord/10)))) {//+1 or -1 apparently not needed here, seems to be working fine
 			for (int k = 0; k < i; k++) {
-				if (this.board.squares[coord+k*adjust].isOccupied == true) {
+				if (this.board.getSquares()[coord+k*adjust].isOccupied()) {
 					TextView tv = (TextView) findViewById(R.id.textView5);
 					tv.setText("Your cannot place your ship that way!");
 				}
 			}
 			for (int j = 0; j < i; j++) {
-				this.board.squares[coord+j*adjust].isOccupied = true;
-				this.board.squares[coord+j*adjust].shipNum = this.shipType;
-				this.board.squares[coord+j*adjust].shipDirection = this.direction%2;//0 if horizontal, 1 if vertical
-				this.board.squares[coord+j*adjust].shipSegmentNum = j;
+				this.board.getSquares()[coord+j*adjust].setOccupied(true);
+				this.board.getSquares()[coord+j*adjust].setShipNum(this.shipType);
+				this.board.getSquares()[coord+j*adjust].setShipDirection(this.direction%2);//0 if horizontal, 1 if vertical
+				this.board.getSquares()[coord+j*adjust].setShipSegmentNum(j);
 
 				Bitmap bmpOriginal = BitmapFactory.decodeResource(getResources(),getPic(shipType,direction,j));
 				Bitmap bmpunoc = BitmapFactory.decodeResource(getResources(),R.drawable.bg);
@@ -350,7 +306,7 @@ public class PlacementActivity extends Activity {
 				else tv.setText("Aircraft Carrier placed starting at "+ l + "10!");
 			}
 			this.shipType = -1;
-			if (this.board.numShipsPlaced == 5) {
+			if (this.board.getNumShipsPlaced() == 5) {
 				//leave this activity go to next one,
 				//since we got all ships placed
 			}

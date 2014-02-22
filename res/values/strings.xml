@@ -13,13 +13,6 @@
     <string name="opponent">Opponent</string>
     <string name="floating">O</string>
     <string name="sank">X</string>
-	<string-array name="navigation_array">
-		<item>Setting0</item>
-		<item>Setting1</item>
-		<item>Setting2</item>
-		<item>Setting3</item>
-		<item>Setting4</item>
-	</string-array>
 	<string name="LetterButton">Select Letter</string>
 	<string name="NumberButton">Select Number</string>
 	<string name="ConfirmButton">Place Ship</string>

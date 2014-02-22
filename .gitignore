@@ -26,6 +26,7 @@ local.properties
 .buildpath
 .target
 .texlipse
+lint.xml
 
 .DS_Store
 
