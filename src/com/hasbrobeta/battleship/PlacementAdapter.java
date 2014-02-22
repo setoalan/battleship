@@ -35,10 +35,7 @@ public class PlacementAdapter extends BaseAdapter {
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		
 		View v = inflater.inflate(R.layout.unoccupied_square, parent, false);
-		v.setFocusable(false);
-		v.setFocusableInTouchMode(false);
-		v.setEnabled(false);
-		v.setClickable(false);
+
 		return v;
 	}
 
