@@ -1,6 +1,8 @@
 package com.hasbrobeta.battleship;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -31,15 +33,17 @@ public class BattleshipAdapter extends BaseAdapter {
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		//LayoutInflater inflater = (LayoutInflater) mContext
-		//		.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		LayoutInflater inflater = (LayoutInflater) mContext
+				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		
-		ImageView imageView = new ImageView(mContext);
-		imageView.setImageResource(R.drawable.bg);
-		return imageView;
-		//View v = inflater.inflate(R.layout.unoccupied_square, parent, false);
+		View v = inflater.inflate(R.layout.view_square, parent, false);
+		ImageView iv = (ImageView) v.findViewById(R.id.view_square);
+		if (BattleshipFragment.sb.getPlayers()[BattleshipFragment.CURRENT_PLAYER ? 0 : 1]
+				.getSquares()[position].isShot()) {
+			iv.setBackgroundColor(Color.RED);
+		}
 		
-		//return v;
+		return v;
 	}
 
 }

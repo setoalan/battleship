@@ -1,6 +1,9 @@
 package com.hasbrobeta.battleship;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -16,6 +19,9 @@ public class BattleshipFragment extends Fragment {
 	public static SingletonBean sb;
 	public static final int PLAYER_ONE = 1;
 	public static final int PLAYER_TWO = 2;
+	public static final boolean CURRENT_PLAYER = false;
+	
+	BattleshipAdapter mAdapter;
 	GridView mGridView;
 	
 	@Override
@@ -35,7 +41,17 @@ public class BattleshipFragment extends Fragment {
 			i.putExtra("PLAYER_NUM", 1);
 			startActivityForResult(i, PLAYER_TWO);
 		} else if (requestCode == PLAYER_TWO) {
-			// Display Dialog and then load data to main screen to player one;
+			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+			builder.setMessage("Please hand tablet to player one.");
+			builder.setPositiveButton("OK", new OnClickListener() {
+				@Override
+				public void onClick(DialogInterface arg0, int arg1) {
+					BattleshipFragmentSide.refresh();
+					mAdapter.notifyDataSetChanged();
+				}
+			});
+			builder.show();
+			
 		}
 	}
 	
@@ -46,7 +62,8 @@ public class BattleshipFragment extends Fragment {
 		
 		mGridView = (GridView) v.findViewById(R.id.grid_view);
 		
-		mGridView.setAdapter(new BattleshipAdapter(getActivity()));
+		mAdapter = new BattleshipAdapter(getActivity());
+		mGridView.setAdapter(mAdapter);
 		
 		mGridView.setOnItemClickListener(new OnItemClickListener() {
 			@Override
