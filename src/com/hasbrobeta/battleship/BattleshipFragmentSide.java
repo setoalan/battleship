@@ -5,13 +5,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.Toast;
-import android.widget.AdapterView.OnItemClickListener;
 
 public class BattleshipFragmentSide extends Fragment {
-
+	
+	static BattleshipAdapterSide mSideAdapter;
 	GridView mGridView;
 	
 	@Override
@@ -19,17 +17,16 @@ public class BattleshipFragmentSide extends Fragment {
 			Bundle savedInstanceState) {
 		View v = inflater.inflate(R.layout.fragment_battleship_side, container, false);
 		
+		mSideAdapter = new BattleshipAdapterSide(getActivity());
+		
 		mGridView = (GridView) v.findViewById(R.id.grid_view_side);
-		
-		mGridView.setAdapter(new BattleshipAdapterSide(getActivity()));
-		
-		mGridView.setOnItemClickListener(new OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-				Toast.makeText(getActivity(), "" + position, Toast.LENGTH_SHORT).show();
-			}
-		});
+		mGridView.setAdapter(mSideAdapter);
 		
 		return v;
 	}
+	
+	public static void refresh() {
+		mSideAdapter.notifyDataSetChanged();
+	}
+	
 }

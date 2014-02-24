@@ -1,9 +1,9 @@
 package com.hasbrobeta.battleship;
 
+import android.app.Activity;
 import android.os.Bundle;
-import ask.scanninglibrary.ASKActivity;
 
-public class BattleshipActivity extends ASKActivity {
+public class BattleshipActivity extends Activity {
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

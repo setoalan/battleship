@@ -3,7 +3,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content" >
     
-	<View 
+	<ImageView 
 	    android:id="@+id/view_square_side"
 	    android:layout_width="33dp"
 	    android:layout_height="33dp"

@@ -3,7 +3,8 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content" >
     
-	<View 
+	<ImageView 
+	    android:id="@+id/view_square"
 	    android:layout_width="50.70dp"
 	    android:layout_height="50.70dp"
 	    android:background="@android:color/background_dark" />

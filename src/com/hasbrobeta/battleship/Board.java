@@ -6,6 +6,7 @@ public class Board {
 	private Square[] squares;
 	
 	public Board() {
+		this.numShipsPlaced = 0;
 		this.squares = new Square[100];
 		for (int i=0; i<100; i++)
 			this.squares[i] = new Square();
@@ -15,8 +16,8 @@ public class Board {
 		return numShipsPlaced;
 	}
 
-	public void setNumShipsPlaced(int numShipsPlaced) {
-		this.numShipsPlaced = numShipsPlaced;
+	public void addNumShipsPlaced() {
+		this.numShipsPlaced++;
 	}
 
 	public Square[] getSquares() {
