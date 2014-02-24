@@ -231,6 +231,7 @@ public class PlacementActivity extends Activity {
 				if (BattleshipFragment.sb.getPlayers()[playerNum].getSquares()[coord+k*adjust].isOccupied()) {
 					TextView tv = (TextView) findViewById(R.id.textView5);
 					tv.setText("Your cannot place your ship that way!");
+					return;
 				}
 			}
 			for (int j = 0; j < i; j++) {
