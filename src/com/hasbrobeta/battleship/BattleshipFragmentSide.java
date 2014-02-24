@@ -17,9 +17,9 @@ public class BattleshipFragmentSide extends Fragment {
 			Bundle savedInstanceState) {
 		View v = inflater.inflate(R.layout.fragment_battleship_side, container, false);
 		
-		mGridView = (GridView) v.findViewById(R.id.grid_view_side);
-		
 		mSideAdapter = new BattleshipAdapterSide(getActivity());
+		
+		mGridView = (GridView) v.findViewById(R.id.grid_view_side);
 		mGridView.setAdapter(mSideAdapter);
 		
 		return v;

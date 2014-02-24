@@ -19,7 +19,7 @@ public class BattleshipFragment extends Fragment {
 	public static SingletonBean sb;
 	public static final int PLAYER_ONE = 1;
 	public static final int PLAYER_TWO = 2;
-	public static final boolean CURRENT_PLAYER = false;
+	public static boolean CURRENT_PLAYER = false;
 	
 	BattleshipAdapter mAdapter;
 	GridView mGridView;
@@ -51,7 +51,6 @@ public class BattleshipFragment extends Fragment {
 				}
 			});
 			builder.show();
-			
 		}
 	}
 	
@@ -60,20 +59,37 @@ public class BattleshipFragment extends Fragment {
 			Bundle savedInstanceState) {
 		View v = inflater.inflate(R.layout.fragment_battleship, container, false);
 		
-		mGridView = (GridView) v.findViewById(R.id.grid_view);
-		
 		mAdapter = new BattleshipAdapter(getActivity());
+		
+		mGridView = (GridView) v.findViewById(R.id.grid_view);
 		mGridView.setAdapter(mAdapter);
 		
 		mGridView.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
 				Toast.makeText(getActivity(), "" + position, Toast.LENGTH_SHORT).show();
-				
+				BattleshipFragment.sb.getPlayers()[BattleshipFragment.CURRENT_PLAYER ? 0 : 1]
+						.getSquares()[position].setShot(true);
+				mAdapter.notifyDataSetChanged();
+				showAlert();
 			}
 		});
 		
 		return v;
 	}
 	
+	
+	public void showAlert() {
+		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+		builder.setMessage("Please hand tablet to other player.");
+		builder.setPositiveButton("OK", new OnClickListener() {
+			@Override
+			public void onClick(DialogInterface arg0, int arg1) {
+				CURRENT_PLAYER = (CURRENT_PLAYER) ? false : true;
+				BattleshipFragmentSide.refresh();
+				mAdapter.notifyDataSetChanged();
+			}
+		});
+		builder.show();
+	}
 }
