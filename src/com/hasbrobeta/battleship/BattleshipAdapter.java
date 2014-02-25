@@ -1,7 +1,9 @@
 package com.hasbrobeta.battleship;
 
 import android.content.Context;
-import android.graphics.Color;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,22 +38,39 @@ public class BattleshipAdapter extends BaseAdapter {
 		LayoutInflater inflater = (LayoutInflater) mContext
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		
-		View v = inflater.inflate(R.layout.view_square, parent, false);
-		ImageView iv = (ImageView) v.findViewById(R.id.view_square);
+		View v = inflater.inflate(R.layout.unoccupied_square, parent, false);
+		ImageView iv = (ImageView) v.findViewById(R.id.usquare);
 		
 		if (BattleshipFragment.sb.getPlayers()[BattleshipFragment.CURRENT_PLAYER ? 1 : 0]
 				.getSquares()[position].isShot() && 
 				BattleshipFragment.sb.getPlayers()[BattleshipFragment.CURRENT_PLAYER ? 0 : 1]
 						.getSquares()[position].isOccupied()) {
 			// Hit shots
-			iv.setBackgroundColor(Color.GREEN);
+			//iv.setBackgroundColor(Color.GREEN);
+			Bitmap bmpOriginal = BitmapFactory.decodeResource(mContext.getResources(),R.drawable.bg);
+			Bitmap bmpunoc = BitmapFactory.decodeResource(mContext.getResources(),R.drawable.peg_hit);
+			Bitmap bmResult = Bitmap.createBitmap(bmpOriginal.getWidth(), bmpOriginal.getHeight(), Bitmap.Config.ARGB_8888);
+			Canvas tempCanvas = new Canvas(bmResult);
+			tempCanvas.drawBitmap(bmpOriginal, 0, 0, null);
+			tempCanvas.drawBitmap(bmpunoc,0,0,null);
+			
+			iv.setImageBitmap(bmResult);
+
 		} else if (BattleshipFragment.sb.getPlayers()[BattleshipFragment.CURRENT_PLAYER ? 1 : 0]
 				.getSquares()[position].isShot()) {
 			// Missed Shots
-			iv.setBackgroundColor(Color.RED);
+			//iv.setBackgroundColor(Color.RED);
+			Bitmap bmpOriginal = BitmapFactory.decodeResource(mContext.getResources(),R.drawable.bg);
+			Bitmap bmpunoc = BitmapFactory.decodeResource(mContext.getResources(),R.drawable.peg_miss);
+			Bitmap bmResult = Bitmap.createBitmap(bmpOriginal.getWidth(), bmpOriginal.getHeight(), Bitmap.Config.ARGB_8888);
+			Canvas tempCanvas = new Canvas(bmResult);
+			tempCanvas.drawBitmap(bmpOriginal, 0, 0, null);
+			tempCanvas.drawBitmap(bmpunoc,0,0,null);
+			iv.setImageBitmap(bmResult);
 		}
 		
 		return v;
+
 	}
 
 }

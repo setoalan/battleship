@@ -13,8 +13,8 @@
     
    	<GridView 
         android:id="@+id/grid_view_side"
-        android:layout_width="350dp"
-        android:layout_height="350dp"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:clickable="false"
         android:numColumns="10"
