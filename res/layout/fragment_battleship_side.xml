@@ -16,6 +16,7 @@
         android:layout_width="350dp"
         android:layout_height="350dp"
         android:layout_gravity="center"
+        android:clickable="false"
         android:numColumns="10"
 		android:horizontalSpacing="1dp"
 		android:verticalSpacing="1dp"

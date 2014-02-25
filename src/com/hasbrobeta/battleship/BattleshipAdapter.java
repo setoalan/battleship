@@ -38,8 +38,16 @@ public class BattleshipAdapter extends BaseAdapter {
 		
 		View v = inflater.inflate(R.layout.view_square, parent, false);
 		ImageView iv = (ImageView) v.findViewById(R.id.view_square);
-		if (BattleshipFragment.sb.getPlayers()[BattleshipFragment.CURRENT_PLAYER ? 0 : 1]
+		
+		if (BattleshipFragment.sb.getPlayers()[BattleshipFragment.CURRENT_PLAYER ? 1 : 0]
+				.getSquares()[position].isShot() && 
+				BattleshipFragment.sb.getPlayers()[BattleshipFragment.CURRENT_PLAYER ? 0 : 1]
+						.getSquares()[position].isOccupied()) {
+			// Hit shots
+			iv.setBackgroundColor(Color.GREEN);
+		} else if (BattleshipFragment.sb.getPlayers()[BattleshipFragment.CURRENT_PLAYER ? 1 : 0]
 				.getSquares()[position].isShot()) {
+			// Missed Shots
 			iv.setBackgroundColor(Color.RED);
 		}
 		

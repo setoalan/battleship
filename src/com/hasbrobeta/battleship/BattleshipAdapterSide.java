@@ -38,9 +38,20 @@ public class BattleshipAdapterSide extends BaseAdapter {
 		
 		View v = inflater.inflate(R.layout.view_square_side, parent, false);
 		ImageView iv = (ImageView) v.findViewById(R.id.view_square_side);
-		if (BattleshipFragment.sb.getPlayers()[BattleshipFragment.CURRENT_PLAYER ? 0 : 1]
-				.getSquares()[position].isOccupied()) {
+		if (BattleshipFragment.sb.getPlayers()[BattleshipFragment.CURRENT_PLAYER ? 1 : 0]
+				.getSquares()[position].isOccupied() &&
+				BattleshipFragment.sb.getPlayers()[BattleshipFragment.CURRENT_PLAYER ? 0 : 1]
+						.getSquares()[position].isShot()) {
+			// Current player's ship, shot
 			iv.setBackgroundColor(Color.RED);
+		} else if (BattleshipFragment.sb.getPlayers()[BattleshipFragment.CURRENT_PLAYER ? 1 : 0]
+				.getSquares()[position].isOccupied()) {
+			// Current player's ships, not shot
+			iv.setBackgroundColor(Color.BLUE);
+		} else if (BattleshipFragment.sb.getPlayers()[BattleshipFragment.CURRENT_PLAYER ? 0 : 1]
+				.getSquares()[position].isShot()) {
+			// Opponent's missed shot
+			iv.setBackgroundColor(Color.GREEN);
 		}
 		
 		return v;
