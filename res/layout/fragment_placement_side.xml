@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
@@ -10,145 +10,159 @@
         android:gravity="center"
         android:text="@string/app_name"
         android:textSize="30sp" />
+    
+	<TextView
+	    android:id="@+id/place_ships_text"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_gravity="center"
+	    android:text="@string/place_ships" />
 
-    <Button
-        android:id="@+id/shipPlaceConfirm"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:onClick="placeShip"
-        android:text="@string/ConfirmButton" />
-
-     <Button
-        android:id="@+id/up"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="50dp"
-        android:layout_height="40dp"
-        android:layout_above="@+id/shipPlaceConfirm"
-        android:layout_alignParentLeft="true"
-        android:onClick="directionU"
-        android:text="Up" />
-     
-     <Button
-        android:id="@+id/Left"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="50dp"
-        android:layout_height="40dp"
-        android:layout_alignBaseline="@+id/up"
-        android:layout_alignBottom="@+id/up"
-        android:layout_toRightOf="@+id/up"
-        android:onClick="directionL"
-        android:text="Left" />
-     
-    <Button
-        android:id="@+id/Right"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="50dp"
-        android:layout_height="40dp"
-        android:layout_alignBaseline="@+id/up"
-        android:layout_alignBottom="@+id/up"
-        android:layout_toRightOf="@+id/Left"
-        android:onClick="directionR"
-        android:text="Right" />
-
-    <Button
-        android:id="@+id/Down"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="50dp"
-        android:layout_height="40dp"
-        android:layout_alignBaseline="@+id/Right"
-        android:layout_alignBottom="@+id/Right"
-        android:layout_toRightOf="@+id/Right"
-        android:onClick="directionD"
-        android:text="Down" />   
-
-    <Button
-        android:id="@+id/ac5"
-        android:layout_width="wrap_content"
+    <LinearLayout 
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/Right"
-        android:layout_alignParentLeft="true"
-        android:onClick="ship5"
-        android:text="Aircraft Carrier (5)" />
-
-    <Button
-        android:id="@+id/s3"
-        android:layout_width="wrap_content"
+        android:orientation="horizontal" >
+        
+        <Button
+            android:id="@+id/patrol_boat_button" 
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/patrol_boat"
+            android:onClick="ship2" />
+        
+   		<Button
+            android:id="@+id/destroyer_button" 
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/destroyer"
+            android:onClick="ship3d" />
+   		
+		<Button
+            android:id="@+id/submarine_button" 
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/submarine"
+            android:onClick="ship3s" />
+        
+    </LinearLayout>
+    
+	<LinearLayout 
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/b4"
-        android:layout_alignParentLeft="true"
-        android:layout_alignRight="@+id/d3"
-        android:onClick="ship3s"
-        android:text="Submarine (3)" />
-
-    <Button
-        android:id="@+id/d3"
-        android:layout_width="wrap_content"
+        android:orientation="horizontal" >
+	    
+		<Button
+            android:id="@+id/battleship_button" 
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/battleship"
+            android:onClick="ship4" />
+		
+		<Button
+            android:id="@+id/aircraft_carrier_button" 
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/aircraft_carrier"
+            android:onClick="ship5" />
+	    
+	</LinearLayout>
+	
+	<TextView
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_gravity="center"
+	    android:text="@string/direction_origin" />
+	
+	<Button
+		android:id="@+id/up_button" 
+		android:layout_width="100dp"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center"
+		android:text="@string/up"
+		android:onClick="directionU" />
+	
+	<LinearLayout 
+	    android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/s3"
-        android:layout_alignParentLeft="true"
-        android:layout_alignRight="@+id/pb2"
-        android:onClick="ship3d"
-        android:text="Destroyer (3)" />
-
-    <Button
-        android:id="@+id/pb2"
-        android:layout_width="wrap_content"
+		android:gravity="center"
+        android:orientation="horizontal" >
+	    
+		<Button
+            android:id="@+id/left_button" 
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="@string/left"
+            android:onClick="directionL" />
+		
+		<Button
+            android:id="@+id/right_button" 
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="@string/right"
+            android:onClick="directionR" />
+	   
+	</LinearLayout>
+	
+	<Button
+		android:id="@+id/down_button" 
+		android:layout_width="100dp"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center"
+		android:gravity="center"
+		android:text="@string/down"
+		android:onClick="directionD" />
+	
+	<Button
+		android:id="@+id/place_ship_button" 
+		android:layout_width="200dp"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center"
+		android:text="@string/place_ship"
+		android:onClick="placeShip" />
+	
+	<TextView
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_gravity="center"
+	    android:text="@string/current_config" />
+		
+	<LinearLayout 
+	    android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/d3"
-        android:layout_alignParentLeft="true"
-        android:layout_alignRight="@+id/ac5"
-        android:onClick="ship2"
-        android:text="Patrol Boat (2)" />
+        android:gravity="center"
+        android:orientation="horizontal" >
+	    
+		<TextView
+	        android:id="@+id/ship_text"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_marginRight="5dp"
+	        android:text="@string/ship" />
+	    
+		<TextView
+	        android:id="@+id/direction_text"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_marginRight="5dp"
+	        android:text="@string/left" />
+		
+		<TextView
+	        android:id="@+id/letter_text"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="@string/A" />
+		
+		<TextView
+	        android:id="@+id/number_text"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="@string/one" />
+		
+	</LinearLayout>
 
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/shipPlaceConfirm"
-        android:layout_alignBottom="@+id/shipPlaceConfirm"
-        android:layout_alignLeft="@+id/Right"
-        android:text="A"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/textView1"
-        android:layout_alignBottom="@+id/textView1"
-        android:layout_toRightOf="@+id/textView1"
-        android:text="1"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView2"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="36dp"
-        android:text="Please place your ships! &lt;|(8^D)"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <Button
-        android:id="@+id/b4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/ac5"
-        android:layout_alignParentLeft="true"
-        android:onClick="ship4"
-        android:text="Battleship (4)" />
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/Down"
-        android:layout_alignBottom="@+id/Down"
-        android:layout_toRightOf="@+id/Down"
-        android:text="Left"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-</RelativeLayout>
+</LinearLayout>
