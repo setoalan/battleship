@@ -15,7 +15,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-//public class PlacementActivity extends ASKActivity {
 public class PlacementActivity extends Activity {
 
 	private GridView mGridView;
