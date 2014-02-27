@@ -40,6 +40,9 @@ public class BattleshipAdapter extends BaseAdapter {
 		
 		View v = inflater.inflate(R.layout.unoccupied_square, parent, false);
 		ImageView iv = (ImageView) v.findViewById(R.id.usquare);
+		Bitmap bgbig = BitmapFactory.decodeResource(mContext.getResources(),R.drawable.bg);
+		Bitmap bgsq = Bitmap.createScaledBitmap(bgbig, 12*bgbig.getWidth()/10, 12*bgbig.getHeight()/10, true);
+		iv.setImageBitmap(bgsq);
 		
 		if (BattleshipFragment.sb.getPlayers()[BattleshipFragment.CURRENT_PLAYER ? 1 : 0]
 				.getSquares()[position].isShot() && 
@@ -54,7 +57,11 @@ public class BattleshipAdapter extends BaseAdapter {
 			tempCanvas.drawBitmap(bmpOriginal, 0, 0, null);
 			tempCanvas.drawBitmap(bmpunoc,0,0,null);
 			
-			iv.setImageBitmap(bmResult);
+			Bitmap fin = Bitmap.createScaledBitmap(bmResult, 12*bmResult.getWidth()/10, 12*bmResult.getHeight()/10, true);
+			iv.setImageBitmap(fin);
+
+			
+			//iv.setImageBitmap(bmResult);
 
 		} else if (BattleshipFragment.sb.getPlayers()[BattleshipFragment.CURRENT_PLAYER ? 1 : 0]
 				.getSquares()[position].isShot()) {
@@ -66,7 +73,11 @@ public class BattleshipAdapter extends BaseAdapter {
 			Canvas tempCanvas = new Canvas(bmResult);
 			tempCanvas.drawBitmap(bmpOriginal, 0, 0, null);
 			tempCanvas.drawBitmap(bmpunoc,0,0,null);
-			iv.setImageBitmap(bmResult);
+		
+			Bitmap fin = Bitmap.createScaledBitmap(bmResult, 12*bmResult.getWidth()/10, 12*bmResult.getHeight()/10, true);
+			iv.setImageBitmap(fin);
+
+			//iv.setImageBitmap(bmResult);
 		}
 		
 		return v;

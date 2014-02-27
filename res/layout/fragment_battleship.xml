@@ -6,12 +6,12 @@
     
     <GridView 
         android:id="@+id/grid_view"
-        android:layout_width="400dp"
-        android:layout_height="415dp"
+        android:layout_width="450dp"
+        android:layout_height="475dp"
         android:layout_gravity="center"
         android:numColumns="10"
-		android:horizontalSpacing="1dp"
-		android:verticalSpacing="1dp"
+		android:horizontalSpacing="0dp"
+		android:verticalSpacing="0dp"
 		android:columnWidth="45dp"
 		android:background="@android:color/holo_blue_bright" >
     </GridView>

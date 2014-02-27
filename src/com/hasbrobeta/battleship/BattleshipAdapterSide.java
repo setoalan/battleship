@@ -131,7 +131,8 @@ public class BattleshipAdapterSide extends BaseAdapter {
 		View v = inflater.inflate(R.layout.unoccupied_square, parent, false);
 		ImageView iv = (ImageView) v.findViewById(R.id.usquare);
 		Bitmap bgbig = BitmapFactory.decodeResource(mContext.getResources(),R.drawable.bg);
-		Bitmap bgsq = Bitmap.createScaledBitmap(bgbig, bgbig.getWidth()/2, bgbig.getHeight()/2, true);
+		//Bitmap bgsq = Bitmap.createScaledBitmap(bgbig, bgbig.getWidth()/2, bgbig.getHeight()/2, true);
+		Bitmap bgsq = Bitmap.createScaledBitmap(bgbig, 3*bgbig.getWidth()/4, 3*bgbig.getHeight()/4, true);
 		iv.setImageBitmap(bgsq);
 		
 		
@@ -170,7 +171,8 @@ public class BattleshipAdapterSide extends BaseAdapter {
 				Bitmap bmpPeg = BitmapFactory.decodeResource(mContext.getResources(),R.drawable.peg_hit);
 				tempCanvas.drawBitmap(bmpPeg,0,0,null);				
 			} 
-			Bitmap finbit = Bitmap.createScaledBitmap(bmResult, bmResult.getWidth()/2, bmResult.getHeight()/2, true);
+//			Bitmap finbit = Bitmap.createScaledBitmap(bmResult, bmResult.getWidth()/2, bmResult.getHeight()/2, true);
+			Bitmap finbit = Bitmap.createScaledBitmap(bmResult, 3*bmResult.getWidth()/4, 3*bmResult.getHeight()/4, true);
 			iv.setImageBitmap(finbit);
 		}
 		
@@ -199,7 +201,8 @@ public class BattleshipAdapterSide extends BaseAdapter {
 			tempCanvas.drawBitmap(bmpOriginal,0,0,null);
 			Bitmap bmpPeg = BitmapFactory.decodeResource(mContext.getResources(),R.drawable.peg_miss);
 			tempCanvas.drawBitmap(bmpPeg,0,0,null);				
-			Bitmap finbit = Bitmap.createScaledBitmap(bmResult, bmResult.getWidth()/2, bmResult.getHeight()/2, true);
+//			Bitmap finbit = Bitmap.createScaledBitmap(bmResult, bmResult.getWidth()/2, bmResult.getHeight()/2, true);
+			Bitmap finbit = Bitmap.createScaledBitmap(bmResult, 3*bmResult.getWidth()/4, 3*bmResult.getHeight()/4, true);
 			iv.setImageBitmap(finbit);
 			//iv.setBackgroundColor(Color.GREEN);
 		}
