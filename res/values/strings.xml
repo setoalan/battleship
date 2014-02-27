@@ -28,6 +28,5 @@
 	<string name="ask_settings">ASK Settings</string>
 	<string name="ask_speed">ASK Speed</string>
 	<string name="placement">Placement</string>
-	<string name="transition">Pass tablet to next player.</string>
 
 </resources>

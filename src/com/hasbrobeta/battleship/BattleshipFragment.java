@@ -7,7 +7,6 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,11 +24,16 @@ public class BattleshipFragment extends Fragment {
 	
 	BattleshipAdapter mAdapter;
 	GridView mGridView;
+	Button mTransition, mWinner;
+	
+	private boolean mHit;
+	private boolean mWin;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		sb = new SingletonBean();
+		mWin = false;
 		
 		Intent i = new Intent(getActivity(), PlacementActivity.class);
 		i.putExtra("PLAYER_NUM", 0);
@@ -75,43 +79,56 @@ public class BattleshipFragment extends Fragment {
 						BattleshipFragment.sb.getPlayers()[BattleshipFragment.CURRENT_PLAYER ? 0 : 1]
 								.getSquares()[position].isOccupied()) {
 					BattleshipFragment.sb.getPlayers()[BattleshipFragment.CURRENT_PLAYER ? 1 : 0].addHitCounter();
-					if (BattleshipFragment.sb.getPlayers()[BattleshipFragment.CURRENT_PLAYER ? 1 : 0].getHitCounter() == 17) {
-						Log.i("TAG", "WE HAVE A WINNER");
-					}
+					if (BattleshipFragment.sb.getPlayers()[BattleshipFragment.CURRENT_PLAYER ? 1 : 0].getHitCounter() == 1) mWin = true;
+					mHit = true;
+				} else {
+					mHit = false;
 				}
 				mAdapter.notifyDataSetChanged();
-				showAlert();
+				showAlert(mWin, mHit);
 			}
 		});
 		
 		return v;
 	}
 	
-	public void showAlert() {
+	public void showAlert(boolean win, boolean hit) {
 		final Dialog dialog = new Dialog(getActivity(), android.R.style.Theme_Black_NoTitleBar_Fullscreen);
-		dialog.setContentView(R.layout.dialog_transition);
-		dialog.setTitle("Please hand tablet to other player.");
-		Button mTransition = (Button) dialog.findViewById(R.id.transition);
-		mTransition.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				CURRENT_PLAYER = (CURRENT_PLAYER) ? false : true;
-				BattleshipFragmentSide.refresh();
-				mAdapter.notifyDataSetChanged();
-				Thread timer = new Thread() {
-					public void run() {
-						try {
-							sleep(500);
-						} catch(InterruptedException e) {
-							e.printStackTrace();
-						} finally {
-							dialog.dismiss();
+		if (win) {
+			dialog.setContentView(R.layout.dialog_winner);
+			mWinner = (Button) dialog.findViewById(R.id.winner);
+			mWinner.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					getActivity().finish();
+				}
+			});
+		} else {
+			dialog.setContentView(R.layout.dialog_transition);
+			mTransition = (Button) dialog.findViewById(R.id.transition);
+			if (mHit) mTransition.setBackgroundResource(R.drawable.background_hit);
+			else mTransition.setBackgroundResource(R.drawable.background_miss);
+			mTransition.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					CURRENT_PLAYER = (CURRENT_PLAYER) ? false : true;
+					BattleshipFragmentSide.refresh();
+					mAdapter.notifyDataSetChanged();
+					Thread timer = new Thread() {
+						public void run() {
+							try {
+								sleep(500);
+							} catch(InterruptedException e) {
+								e.printStackTrace();
+							} finally {
+								dialog.dismiss();
+							}
 						}
-					}
-				};
-				timer.start();
-			}
-		});
+					};
+					timer.start();
+				}
+			});
+		}
 		dialog.show();
 	}
 	
