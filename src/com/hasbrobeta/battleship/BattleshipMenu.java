@@ -18,11 +18,6 @@ public class BattleshipMenu extends Activity {
 		startActivity(i);
 	}
 	
-	public void placement(View view) {
-		Intent i = new Intent(this, PlacementActivity.class);
-		startActivity(i);
-	}
-	
 	public void settings(View view) {
 		Intent i = new Intent(this, BattleshipSettingsActivity.class);
 		startActivity(i);

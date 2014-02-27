@@ -1,6 +1,7 @@
 package com.hasbrobeta.battleship;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.Fragment;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
@@ -12,8 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
 import android.widget.GridView;
-import android.widget.Toast;
 
 public class BattleshipFragment extends Fragment {
 	
@@ -46,7 +47,7 @@ public class BattleshipFragment extends Fragment {
 			builder.setMessage("Please hand tablet to player one.");
 			builder.setPositiveButton("OK", new OnClickListener() {
 				@Override
-				public void onClick(DialogInterface arg0, int arg1) {
+				public void onClick(DialogInterface dialog, int which) {
 					BattleshipFragmentSide.refresh();
 					mAdapter.notifyDataSetChanged();
 				}
@@ -64,11 +65,9 @@ public class BattleshipFragment extends Fragment {
 		
 		mGridView = (GridView) v.findViewById(R.id.grid_view);
 		mGridView.setAdapter(mAdapter);
-		
 		mGridView.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-				Toast.makeText(getActivity(), "" + position, Toast.LENGTH_SHORT).show();
 				BattleshipFragment.sb.getPlayers()[BattleshipFragment.CURRENT_PLAYER ? 1 : 0]
 						.getSquares()[position].setShot(true);
 				if (BattleshipFragment.sb.getPlayers()[BattleshipFragment.CURRENT_PLAYER ? 1 : 0]
@@ -88,18 +87,32 @@ public class BattleshipFragment extends Fragment {
 		return v;
 	}
 	
-	
 	public void showAlert() {
-		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-		builder.setMessage("Please hand tablet to other player.");
-		builder.setPositiveButton("OK", new OnClickListener() {
+		final Dialog dialog = new Dialog(getActivity(), android.R.style.Theme_Black_NoTitleBar_Fullscreen);
+		dialog.setContentView(R.layout.dialog_transition);
+		dialog.setTitle("Please hand tablet to other player.");
+		Button mTransition = (Button) dialog.findViewById(R.id.transition);
+		mTransition.setOnClickListener(new View.OnClickListener() {
 			@Override
-			public void onClick(DialogInterface arg0, int arg1) {
+			public void onClick(View v) {
 				CURRENT_PLAYER = (CURRENT_PLAYER) ? false : true;
 				BattleshipFragmentSide.refresh();
 				mAdapter.notifyDataSetChanged();
+				Thread timer = new Thread() {
+					public void run() {
+						try {
+							sleep(500);
+						} catch(InterruptedException e) {
+							e.printStackTrace();
+						} finally {
+							dialog.dismiss();
+						}
+					}
+				};
+				timer.start();
 			}
 		});
-		builder.show();
+		dialog.show();
 	}
+	
 }
