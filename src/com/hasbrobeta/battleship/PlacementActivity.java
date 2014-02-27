@@ -14,11 +14,12 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class PlacementActivity extends Activity {
 
 	GridView mGridView;
-	TextView mShipTV, mNumberTV, mLetterTV, mShipTV2;
+	TextView mShipTV, mLocationTV;
 	Button mShipBtn;
 	
 	private int lcoord = 0;
@@ -35,9 +36,7 @@ public class PlacementActivity extends Activity {
 		playerNum = getIntent().getIntExtra("PLAYER_NUM", 0);
 		
 		mShipTV = (TextView) findViewById(R.id.ship_text);
-		mShipTV2 = (TextView) findViewById(R.id.place_ships_text);
-		mNumberTV = (TextView) findViewById(R.id.number_text);
-		mLetterTV = (TextView) findViewById(R.id.letter_text);
+		mLocationTV = (TextView) findViewById(R.id.location_text);
 		
 		mGridView = (GridView) findViewById(R.id.grid_view);
 		mGridView.setOnItemClickListener(new OnItemClickListener() {
@@ -46,17 +45,15 @@ public class PlacementActivity extends Activity {
 				int num = 1 + position % 10;
 				int le = position / 10;
 				char l = (char) ('A' + le);
-				mNumberTV.setText("" + num);
+				mLocationTV.setText("" + num + l);
 				ncoord = num - 1;
-				mLetterTV.setText("" + l);
 				lcoord = le;
 			}
 		});
 	}
 	
 	public void setText(String n, String l) {
-		mNumberTV.setText(n);
-        mLetterTV.setText(l);
+		mLocationTV.setText(n + l);
 	}
 	
 	public void ship2(View view) {
@@ -138,8 +135,7 @@ public class PlacementActivity extends Activity {
 	
 	public void placeShip(View v) {
 		if (shipType == -1) {
-			TextView tv = (TextView) findViewById(R.id.place_ships_text);
-	        tv.setText("Please select a ship to Place!");	
+			Toast.makeText(this, "Please select a ship to place!", Toast.LENGTH_SHORT).show();
 	        return;
 		}
 		
@@ -163,8 +159,7 @@ public class PlacementActivity extends Activity {
 				(this.direction!= 2 || coord + i <= 10+10*((int)(coord/10)))) {//+1 or -1 apparently not needed here, seems to be working fine
 			for (int k = 0; k < i; k++) {
 				if (BattleshipFragment.sb.getPlayers()[playerNum].getSquares()[coord+k*adjust].isOccupied()) {
-					TextView tv = (TextView) findViewById(R.id.place_ships_text);
-					tv.setText("Your cannot place your ship that way!");
+					Toast.makeText(this, "You cannot place your ship that way!", Toast.LENGTH_SHORT).show();
 					return;
 				}
 			}
@@ -200,40 +195,40 @@ public class PlacementActivity extends Activity {
 				mShipBtn.setEnabled(false);
 				char l = 'A'; for (int x = 0; x < lcoord; x++) l++;
 				char n = '1'; for (int x = 0; x < ncoord; x++) n++;
-				if (n != ':') mShipTV2.setText("Patrol Boat placed starting at "+ l + n + "!");
-				else mShipTV2.setText("Patrol Boat placed starting at "+ l + "10!");
+				if (n != ':') Toast.makeText(this, "Patrol Boat placed starting at "+ l + n + "!", Toast.LENGTH_SHORT).show();
+				else Toast.makeText(this, "Patrol Boat placed starting at "+ l + "10!", Toast.LENGTH_SHORT).show();
 				BattleshipFragment.sb.getPlayers()[playerNum].addNumShipsPlaced();
 			} else if (this.shipType == 1) {
 				mShipBtn = (Button) findViewById(R.id.destroyer_button);
 				mShipBtn.setEnabled(false);
 				char l = 'A'; for (int x = 0; x < lcoord; x++) l++;
 				char n = '1'; for (int x = 0; x < ncoord; x++) n++;
-				if (n != ':') mShipTV2.setText("Destroyer placed starting at "+ l + n + "!");
-				else mShipTV2.setText("Destroyer placed starting at "+ l + "10!");
+				if (n != ':') Toast.makeText(this, "Destroyer placed starting at "+ l + n + "!", Toast.LENGTH_SHORT).show();
+				else Toast.makeText(this, "Destroyer placed starting at "+ l + "10!", Toast.LENGTH_SHORT).show();
 				BattleshipFragment.sb.getPlayers()[playerNum].addNumShipsPlaced();
 			} else if (this.shipType == 2) {
 				mShipBtn = (Button) findViewById(R.id.submarine_button);
 				mShipBtn.setEnabled(false);
 				char l = 'A'; for (int x = 0; x < lcoord; x++) l++;
 				char n = '1'; for (int x = 0; x < ncoord; x++) n++;
-				if (n != ':') mShipTV2.setText("Submarine placed starting at "+ l + n + "!");
-				else mShipTV2.setText("Submarine placed starting at "+ l + "10!");
+				if (n != ':') Toast.makeText(this, "Submarine placed starting at "+ l + n + "!", Toast.LENGTH_SHORT).show();
+				else Toast.makeText(this, "Submarine placed starting at "+ l + "10!", Toast.LENGTH_SHORT).show();
 				BattleshipFragment.sb.getPlayers()[playerNum].addNumShipsPlaced();
 			} else if (this.shipType == 3) {
 				mShipBtn = (Button) findViewById(R.id.battleship_button);
 				mShipBtn.setEnabled(false);
 				char l = 'A'; for (int x = 0; x < lcoord; x++) l++;
 				char n = '1'; for (int x = 0; x < ncoord; x++) n++;
-				if (n != ':') mShipTV2.setText("Battleship placed starting at "+ l + n + "!");
-				else mShipTV2.setText("Battleship placed starting at "+ l + "10!");
+				if (n != ':') Toast.makeText(this, "Battleship placed starting at "+ l + n + "!", Toast.LENGTH_SHORT).show();
+				else Toast.makeText(this, "Battleship placed starting at "+ l + "10!", Toast.LENGTH_SHORT).show();
 				BattleshipFragment.sb.getPlayers()[playerNum].addNumShipsPlaced();
 			} else if (this.shipType == 4) {
 				mShipBtn = (Button) findViewById(R.id.aircraft_carrier_button);
 				mShipBtn.setEnabled(false);
 				char l = 'A'; for (int x = 0; x < lcoord; x++) l++;
 				char n = '1'; for (int x = 0; x < ncoord; x++) n++;
-				if (n != ':') mShipTV2.setText("Aircraft Carrier placed starting at "+ l + n + "!");
-				else mShipTV2.setText("Aircraft Carrier placed starting at "+ l + "10!");
+				if (n != ':') Toast.makeText(this, "Aircraft Carrier placed starting at "+ l + n + "!", Toast.LENGTH_SHORT).show();
+				else Toast.makeText(this, "Aircraft Carrier placed starting at "+ l + "10!", Toast.LENGTH_SHORT).show();
 				BattleshipFragment.sb.getPlayers()[playerNum].addNumShipsPlaced();
 			}
 			this.shipType = -1;
@@ -248,7 +243,7 @@ public class PlacementActivity extends Activity {
 		} else {
 			//print some kind of message
 			//telling that we couldn't place it there
-			mShipTV2.setText("You cannot place your ship that way!");
+			Toast.makeText(this, "You cannot place your ship that way!", Toast.LENGTH_SHORT).show();
 		}
 	}
 	

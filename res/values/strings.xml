@@ -22,11 +22,11 @@
     <string name="place_ship">Place Ship</string>
     <string name="current_config">Current Configuration</string>
     <string name="ship">Ship</string>
-    <string name="A">A</string>
-    <string name="one">1</string>
+    <string name="A1">A1</string>
 	<string name="start_game">Start Game</string>
 	<string name="ask_settings">ASK Settings</string>
 	<string name="ask_speed">ASK Speed</string>
 	<string name="placement">Placement</string>
-
+	<string name="return_to_menu">Return to Menu</string>
+	
 </resources>

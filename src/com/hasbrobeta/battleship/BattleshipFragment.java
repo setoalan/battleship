@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.TextView;
 
 public class BattleshipFragment extends Fragment {
 	
@@ -22,12 +23,13 @@ public class BattleshipFragment extends Fragment {
 	public static final int PLAYER_TWO = 2;
 	public static boolean CURRENT_PLAYER = false;
 	
+	private boolean mHit;
+	private boolean mWin;
+	
 	BattleshipAdapter mAdapter;
 	GridView mGridView;
 	Button mTransition, mWinner;
-	
-	private boolean mHit;
-	private boolean mWin;
+	TextView mWinnerTV;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -72,14 +74,14 @@ public class BattleshipFragment extends Fragment {
 		mGridView.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-				BattleshipFragment.sb.getPlayers()[BattleshipFragment.CURRENT_PLAYER ? 1 : 0]
+				BattleshipFragment.sb.getPlayers()[CURRENT_PLAYER ? 1 : 0]
 						.getSquares()[position].setShot(true);
-				if (BattleshipFragment.sb.getPlayers()[BattleshipFragment.CURRENT_PLAYER ? 1 : 0]
+				if (BattleshipFragment.sb.getPlayers()[CURRENT_PLAYER ? 1 : 0]
 						.getSquares()[position].isShot() && 
-						BattleshipFragment.sb.getPlayers()[BattleshipFragment.CURRENT_PLAYER ? 0 : 1]
+						BattleshipFragment.sb.getPlayers()[CURRENT_PLAYER ? 0 : 1]
 								.getSquares()[position].isOccupied()) {
-					BattleshipFragment.sb.getPlayers()[BattleshipFragment.CURRENT_PLAYER ? 1 : 0].addHitCounter();
-					if (BattleshipFragment.sb.getPlayers()[BattleshipFragment.CURRENT_PLAYER ? 1 : 0].getHitCounter() == 1) mWin = true;
+					BattleshipFragment.sb.getPlayers()[CURRENT_PLAYER ? 1 : 0].addHitCounter();
+					if (BattleshipFragment.sb.getPlayers()[CURRENT_PLAYER ? 1 : 0].getHitCounter() == 17) mWin = true;
 					mHit = true;
 				} else {
 					mHit = false;
@@ -96,6 +98,8 @@ public class BattleshipFragment extends Fragment {
 		final Dialog dialog = new Dialog(getActivity(), android.R.style.Theme_Black_NoTitleBar_Fullscreen);
 		if (win) {
 			dialog.setContentView(R.layout.dialog_winner);
+			mWinnerTV = (TextView) dialog.findViewById(R.id.winner_tv);
+			mWinnerTV.setText("Player " + (CURRENT_PLAYER ? 2 : 1) + " wins!");
 			mWinner = (Button) dialog.findViewById(R.id.winner);
 			mWinner.setOnClickListener(new View.OnClickListener() {
 				@Override
