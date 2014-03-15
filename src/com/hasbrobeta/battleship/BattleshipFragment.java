@@ -5,8 +5,10 @@ import android.app.Dialog;
 import android.app.Fragment;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
+import android.content.DialogInterface.OnKeyListener;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +17,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class BattleshipFragment extends Fragment {
 	
@@ -44,11 +47,17 @@ public class BattleshipFragment extends Fragment {
 	
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
-		if (requestCode == PLAYER_ONE) {
+		if (resultCode == 0) {
+			getActivity().finish();
+			return;
+		}
+		switch (requestCode) {
+		case PLAYER_ONE:
 			Intent i = new Intent(getActivity(), PlacementActivity.class);
 			i.putExtra("PLAYER_NUM", 1);
 			startActivityForResult(i, PLAYER_TWO);
-		} else if (requestCode == PLAYER_TWO) {
+			return;
+		case PLAYER_TWO:
 			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 			builder.setMessage("Please hand tablet to player one.");
 			builder.setPositiveButton("OK", new OnClickListener() {
@@ -59,6 +68,7 @@ public class BattleshipFragment extends Fragment {
 				}
 			});
 			builder.show();
+			return;
 		}
 	}
 	
@@ -74,6 +84,12 @@ public class BattleshipFragment extends Fragment {
 		mGridView.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+				if (BattleshipFragment.sb.getPlayers()[CURRENT_PLAYER ? 1 : 0]
+						.getSquares()[position].isShot()) {
+					Toast.makeText(getActivity(), "Square already shot, please select another square", Toast.LENGTH_SHORT).show();
+					return;
+				}
+				mGridView.setEnabled(false);
 				BattleshipFragment.sb.getPlayers()[CURRENT_PLAYER ? 1 : 0]
 						.getSquares()[position].setShot(true);
 				if (BattleshipFragment.sb.getPlayers()[CURRENT_PLAYER ? 1 : 0]
@@ -118,6 +134,7 @@ public class BattleshipFragment extends Fragment {
 					CURRENT_PLAYER = (CURRENT_PLAYER) ? false : true;
 					BattleshipFragmentSide.refresh();
 					mAdapter.notifyDataSetChanged();
+					mGridView.setEnabled(true);
 					Thread timer = new Thread() {
 						public void run() {
 							try {
@@ -133,6 +150,15 @@ public class BattleshipFragment extends Fragment {
 				}
 			});
 		}
+		dialog.setOnKeyListener(new OnKeyListener() {
+			@Override
+			public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
+				if (keyCode == KeyEvent.KEYCODE_BACK) {
+					// do nothing
+                }
+                return true;
+			}
+		});
 		dialog.show();
 	}
 	

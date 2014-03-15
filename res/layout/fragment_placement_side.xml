@@ -32,6 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/patrol_boat"
+            android:background="@drawable/button_patrol"
             android:onClick="ship2" />
         
    		<Button
@@ -40,6 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/destroyer"
+            android:background="@drawable/button_destroyer"
             android:onClick="ship3d" />
    		
 		<Button
@@ -48,6 +50,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/submarine"
+            android:background="@drawable/button_sub"
             android:onClick="ship3s" />
         
     </LinearLayout>
@@ -63,6 +66,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/battleship"
+            android:background="@drawable/button_battleship"
             android:onClick="ship4" />
 		
 		<Button
@@ -71,6 +75,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/aircraft_carrier"
+            android:background="@drawable/button_carrier"
             android:onClick="ship5" />
 	    
 	</LinearLayout>
@@ -86,7 +91,7 @@
 		android:layout_width="100dp"
 		android:layout_height="wrap_content"
 		android:layout_gravity="center"
-		android:text="@string/up"
+		android:background="@drawable/button_up"
 		android:onClick="directionU" />
 	
 	<LinearLayout 
@@ -99,14 +104,14 @@
             android:id="@+id/left_button" 
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:text="@string/left"
+            android:background="@drawable/button_left"
             android:onClick="directionL" />
 		
 		<Button
             android:id="@+id/right_button" 
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:text="@string/right"
+            android:background="@drawable/button_right"
             android:onClick="directionR" />
 	   
 	</LinearLayout>
@@ -117,7 +122,7 @@
 		android:layout_height="wrap_content"
 		android:layout_gravity="center"
 		android:gravity="center"
-		android:text="@string/down"
+		android:background="@drawable/button_down"
 		android:onClick="directionD" />
 	
 	<TextView
@@ -167,7 +172,7 @@
 		android:layout_height="wrap_content"
 		android:layout_gravity="center"
 		android:layout_marginTop="15dp"
-		android:text="@string/place_ship"
+		android:background="@drawable/button_place_ship"
 		android:onClick="placeShip" />
 
 </LinearLayout>

@@ -256,4 +256,10 @@ public class PlacementActivity extends Activity {
 		}
 	}
 	
+	@Override
+	public void onBackPressed() {
+		setResult(Activity.RESULT_CANCELED);
+		finish();
+	}
+	
 }
