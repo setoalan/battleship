@@ -21,6 +21,7 @@ public class BattleshipFragmentSide extends Fragment {
 		
 		mGridView = (GridView) v.findViewById(R.id.grid_view_side);
 		mGridView.setAdapter(mSideAdapter);
+		mGridView.setEnabled(false);
 		
 		return v;
 	}

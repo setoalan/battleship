@@ -15,6 +15,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class BattleshipFragment extends Fragment {
 	
@@ -74,6 +75,12 @@ public class BattleshipFragment extends Fragment {
 		mGridView.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+				if (BattleshipFragment.sb.getPlayers()[CURRENT_PLAYER ? 1 : 0]
+						.getSquares()[position].isShot()) {
+					Toast.makeText(getActivity(), "Square already shot, please select another square", Toast.LENGTH_SHORT).show();
+					return;
+				}
+				mGridView.setEnabled(false);
 				BattleshipFragment.sb.getPlayers()[CURRENT_PLAYER ? 1 : 0]
 						.getSquares()[position].setShot(true);
 				if (BattleshipFragment.sb.getPlayers()[CURRENT_PLAYER ? 1 : 0]
@@ -118,6 +125,7 @@ public class BattleshipFragment extends Fragment {
 					CURRENT_PLAYER = (CURRENT_PLAYER) ? false : true;
 					BattleshipFragmentSide.refresh();
 					mAdapter.notifyDataSetChanged();
+					mGridView.setEnabled(true);
 					Thread timer = new Thread() {
 						public void run() {
 							try {
