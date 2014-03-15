@@ -21,37 +21,17 @@
 	    android:layout_gravity="center"
 	    android:text="@string/place_ships" />
 
+	<ImageView
+            android:id="@+id/showShip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/button_patrol_pressed" />
+	
     <LinearLayout 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal" >
-        
-        <Button
-            android:id="@+id/patrol_boat_button" 
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/patrol_boat"
-            android:background="@drawable/button_patrol"
-            android:onClick="ship2" />
-        
-   		<Button
-            android:id="@+id/destroyer_button" 
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/destroyer"
-            android:background="@drawable/button_destroyer"
-            android:onClick="ship3d" />
-   		
-		<Button
-            android:id="@+id/submarine_button" 
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/submarine"
-            android:background="@drawable/button_sub"
-            android:onClick="ship3s" />
         
     </LinearLayout>
     
@@ -59,24 +39,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal" >
-	    
-		<Button
-            android:id="@+id/battleship_button" 
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/battleship"
-            android:background="@drawable/button_battleship"
-            android:onClick="ship4" />
-		
-		<Button
-            android:id="@+id/aircraft_carrier_button" 
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/aircraft_carrier"
-            android:background="@drawable/button_carrier"
-            android:onClick="ship5" />
 	    
 	</LinearLayout>
 	
@@ -144,7 +106,7 @@
 	        android:layout_weight="8"
 	        android:gravity="center"
 	        android:textSize="25sp"
-	        android:text="@string/ship" />
+	        android:text="@string/patrol_boat"  />
 	    
 		<TextView
 	        android:id="@+id/direction_text"

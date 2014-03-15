@@ -8,11 +8,11 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
-public class BattleshipAdapterSide extends BaseAdapter {
+public class AIAdapterSide extends BaseAdapter {
 
 	private Context mContext;
 	
-	public BattleshipAdapterSide(Context context) {
+	public AIAdapterSide(Context context) {
 		mContext = context;
 	}
 	
