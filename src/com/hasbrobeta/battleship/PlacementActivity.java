@@ -28,6 +28,11 @@ public class PlacementActivity extends Activity {
 	private int shipType = -1;
 	private int playerNum;
 	
+//	@Override
+//	public View getView(int row, int index) {
+//		return mRows.get(row).get(index);
+//	}
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -50,6 +55,10 @@ public class PlacementActivity extends Activity {
 				lcoord = le;
 			}
 		});
+		for (int i = 0; i < 100; i++)
+		{
+			i = 1;
+		}
 	}
 	
 	public void setText(String n, String l) {
