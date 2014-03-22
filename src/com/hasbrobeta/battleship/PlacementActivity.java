@@ -30,7 +30,8 @@ public class PlacementActivity extends Activity {
 	private int shipType = 0;
 	private int playerNum;
 	private SoundPool soundPool;
-	private int soundID;
+	private int selectID;
+	private int cancelID;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -60,12 +61,13 @@ public class PlacementActivity extends Activity {
 		});	
 		
 		soundPool = new SoundPool(2, AudioManager.STREAM_MUSIC, 0);
-		soundID = soundPool.load(this, R.raw.menu_select, 1);
+		selectID = soundPool.load(this, R.raw.menu_select, 1);
+		cancelID = soundPool.load(this, R.raw.menu_cancel, 1);
 	}
 	
 	public boolean helper(int adjust, int newCoord)
 	{//adjust -1 left, -10 up, 1 right, 10 down
-		soundPool.play(soundID, 1.0f, 1.0f, 1, 0, 1);
+		soundPool.play(selectID, 1.0f, 1.0f, 1, 0, 1);
 		int coord = ncoord + 10 * lcoord;
 		
 		int realadjust = 0;
@@ -131,7 +133,7 @@ public class PlacementActivity extends Activity {
 	}
 	
 	public void directionL(View view) {
-		soundPool.play(soundID, 1.0f, 1.0f, 1, 0, 1);
+		soundPool.play(selectID, 1.0f, 1.0f, 1, 0, 1);
 		helper(-1,this.ncoord + 10 * this.lcoord);
 		TextView tv = (TextView) findViewById(R.id.direction_text);
 		tv.setText("Left");
@@ -139,7 +141,7 @@ public class PlacementActivity extends Activity {
 	}
 
 	public void directionR(View view) {
-		soundPool.play(soundID, 1.0f, 1.0f, 1, 0, 1);
+		soundPool.play(selectID, 1.0f, 1.0f, 1, 0, 1);
 		helper(1,this.ncoord + 10 * this.lcoord);
 		TextView tv = (TextView) findViewById(R.id.direction_text);
 		tv.setText("Right");
@@ -147,7 +149,7 @@ public class PlacementActivity extends Activity {
 	}
 
 	public void directionU(View view) {
-		soundPool.play(soundID, 1.0f, 1.0f, 1, 0, 1);
+		soundPool.play(selectID, 1.0f, 1.0f, 1, 0, 1);
 		helper(-10,this.ncoord + 10 * this.lcoord);
 		TextView tv = (TextView) findViewById(R.id.direction_text);
 		tv.setText("Up");
@@ -155,7 +157,7 @@ public class PlacementActivity extends Activity {
 	}
 
 	public void directionD(View view) {
-		soundPool.play(soundID, 1.0f, 1.0f, 1, 0, 1);
+		soundPool.play(selectID, 1.0f, 1.0f, 1, 0, 1);
 		helper(10,this.ncoord + 10 * this.lcoord);
 		TextView tv = (TextView) findViewById(R.id.direction_text);
 		tv.setText("Down");
@@ -228,7 +230,7 @@ public class PlacementActivity extends Activity {
 	}
 	
 	public void placeShip(View v) {
-		soundPool.play(soundID, 1.0f, 1.0f, 1, 0, 1);
+		soundPool.play(selectID, 1.0f, 1.0f, 1, 0, 1);
 		if (shipType == -1) {
 			Toast.makeText(this, "Please select a ship to place!", Toast.LENGTH_SHORT).show();
 	        return;
@@ -334,6 +336,7 @@ public class PlacementActivity extends Activity {
 	
 	@Override
 	public void onBackPressed() {
+		soundPool.play(cancelID, 1.0f, 1.0f, 1, 0, 1);
 		setResult(Activity.RESULT_CANCELED);
 		finish();
 	}
