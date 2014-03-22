@@ -24,7 +24,7 @@ public class PlacementActivity extends Activity {
 	private boolean isDrawn = false;
 	private int lcoord = 0;
 	private int ncoord = 0;
-	private int direction = 0;
+	private int direction = 2;
 	private int shipType = 0;
 	private int playerNum;
 	
