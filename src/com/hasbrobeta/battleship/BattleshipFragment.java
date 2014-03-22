@@ -7,7 +7,9 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.DialogInterface.OnKeyListener;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,18 +30,27 @@ public class BattleshipFragment extends Fragment {
 	
 	private boolean mHit;
 	private boolean mWin;
+	private int mShip;
+	private SharedPreferences sharedPref;
+	private boolean mSalvo;
 	
 	BattleshipAdapter mAdapter;
 	GridView mGridView;
 	Button mTransition, mWinner;
 	TextView mWinnerTV;
 	
+	Board[] player; 
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		sb = new SingletonBean();
+		player = BattleshipFragment.sb.getPlayers();
 		mWin = false;
 		
+		sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
+		mSalvo = sharedPref.getBoolean("salvo", false);
+
 		Intent i = new Intent(getActivity(), PlacementActivity.class);
 		i.putExtra("PLAYER_NUM", 0);
 		startActivityForResult(i, PLAYER_ONE);
@@ -84,33 +95,76 @@ public class BattleshipFragment extends Fragment {
 		mGridView.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-				if (BattleshipFragment.sb.getPlayers()[CURRENT_PLAYER ? 1 : 0]
+				if (player[CURRENT_PLAYER ? 1 : 0]
 						.getSquares()[position].isShot()) {
 					Toast.makeText(getActivity(), "Square already shot, please select another square", Toast.LENGTH_SHORT).show();
 					return;
 				}
 				mGridView.setEnabled(false);
-				BattleshipFragment.sb.getPlayers()[CURRENT_PLAYER ? 1 : 0]
+				player[CURRENT_PLAYER ? 1 : 0]
 						.getSquares()[position].setShot(true);
-				if (BattleshipFragment.sb.getPlayers()[CURRENT_PLAYER ? 1 : 0]
+				if (player[CURRENT_PLAYER ? 1 : 0]
 						.getSquares()[position].isShot() && 
-						BattleshipFragment.sb.getPlayers()[CURRENT_PLAYER ? 0 : 1]
+						player[CURRENT_PLAYER ? 0 : 1]
 								.getSquares()[position].isOccupied()) {
-					BattleshipFragment.sb.getPlayers()[CURRENT_PLAYER ? 1 : 0].addHitCounter();
-					if (BattleshipFragment.sb.getPlayers()[CURRENT_PLAYER ? 1 : 0].getHitCounter() == 17) mWin = true;
+					player[CURRENT_PLAYER ? 1 : 0].addHitCounter();
+					mShip = shipSank(player[CURRENT_PLAYER ? 1 : 0].getSquares()[position]);
+					if (player[CURRENT_PLAYER ? 1 : 0].getHitCounter() == 17) mWin = true;
 					mHit = true;
 				} else {
 					mHit = false;
 				}
 				mAdapter.notifyDataSetChanged();
-				showAlert(mWin, mHit);
+				showAlert(mWin, mHit, mShip);
 			}
 		});
 		
 		return v;
 	}
 	
-	public void showAlert(boolean win, boolean hit) {
+	private int shipSank(Square square) {
+		switch (square.getShipNum()) {
+		case 0:
+			player[CURRENT_PLAYER ? 1 : 0].getShips().subPatrolBoat();
+			if (player[CURRENT_PLAYER ? 1 : 0].getShips().getPatrolBoat() == 0) {
+				player[CURRENT_PLAYER ? 1 : 0].subNumCurShips();
+				return 0;
+			}
+			return -1;
+		case 1:
+			player[CURRENT_PLAYER ? 1 : 0].getShips().subDestroyer();
+			if (player[CURRENT_PLAYER ? 1 : 0].getShips().getPatrolBoat() == 0) {
+				player[CURRENT_PLAYER ? 1 : 0].subNumCurShips();
+				return 1;
+			}
+			return -1;
+		case 2:
+			player[CURRENT_PLAYER ? 1 : 0].getShips().subSubmarine();
+			if (player[CURRENT_PLAYER ? 1 : 0].getShips().getPatrolBoat() == 0) {
+				player[CURRENT_PLAYER ? 1 : 0].subNumCurShips();
+				return 2;
+			}
+			return -1;
+		case 3:
+			player[CURRENT_PLAYER ? 1 : 0].getShips().subBattleship();
+			if (player[CURRENT_PLAYER ? 1 : 0].getShips().getPatrolBoat() == 0) {
+				player[CURRENT_PLAYER ? 1 : 0].subNumCurShips();
+				return 3;
+			}
+			return -1;
+		case 4:
+			player[CURRENT_PLAYER ? 1 : 0].getShips().subAircraftCarrier();
+			if (player[CURRENT_PLAYER ? 1 : 0].getShips().getPatrolBoat() == 0) {
+				player[CURRENT_PLAYER ? 1 : 0].subNumCurShips();
+				return 4;
+			}
+			return -1;
+		default:
+			return -1;
+		}
+	}
+	
+	private void showAlert(boolean win, boolean hit, int ship) {
 		final Dialog dialog = new Dialog(getActivity(), android.R.style.Theme_Black_NoTitleBar_Fullscreen);
 		if (win) {
 			dialog.setContentView(R.layout.dialog_winner);
@@ -126,8 +180,25 @@ public class BattleshipFragment extends Fragment {
 		} else {
 			dialog.setContentView(R.layout.dialog_transition);
 			mTransition = (Button) dialog.findViewById(R.id.transition);
-			if (mHit) mTransition.setBackgroundResource(R.drawable.background_hit);
-			else mTransition.setBackgroundResource(R.drawable.background_miss);
+			if (ship == 0) {
+				//patrol boat sunk
+				mTransition.setBackgroundResource(R.drawable.background_hit);
+			} else if (ship == 1) {
+				//destroyer sunk
+				mTransition.setBackgroundResource(R.drawable.background_hit);
+			} else if (ship == 2) {
+				//submarine sunk
+				mTransition.setBackgroundResource(R.drawable.background_hit);
+			} else if (ship == 3) {
+				//battleship sunk
+				mTransition.setBackgroundResource(R.drawable.background_hit);
+			} else if (ship == 4) {
+				//aircraft carrier sunk
+				mTransition.setBackgroundResource(R.drawable.background_hit);
+			} else {
+				if (mHit) mTransition.setBackgroundResource(R.drawable.background_hit);
+				else mTransition.setBackgroundResource(R.drawable.background_miss);
+			}
 			mTransition.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {

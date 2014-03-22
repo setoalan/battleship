@@ -13,10 +13,10 @@
         android:background="@drawable/button_start_game"
         android:onClick="startGame" />
 
-    <!--<Button
+    <Button
         android:layout_width="270dp"
         android:layout_height="wrap_content"
-        android:onClick="settings"
-        android:text="@string/action_settings" />-->
+        android:background="@drawable/button_settings"
+        android:onClick="settings" />
 
 </LinearLayout>

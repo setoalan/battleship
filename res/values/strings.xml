@@ -28,5 +28,7 @@
 	<string name="ask_speed">ASK Speed</string>
 	<string name="placement">Placement</string>
 	<string name="return_to_menu">Return to Menu</string>
+	<string name="game_variations">Gameplay Variations</string>
+	<string name="salvo">Salvo</string>
 	
 </resources>

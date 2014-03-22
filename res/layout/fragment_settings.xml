@@ -4,6 +4,18 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
     
+    <PreferenceCategory
+	    android:title="@string/game_variations"
+	    android:key="game_variations" >
+	    
+        <CheckBoxPreference
+            android:key="salvo"
+            android:summary="The number of shots being equal to the number of ships that the firing player has remaining."
+            android:title="@string/salvo"
+            android:defaultValue="false" />
+        
+	</PreferenceCategory>
+    
 	<PreferenceCategory
 	    android:title="@string/ask_settings"
 	    android:key="ask_settings" >

@@ -168,6 +168,7 @@ public class BattleshipAdapterSide extends BaseAdapter {
 				Bitmap bmpPeg = BitmapFactory.decodeResource(mContext.getResources(),R.drawable.peg_hit);
 				tempCanvas.drawBitmap(bmpPeg,0,0,null);				
 			} 
+			Bitmap finbit = Bitmap.createScaledBitmap(bmResult, 3*bmResult.getWidth()/4, 3*bmResult.getHeight()/4, true);
 			iv.setImageBitmap(finbit);
 		}
 		
