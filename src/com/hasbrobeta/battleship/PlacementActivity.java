@@ -92,6 +92,7 @@ public class PlacementActivity extends Activity {
 					nvv.setImageResource(R.drawable.bg);
 				}
 			}
+			this.isDrawn = false;
 		}
 		if (BattleshipFragment.sb.getPlayers()[playerNum].getSquares()[newCoord].isOccupied() == false &&
 				newCoord+(i-1)*adjust <= 99 &&
@@ -132,7 +133,7 @@ public class PlacementActivity extends Activity {
 		}
 	}
 	
-	public void directionL(View view) {
+	public void directionL(View view) {		
 		soundPool.play(selectID, 1.0f, 1.0f, 1, 0, 1);
 		helper(-1,this.ncoord + 10 * this.lcoord);
 		TextView tv = (TextView) findViewById(R.id.direction_text);
@@ -168,33 +169,33 @@ public class PlacementActivity extends Activity {
 		mLocationTV.setText(n + l);
 	}
 	
-	public void ship2(View view) {
-		this.shipType = 0;
-		mShipTV.setText(getResources().getString(R.string.patrol_boat));
-	}
+//	public void ship2(View view) {
+//		this.shipType = 0;
+//		mShipTV.setText(getResources().getString(R.string.patrol_boat));
+//	}
 	
-	public void ship3d(View view) {
+	public void ship3d() {
 		ImageView temp = (ImageView) findViewById(R.id.showShip);
 		temp.setImageResource(R.drawable.button_destroyer_pressed);
 		this.shipType = 1;
 		mShipTV.setText(getResources().getString(R.string.destroyer));
 	}
 	
-	public void ship3s(View view) {
+	public void ship3s() {
 		ImageView temp = (ImageView) findViewById(R.id.showShip);
 		temp.setImageResource(R.drawable.button_sub_pressed);
 		this.shipType = 2;
 		mShipTV.setText(getResources().getString(R.string.submarine));
 	}
 	
-	public void ship4(View view) {
+	public void ship4() {
 		ImageView temp = (ImageView) findViewById(R.id.showShip);
 		temp.setImageResource(R.drawable.button_battleship_pressed);
 		this.shipType = 3;
 		mShipTV.setText(getResources().getString(R.string.battleship));
 	}
 	
-	public void ship5(View view) {
+	public void ship5() {
 		ImageView temp = (ImageView) findViewById(R.id.showShip);
 		temp.setImageResource(R.drawable.button_carrier_pressed);
 		this.shipType = 4;
@@ -313,10 +314,10 @@ public class PlacementActivity extends Activity {
 				BattleshipFragment.sb.getPlayers()[playerNum].addNumShipsPlaced();
 			}
 //			this.shipType = -1;
-			if (this.shipType == 0) {View temp = null; ship3d(temp); this.isDrawn = false;}
-			else if (this.shipType == 1) {View temp = null; ship3s(temp); this.isDrawn = false;}
-			else if (this.shipType == 2) {View temp = null; ship4(temp); this.isDrawn = false;}
-			else if (this.shipType == 3) {View temp = null; ship5(temp); this.isDrawn = false;}
+			if (this.shipType == 0) {ship3d(); this.isDrawn = false;}
+			else if (this.shipType == 1) {ship3s(); this.isDrawn = false;}
+			else if (this.shipType == 2) {ship4(); this.isDrawn = false;}
+			else if (this.shipType == 3) {ship5(); this.isDrawn = false;}
 			else if (this.shipType == 4) {/*do nothing*/}
 
 			if (BattleshipFragment.sb.getPlayers()[playerNum].getNumShipsPlaced() == 5) {
