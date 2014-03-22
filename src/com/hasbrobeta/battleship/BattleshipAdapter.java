@@ -48,8 +48,6 @@ public class BattleshipAdapter extends BaseAdapter {
 				.getSquares()[position].isShot() && 
 				BattleshipFragment.sb.getPlayers()[BattleshipFragment.CURRENT_PLAYER ? 0 : 1]
 						.getSquares()[position].isOccupied()) {
-			// Hit shots
-			//iv.setBackgroundColor(Color.GREEN);
 			Bitmap bmpOriginal = BitmapFactory.decodeResource(mContext.getResources(),R.drawable.bg);
 			Bitmap bmpunoc = BitmapFactory.decodeResource(mContext.getResources(),R.drawable.peg_hit);
 			Bitmap bmResult = Bitmap.createBitmap(bmpOriginal.getWidth(), bmpOriginal.getHeight(), Bitmap.Config.ARGB_8888);
@@ -60,13 +58,9 @@ public class BattleshipAdapter extends BaseAdapter {
 			Bitmap fin = Bitmap.createScaledBitmap(bmResult, 12*bmResult.getWidth()/10, 12*bmResult.getHeight()/10, true);
 			iv.setImageBitmap(fin);
 
-			
-			//iv.setImageBitmap(bmResult);
-
 		} else if (BattleshipFragment.sb.getPlayers()[BattleshipFragment.CURRENT_PLAYER ? 1 : 0]
 				.getSquares()[position].isShot()) {
 			// Missed Shots
-			//iv.setBackgroundColor(Color.RED);
 			Bitmap bmpOriginal = BitmapFactory.decodeResource(mContext.getResources(),R.drawable.bg);
 			Bitmap bmpunoc = BitmapFactory.decodeResource(mContext.getResources(),R.drawable.peg_miss);
 			Bitmap bmResult = Bitmap.createBitmap(bmpOriginal.getWidth(), bmpOriginal.getHeight(), Bitmap.Config.ARGB_8888);
@@ -76,12 +70,7 @@ public class BattleshipAdapter extends BaseAdapter {
 		
 			Bitmap fin = Bitmap.createScaledBitmap(bmResult, 12*bmResult.getWidth()/10, 12*bmResult.getHeight()/10, true);
 			iv.setImageBitmap(fin);
-
-			//iv.setImageBitmap(bmResult);
-		}
-		
+		}		
 		return v;
-
 	}
-
 }

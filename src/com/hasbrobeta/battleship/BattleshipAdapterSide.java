@@ -131,7 +131,6 @@ public class BattleshipAdapterSide extends BaseAdapter {
 		View v = inflater.inflate(R.layout.unoccupied_square, parent, false);
 		ImageView iv = (ImageView) v.findViewById(R.id.usquare);
 		Bitmap bgbig = BitmapFactory.decodeResource(mContext.getResources(),R.drawable.bg);
-		//Bitmap bgsq = Bitmap.createScaledBitmap(bgbig, bgbig.getWidth()/2, bgbig.getHeight()/2, true);
 		Bitmap bgsq = Bitmap.createScaledBitmap(bgbig, 3*bgbig.getWidth()/4, 3*bgbig.getHeight()/4, true);
 		iv.setImageBitmap(bgsq);
 		
@@ -166,45 +165,22 @@ public class BattleshipAdapterSide extends BaseAdapter {
 			tempCanvas.drawBitmap(bmpunoc,0,0,null);			
 			if (BattleshipFragment.sb.getPlayers()[BattleshipFragment.CURRENT_PLAYER ? 0 : 1]
 							.getSquares()[position].isShot()) {
-				// Current player's ship, shot
-				//iv.setBackgroundColor(Color.RED);
 				Bitmap bmpPeg = BitmapFactory.decodeResource(mContext.getResources(),R.drawable.peg_hit);
 				tempCanvas.drawBitmap(bmpPeg,0,0,null);				
 			} 
-//			Bitmap finbit = Bitmap.createScaledBitmap(bmResult, bmResult.getWidth()/2, bmResult.getHeight()/2, true);
-			Bitmap finbit = Bitmap.createScaledBitmap(bmResult, 3*bmResult.getWidth()/4, 3*bmResult.getHeight()/4, true);
 			iv.setImageBitmap(finbit);
 		}
 		
-//		if (BattleshipFragment.sb.getPlayers()[BattleshipFragment.CURRENT_PLAYER ? 1 : 0]
-//				.getSquares()[position].isOccupied() &&
-//				BattleshipFragment.sb.getPlayers()[BattleshipFragment.CURRENT_PLAYER ? 0 : 1]
-//						.getSquares()[position].isShot()) {
-//			// Current player's ship, shot
-//			//iv.setBackgroundColor(Color.RED);
-//			Bitmap bmpOriginal = BitmapFactory.decodeResource(mContext.getResources(),R.drawable.bg);
-//			Bitmap bmpunoc = BitmapFactory.decodeResource(mContext.getResources(),R.drawable.peg_hit);
-//			Bitmap bmResult = Bitmap.createBitmap(bmpOriginal.getWidth(), bmpOriginal.getHeight(), Bitmap.Config.ARGB_8888);
-//			Canvas tempCanvas = new Canvas(bmResult);
-//			tempCanvas.drawBitmap(bmpOriginal, 0, 0, null);
-//			tempCanvas.drawBitmap(bmpunoc,0,0,null);
-//			
-//			iv.setImageBitmap(bmResult);
-//			
-//		} 
 		else if (BattleshipFragment.sb.getPlayers()[BattleshipFragment.CURRENT_PLAYER ? 0 : 1]
 				.getSquares()[position].isShot()) {
-			// Opponent's missed shot
 			Bitmap bmpOriginal = BitmapFactory.decodeResource(mContext.getResources(),R.drawable.bg);
 			Bitmap bmResult = Bitmap.createBitmap(bmpOriginal.getWidth(), bmpOriginal.getHeight(), Bitmap.Config.ARGB_8888);
 			Canvas tempCanvas = new Canvas(bmResult);
 			tempCanvas.drawBitmap(bmpOriginal,0,0,null);
 			Bitmap bmpPeg = BitmapFactory.decodeResource(mContext.getResources(),R.drawable.peg_miss);
 			tempCanvas.drawBitmap(bmpPeg,0,0,null);				
-//			Bitmap finbit = Bitmap.createScaledBitmap(bmResult, bmResult.getWidth()/2, bmResult.getHeight()/2, true);
 			Bitmap finbit = Bitmap.createScaledBitmap(bmResult, 3*bmResult.getWidth()/4, 3*bmResult.getHeight()/4, true);
 			iv.setImageBitmap(finbit);
-			//iv.setBackgroundColor(Color.GREEN);
 		}
 		
 		return v;
