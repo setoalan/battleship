@@ -1,2 +1,2 @@
-Menu Sound Byte
+Menu Sound Byte (menu_select.wav)
 https://www.freesound.org/people/broumbroum/sounds/50561/
