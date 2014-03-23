@@ -91,7 +91,7 @@ public class BattleshipFragment extends Fragment {
 		
 		mAdapter = new BattleshipAdapter(getActivity());
 		
-		mFiresLeft = player[CURRENT_PLAYER ? 1 : 0].getNumCurShips();
+		mFiresLeft = player[CURRENT_PLAYER ? 0 : 1].getNumCurShips();
 		
 		mGridView = (GridView) v.findViewById(R.id.grid_view);
 		mGridView.setAdapter(mAdapter);
@@ -119,7 +119,7 @@ public class BattleshipFragment extends Fragment {
 					mGridView.setEnabled(true);
 					mFiresLeft--;
 					if (mFiresLeft == 0) {
-						mFiresLeft = player[CURRENT_PLAYER ? 0 : 1].getNumCurShips();
+						mFiresLeft = player[CURRENT_PLAYER ? 1 : 0].getNumCurShips();
 						showAlert(mWin, mHit, mShip);
 					}
 				} else {
