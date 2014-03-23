@@ -31,6 +31,7 @@ public class BattleshipFragment extends Fragment {
 	private boolean mHit;
 	private boolean mWin;
 	private int mShip;
+	private int mFiresLeft;
 	private SharedPreferences sharedPref;
 	private boolean mSalvo;
 	
@@ -39,7 +40,7 @@ public class BattleshipFragment extends Fragment {
 	Button mTransition, mWinner;
 	TextView mWinnerTV;
 	
-	Board[] player; 
+	Board[] player;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -90,6 +91,8 @@ public class BattleshipFragment extends Fragment {
 		
 		mAdapter = new BattleshipAdapter(getActivity());
 		
+		mFiresLeft = player[CURRENT_PLAYER ? 1 : 0].getNumCurShips();
+		
 		mGridView = (GridView) v.findViewById(R.id.grid_view);
 		mGridView.setAdapter(mAdapter);
 		mGridView.setOnItemClickListener(new OnItemClickListener() {
@@ -101,21 +104,27 @@ public class BattleshipFragment extends Fragment {
 					return;
 				}
 				mGridView.setEnabled(false);
-				player[CURRENT_PLAYER ? 1 : 0]
-						.getSquares()[position].setShot(true);
-				if (player[CURRENT_PLAYER ? 1 : 0]
-						.getSquares()[position].isShot() && 
-						player[CURRENT_PLAYER ? 0 : 1]
-								.getSquares()[position].isOccupied()) {
+				player[CURRENT_PLAYER ? 1 : 0] .getSquares()[position].setShot(true);
+				if (player[CURRENT_PLAYER ? 1 : 0].getSquares()[position].isShot() && 
+						player[CURRENT_PLAYER ? 0 : 1].getSquares()[position].isOccupied()) {
 					player[CURRENT_PLAYER ? 1 : 0].addHitCounter();
-					mShip = shipSank(player[CURRENT_PLAYER ? 1 : 0].getSquares()[position]);
 					if (player[CURRENT_PLAYER ? 1 : 0].getHitCounter() == 17) mWin = true;
+					mShip = shipSank(player[CURRENT_PLAYER ? 1 : 0].getSquares()[position]);
 					mHit = true;
 				} else {
 					mHit = false;
 				}
 				mAdapter.notifyDataSetChanged();
-				showAlert(mWin, mHit, mShip);
+				if (mSalvo) {
+					mGridView.setEnabled(true);
+					mFiresLeft--;
+					if (mFiresLeft == 0) {
+						mFiresLeft = player[CURRENT_PLAYER ? 0 : 1].getNumCurShips();
+						showAlert(mWin, mHit, mShip);
+					}
+				} else {
+					showAlert(mWin, mHit, mShip);
+				}
 			}
 		});
 		
@@ -133,28 +142,28 @@ public class BattleshipFragment extends Fragment {
 			return -1;
 		case 1:
 			player[CURRENT_PLAYER ? 1 : 0].getShips().subDestroyer();
-			if (player[CURRENT_PLAYER ? 1 : 0].getShips().getPatrolBoat() == 0) {
+			if (player[CURRENT_PLAYER ? 1 : 0].getShips().getDestroyer() == 0) {
 				player[CURRENT_PLAYER ? 1 : 0].subNumCurShips();
 				return 1;
 			}
 			return -1;
 		case 2:
 			player[CURRENT_PLAYER ? 1 : 0].getShips().subSubmarine();
-			if (player[CURRENT_PLAYER ? 1 : 0].getShips().getPatrolBoat() == 0) {
+			if (player[CURRENT_PLAYER ? 1 : 0].getShips().getSubmarine() == 0) {
 				player[CURRENT_PLAYER ? 1 : 0].subNumCurShips();
 				return 2;
 			}
 			return -1;
 		case 3:
 			player[CURRENT_PLAYER ? 1 : 0].getShips().subBattleship();
-			if (player[CURRENT_PLAYER ? 1 : 0].getShips().getPatrolBoat() == 0) {
+			if (player[CURRENT_PLAYER ? 1 : 0].getShips().getBattleship() == 0) {
 				player[CURRENT_PLAYER ? 1 : 0].subNumCurShips();
 				return 3;
 			}
 			return -1;
 		case 4:
 			player[CURRENT_PLAYER ? 1 : 0].getShips().subAircraftCarrier();
-			if (player[CURRENT_PLAYER ? 1 : 0].getShips().getPatrolBoat() == 0) {
+			if (player[CURRENT_PLAYER ? 1 : 0].getShips().getAircraftCarrier() == 0) {
 				player[CURRENT_PLAYER ? 1 : 0].subNumCurShips();
 				return 4;
 			}
