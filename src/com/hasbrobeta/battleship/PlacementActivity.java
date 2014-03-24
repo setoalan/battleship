@@ -11,18 +11,17 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import ask.scanninglibrary.ASKActivity;
 
-public class PlacementActivity extends Activity {
+public class PlacementActivity extends ASKActivity {
 
 	GridView mGridView;
 	TextView mShipTV, mLocationTV;
-	Button mShipBtn;
 	private boolean isDrawn = false;
 	private int lcoord = 0;
 	private int ncoord = 0;
@@ -65,7 +64,7 @@ public class PlacementActivity extends Activity {
 		cancelID = soundPool.load(this, R.raw.menu_cancel, 1);
 	}
 	
-	public boolean helper(int adjust, int newCoord)
+	private boolean helper(int adjust, int newCoord)
 	{//adjust -1 left, -10 up, 1 right, 10 down
 		soundPool.play(selectID, 1.0f, 1.0f, 1, 0, 1);
 		int coord = ncoord + 10 * lcoord;
@@ -165,7 +164,7 @@ public class PlacementActivity extends Activity {
 		this.direction = 3;
 	}
 	
-	public void setText(String n, String l) {
+	private void setText(String n, String l) {
 		mLocationTV.setText(n + l);
 	}
 	
@@ -174,35 +173,35 @@ public class PlacementActivity extends Activity {
 //		mShipTV.setText(getResources().getString(R.string.patrol_boat));
 //	}
 	
-	public void ship3d() {
+	private void ship3d() {
 		ImageView temp = (ImageView) findViewById(R.id.showShip);
 		temp.setImageResource(R.drawable.button_destroyer_pressed);
 		this.shipType = 1;
 		mShipTV.setText(getResources().getString(R.string.destroyer));
 	}
 	
-	public void ship3s() {
+	private void ship3s() {
 		ImageView temp = (ImageView) findViewById(R.id.showShip);
 		temp.setImageResource(R.drawable.button_sub_pressed);
 		this.shipType = 2;
 		mShipTV.setText(getResources().getString(R.string.submarine));
 	}
 	
-	public void ship4() {
+	private void ship4() {
 		ImageView temp = (ImageView) findViewById(R.id.showShip);
 		temp.setImageResource(R.drawable.button_battleship_pressed);
 		this.shipType = 3;
 		mShipTV.setText(getResources().getString(R.string.battleship));
 	}
 	
-	public void ship5() {
+	private void ship5() {
 		ImageView temp = (ImageView) findViewById(R.id.showShip);
 		temp.setImageResource(R.drawable.button_carrier_pressed);
 		this.shipType = 4;
 		mShipTV.setText(getResources().getString(R.string.aircraft_carrier));
 	}
 	
-	public int getPic(int ship, int direction, int bit) {
+	private int getPic(int ship, int direction, int bit) {
 		if (ship == 0) {
 			if (bit == 0) return R.drawable.patrol_1;
 			if (bit == 1) return R.drawable.patrol_2;
