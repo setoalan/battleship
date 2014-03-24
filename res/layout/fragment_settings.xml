@@ -5,14 +5,16 @@
     android:orientation="vertical" >
     
     <PreferenceCategory
-	    android:title="@string/game_variations"
-	    android:key="game_variations" >
+	    android:title="@string/game_settings"
+	    android:key="game_settings" >
 	    
-        <CheckBoxPreference
-            android:key="salvo"
-            android:summary="The number of shots being equal to the number of ships that the firing player has remaining."
-            android:title="@string/salvo"
-            android:defaultValue="false" />
+		<ListPreference
+		    android:title="@string/game_variations"
+			android:summary="Select the game type"
+			android:key="game_type"
+			android:defaultValue="Classic"
+			android:entries="@array/game_variations"
+			android:entryValues="@array/game_variations_values" />
         
 	</PreferenceCategory>
     

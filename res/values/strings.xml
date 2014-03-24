@@ -28,7 +28,10 @@
 	<string name="ask_speed">ASK Speed</string>
 	<string name="placement">Placement</string>
 	<string name="return_to_menu">Return to Menu</string>
+	<string name="game_settings">Game Settings</string>
 	<string name="game_variations">Gameplay Variations</string>
 	<string name="salvo">Salvo</string>
+	<string name="fire_until_miss">Fire Until Miss</string>
+	<string name="game_type">Game Type:</string>
 	
 </resources>

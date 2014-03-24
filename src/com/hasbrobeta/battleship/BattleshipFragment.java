@@ -33,7 +33,7 @@ public class BattleshipFragment extends Fragment {
 	private int mShip;
 	private int mFiresLeft;
 	private SharedPreferences sharedPref;
-	private boolean mSalvo;
+	private String mGameType;
 	
 	BattleshipAdapter mAdapter;
 	GridView mGridView;
@@ -50,7 +50,7 @@ public class BattleshipFragment extends Fragment {
 		mWin = false;
 		
 		sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
-		mSalvo = sharedPref.getBoolean("salvo", false);
+		mGameType = sharedPref.getString("game_type", "0");
 
 		Intent i = new Intent(getActivity(), PlacementActivity.class);
 		i.putExtra("PLAYER_NUM", 0);
@@ -108,18 +108,28 @@ public class BattleshipFragment extends Fragment {
 				if (player[CURRENT_PLAYER ? 1 : 0].getSquares()[position].isShot() && 
 						player[CURRENT_PLAYER ? 0 : 1].getSquares()[position].isOccupied()) {
 					player[CURRENT_PLAYER ? 1 : 0].addHitCounter();
-					if (player[CURRENT_PLAYER ? 1 : 0].getHitCounter() == 17) mWin = true;
-					mShip = shipSank(player[CURRENT_PLAYER ? 1 : 0].getSquares()[position]);
-					mHit = true;
+					if (player[CURRENT_PLAYER ? 1 : 0].getHitCounter() == 17) {
+						mWin = true;
+						showAlert(mWin, mHit, mShip);
+					} else {
+						mShip = shipSank(player[CURRENT_PLAYER ? 1 : 0].getSquares()[position]);
+						mHit = true;
+					}
 				} else {
 					mHit = false;
 				}
 				mAdapter.notifyDataSetChanged();
-				if (mSalvo) {
+				if (mGameType.equals("salvo")) {
 					mGridView.setEnabled(true);
 					mFiresLeft--;
 					if (mFiresLeft == 0) {
 						mFiresLeft = player[CURRENT_PLAYER ? 1 : 0].getNumCurShips();
+						showAlert(mWin, mHit, mShip);
+					}
+				} else if (mGameType.equals("hitmiss")){
+					if (mHit) {
+						mGridView.setEnabled(true);
+					} else {
 						showAlert(mWin, mHit, mShip);
 					}
 				} else {

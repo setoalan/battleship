@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+	<string-array name="game_variations">
+		<item>Classic</item>
+		<item>Salvo</item>
+		<item>Hit Until Miss</item>
+	</string-array>
+	
+	<string-array name="game_variations_values">
+		<item>classic</item>
+		<item>salvo</item>
+		<item>hitmiss</item>
+	</string-array>
+	
+</resources>
