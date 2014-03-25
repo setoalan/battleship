@@ -148,35 +148,35 @@ public class BattleshipFragment extends Fragment {
 				player[CURRENT_PLAYER ? 1 : 0].subNumCurShips();
 				return 0;
 			}
-			return -1;
+			return 5;
 		case 1:
 			player[CURRENT_PLAYER ? 1 : 0].getShips().subDestroyer();
 			if (player[CURRENT_PLAYER ? 1 : 0].getShips().getDestroyer() == 0) {
 				player[CURRENT_PLAYER ? 1 : 0].subNumCurShips();
 				return 1;
 			}
-			return -1;
+			return 6;
 		case 2:
 			player[CURRENT_PLAYER ? 1 : 0].getShips().subSubmarine();
 			if (player[CURRENT_PLAYER ? 1 : 0].getShips().getSubmarine() == 0) {
 				player[CURRENT_PLAYER ? 1 : 0].subNumCurShips();
 				return 2;
 			}
-			return -1;
+			return 7;
 		case 3:
 			player[CURRENT_PLAYER ? 1 : 0].getShips().subBattleship();
 			if (player[CURRENT_PLAYER ? 1 : 0].getShips().getBattleship() == 0) {
 				player[CURRENT_PLAYER ? 1 : 0].subNumCurShips();
 				return 3;
 			}
-			return -1;
+			return 8;
 		case 4:
 			player[CURRENT_PLAYER ? 1 : 0].getShips().subAircraftCarrier();
 			if (player[CURRENT_PLAYER ? 1 : 0].getShips().getAircraftCarrier() == 0) {
 				player[CURRENT_PLAYER ? 1 : 0].subNumCurShips();
 				return 4;
 			}
-			return -1;
+			return 9;
 		default:
 			return -1;
 		}
@@ -198,25 +198,7 @@ public class BattleshipFragment extends Fragment {
 		} else {
 			dialog.setContentView(R.layout.dialog_transition);
 			mTransition = (Button) dialog.findViewById(R.id.transition);
-			if (ship == 0) {
-				//patrol boat sunk
-				mTransition.setBackgroundResource(R.drawable.background_hit);
-			} else if (ship == 1) {
-				//destroyer sunk
-				mTransition.setBackgroundResource(R.drawable.background_hit);
-			} else if (ship == 2) {
-				//submarine sunk
-				mTransition.setBackgroundResource(R.drawable.background_hit);
-			} else if (ship == 3) {
-				//battleship sunk
-				mTransition.setBackgroundResource(R.drawable.background_hit);
-			} else if (ship == 4) {
-				//aircraft carrier sunk
-				mTransition.setBackgroundResource(R.drawable.background_hit);
-			} else {
-				if (mHit) mTransition.setBackgroundResource(R.drawable.background_hit);
-				else mTransition.setBackgroundResource(R.drawable.background_miss);
-			}
+			setTransitionBackground(hit, ship);
 			mTransition.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
@@ -249,6 +231,36 @@ public class BattleshipFragment extends Fragment {
 			}
 		});
 		dialog.show();
+	}
+
+	private void setTransitionBackground(boolean hit, int ship) {
+		if (!hit) {
+			mTransition.setBackgroundResource(R.drawable.background_miss);
+		} else {
+			switch(ship) {
+			case 0: mTransition.setBackgroundResource(R.drawable.background_sunk_patrol);
+				return;
+			case 1: mTransition.setBackgroundResource(R.drawable.background_sunk_destroyer);
+				return;
+			case 2: mTransition.setBackgroundResource(R.drawable.background_sunk_sub);
+				return;
+			case 3: mTransition.setBackgroundResource(R.drawable.background_sunk_battleship);
+				return;
+			case 4: mTransition.setBackgroundResource(R.drawable.background_sunk_carrier);
+				return;
+			case 5: mTransition.setBackgroundResource(R.drawable.background_hit_patrol);
+				return;
+			case 6: mTransition.setBackgroundResource(R.drawable.background_hit_destroyer);
+				return;
+			case 7: mTransition.setBackgroundResource(R.drawable.background_hit_sub);
+				return;
+			case 8: mTransition.setBackgroundResource(R.drawable.background_hit_battleship);
+				return;
+			case 9: mTransition.setBackgroundResource(R.drawable.background_hit_carrier);
+				return;
+			}
+		}
+		return;
 	}
 	
 }
