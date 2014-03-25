@@ -34,6 +34,7 @@ public class BattleshipFragment extends Fragment {
 	private int mFiresLeft;
 	private SharedPreferences sharedPref;
 	private String mGameType;
+	private String mdeclareType;
 	
 	BattleshipAdapter mAdapter;
 	GridView mGridView;
@@ -51,6 +52,7 @@ public class BattleshipFragment extends Fragment {
 		
 		sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
 		mGameType = sharedPref.getString("game_type", "0");
+		mdeclareType = sharedPref.getString("declare_type", "0");
 
 		Intent i = new Intent(getActivity(), PlacementActivity.class);
 		i.putExtra("PLAYER_NUM", 0);
@@ -236,7 +238,7 @@ public class BattleshipFragment extends Fragment {
 	private void setTransitionBackground(boolean hit, int ship) {
 		if (!hit) {
 			mTransition.setBackgroundResource(R.drawable.background_miss);
-		} else if (!sharedPref.getBoolean("game_display_hit", true)) {
+		} else if (mdeclareType.equals("none")) {
 			mTransition.setBackgroundResource(R.drawable.background_hit);
 		} else {
 			switch(ship) {
@@ -250,15 +252,30 @@ public class BattleshipFragment extends Fragment {
 				return;
 			case 4: mTransition.setBackgroundResource(R.drawable.background_sunk_carrier);
 				return;
-			case 5: mTransition.setBackgroundResource(R.drawable.background_hit_patrol);
+			case 5: if (mdeclareType.equals("hit"))
+					mTransition.setBackgroundResource(R.drawable.background_hit_patrol);
+				else
+					mTransition.setBackgroundResource(R.drawable.background_hit);
 				return;
-			case 6: mTransition.setBackgroundResource(R.drawable.background_hit_destroyer);
+			case 6: if (mdeclareType.equals("hit"))
+					mTransition.setBackgroundResource(R.drawable.background_hit_destroyer);
+				else
+					mTransition.setBackgroundResource(R.drawable.background_hit);
 				return;
-			case 7: mTransition.setBackgroundResource(R.drawable.background_hit_sub);
+			case 7: if (mdeclareType.equals("hit"))
+					mTransition.setBackgroundResource(R.drawable.background_hit_sub);
+				else
+					mTransition.setBackgroundResource(R.drawable.background_hit);
 				return;
-			case 8: mTransition.setBackgroundResource(R.drawable.background_hit_battleship);
+			case 8: if (mdeclareType.equals("hit"))
+					mTransition.setBackgroundResource(R.drawable.background_hit_battleship);
+				else
+					mTransition.setBackgroundResource(R.drawable.background_hit);
 				return;
-			case 9: mTransition.setBackgroundResource(R.drawable.background_hit_carrier);
+			case 9: if (mdeclareType.equals("hit"))
+					mTransition.setBackgroundResource(R.drawable.background_hit_carrier);
+				else
+					mTransition.setBackgroundResource(R.drawable.background_hit);
 				return;
 			}
 		}
