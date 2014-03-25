@@ -10,29 +10,39 @@ import android.view.View;
 
 public class BattleshipMenu extends Activity {
 	
-	private SoundPool soundPool;
-	private int soundID;
+	private static SoundPool soundPool;
 	private MediaPlayer mediaPlayer;
+	public static int cannon,
+				menu_cancel,
+				menu_select,
+				splash;
+	
+	public static void playSound(int soundID, int loop) {
+		soundPool.play(soundID, 1.0f, 1.0f, 1, loop, 1);
+	}
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_menu);
+		soundPool = new SoundPool(2, AudioManager.STREAM_MUSIC, 0);
+		cannon = soundPool.load(this, R.raw.cannon, 1);
+		menu_cancel = soundPool.load(this, R.raw.menu_cancel, 1);
+		menu_select = soundPool.load(this, R.raw.menu_select, 1);
+		splash = soundPool.load(this, R.raw.splash, 1);
 		mediaPlayer = MediaPlayer.create(this, R.raw.must_persevere);
 		mediaPlayer.setLooping(true);
 		mediaPlayer.start();
-		soundPool = new SoundPool(2, AudioManager.STREAM_MUSIC, 0);
-		soundID = soundPool.load(this, R.raw.menu_select, 1);
 	}
 	
 	public void startGame(View view) {
-		soundPool.play(soundID, 1.0f, 1.0f, 1, 0, 1);
+		playSound(menu_select, 0);
 		Intent i = new Intent(this, BattleshipActivity.class);
 		startActivity(i);
 	}
 	
 	public void settings(View view) {
-		soundPool.play(soundID, 1.0f, 1.0f, 1, 0, 1);
+		playSound(menu_select, 0);
 		Intent i = new Intent(this, BattleshipSettingsActivity.class);
 		startActivity(i);
 	}

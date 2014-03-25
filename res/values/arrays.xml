@@ -13,4 +13,16 @@
 		<item>hitmiss</item>
 	</string-array>
 	
+	<string-array name="declare_variations">
+		<item>Declare On Hit</item>
+		<item>Declare On Sink</item>
+		<item>Don\'t Declare</item>
+	</string-array>
+	
+	<string-array name="declare_variations_values">
+		<item>hit</item>
+		<item>sink</item>
+		<item>none</item>
+	</string-array>
+	
 </resources>

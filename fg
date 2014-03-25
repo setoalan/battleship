@@ -1,0 +1,27 @@
+[1mdiff --git a/.classpath b/.classpath[m
+[1mindex 5176974..fef8a60 100644[m
+[1m--- a/.classpath[m
+[1m+++ b/.classpath[m
+[36m@@ -4,6 +4,7 @@[m
+ 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>[m
+ 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>[m
+ 	<classpathentry kind="src" path="src"/>[m
+[32m+[m	[32m<classpathentry kind="src" path="ASKLibrary/src"/>[m
+ 	<classpathentry kind="src" path="gen"/>[m
+ 	<classpathentry kind="output" path="bin/classes"/>[m
+ </classpath>[m
+[1mdiff --git a/src/com/hasbrobeta/battleship/PlacementActivity.java b/src/com/hasbrobeta/battleship/PlacementActivity.java[m
+[1mindex d832447..48d4751 100644[m
+[1m--- a/src/com/hasbrobeta/battleship/PlacementActivity.java[m
+[1m+++ b/src/com/hasbrobeta/battleship/PlacementActivity.java[m
+[36m@@ -18,7 +18,7 @@[m [mimport android.widget.TextView;[m
+ import android.widget.Toast;[m
+ import ask.scanninglibrary.ASKActivity;[m
+ [m
+[31m-public class PlacementActivity extends ASKActivity {[m
+[32m+[m[32mpublic class PlacementActivity extends Activity {[m
+ [m
+ 	GridView mGridView;[m
+ 	TextView mShipTV, mLocationTV;[m
+warning: LF will be replaced by CRLF in project.properties.
+The file will have its original line endings in your working directory.
