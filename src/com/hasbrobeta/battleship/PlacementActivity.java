@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -56,6 +57,8 @@ public class PlacementActivity extends ASKActivity {
 				else if (direction == 3) helper(10,num-1+10*le);
 				ncoord = num - 1;
 				lcoord = le;
+				Button holder = (Button) findViewById(R.id.left_button);
+				if (!isDrawn) holder.performClick();
 			}
 		});	
 		
@@ -100,7 +103,7 @@ public class PlacementActivity extends ASKActivity {
 				(adjust != 1 || newCoord + i <= 10+10*((int)(newCoord/10)))) {//+1 or -1 apparently not needed here, seems to be working fine
 			for (int k = 0; k < i; k++) {
 				if (BattleshipFragment.sb.getPlayers()[playerNum].getSquares()[newCoord+k*adjust].isOccupied()) {
-					Toast.makeText(this, "You cannot place your ship that way!", Toast.LENGTH_SHORT).show();
+					//Toast.makeText(this, "You cannot place your ship that way!", Toast.LENGTH_SHORT).show();
 					return false;
 				}
 			}
@@ -127,9 +130,24 @@ public class PlacementActivity extends ASKActivity {
 		}
 		else 
 		{
-			Toast.makeText(this, "You cannot place your ship that way!", Toast.LENGTH_SHORT).show();
+			//Toast.makeText(this, "You cannot place your ship that way!", Toast.LENGTH_SHORT).show();
 			return false;
 		}
+	}
+	
+	public void rotate(View view)
+	{
+		int dir = (this.direction);
+		for (int i = 0; i < 4; i++)
+		{
+			if (dir == 0) directionU(view);
+			else if (dir == 1) directionR(view);
+			else if (dir == 2) directionD(view);
+			else if (dir == 3) directionL(view);
+			if (isDrawn) return;
+			else dir = (dir+1)%4;
+		}
+		Toast.makeText(this, "You cannot place your ship that way!", Toast.LENGTH_SHORT).show();
 	}
 	
 	public void directionL(View view) {		

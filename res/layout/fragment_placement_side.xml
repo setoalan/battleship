@@ -51,14 +51,6 @@
 	    android:textColor="@android:color/white"
 	    android:text="@string/direction_origin" />
 	
-	<Button
-		android:id="@+id/up_button" 
-		android:layout_width="100dp"
-		android:layout_height="wrap_content"
-		android:layout_gravity="center"
-		android:background="@drawable/button_up"
-		android:onClick="directionU" />
-	
 	<LinearLayout 
 	    android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -70,25 +62,9 @@
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:background="@drawable/button_left"
-            android:onClick="directionL" />
-		
-		<Button
-            android:id="@+id/right_button" 
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/button_right"
-            android:onClick="directionR" />
+            android:onClick="rotate" />
 	   
 	</LinearLayout>
-	
-	<Button
-		android:id="@+id/down_button" 
-		android:layout_width="100dp"
-		android:layout_height="wrap_content"
-		android:layout_gravity="center"
-		android:gravity="center"
-		android:background="@drawable/button_down"
-		android:onClick="directionD" />
 	
 	<TextView
 	    android:layout_width="wrap_content"
