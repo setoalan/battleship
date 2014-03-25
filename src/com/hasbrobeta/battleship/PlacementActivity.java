@@ -16,8 +16,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import ask.scanninglibrary.ASKActivity;
 
-public class PlacementActivity extends Activity {
+public class PlacementActivity extends ASKActivity {
 
 	GridView mGridView;
 	TextView mShipTV, mLocationTV;

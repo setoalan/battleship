@@ -9,12 +9,18 @@
 	    android:key="game_settings" >
 	    
 		<ListPreference
-		    android:title="@string/game_variations"
-			android:summary="Select the game type"
 			android:key="game_type"
+			android:title="@string/game_type"
+			android:summary="Select the game type"
 			android:defaultValue="Classic"
 			android:entries="@array/game_variations"
 			android:entryValues="@array/game_variations_values" />
+		
+		<CheckBoxPreference
+			android:key="game_display_hit"
+			android:title="@string/game_display_hit"
+			android:summary="Display the ship a player hit during the transition"
+			android:defaultValue="true" />
         
 	</PreferenceCategory>
     
@@ -22,12 +28,25 @@
 	    android:title="@string/ask_settings"
 	    android:key="ask_settings" >
 	   
+		<CheckBoxPreference
+			android:key="ask_player_one"
+			android:title="@string/ask_player_one"
+			android:summary="@string/ask_on_off"
+			android:defaultValue="false" />
+			        
+		<CheckBoxPreference
+			android:key="ask_player_two"
+			android:title="@string/ask_player_two"
+			android:summary="@string/ask_on_off"
+			android:defaultValue="false" />
+	    
 	    <EditTextPreference
 	        android:id="@+id/ask_speed"
 	        android:key="ask_speed"
 	        android:title="@string/ask_speed"
 	        android:summary="Change the scanning speed of ASK"
 	        android:dialogTitle="Scanning Speed (ms)"
+	        android:inputType="number"
 	        android:defaultValue="5000" />
 	    
 	</PreferenceCategory>

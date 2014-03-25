@@ -236,6 +236,8 @@ public class BattleshipFragment extends Fragment {
 	private void setTransitionBackground(boolean hit, int ship) {
 		if (!hit) {
 			mTransition.setBackgroundResource(R.drawable.background_miss);
+		} else if (!sharedPref.getBoolean("game_display_hit", true)) {
+			mTransition.setBackgroundResource(R.drawable.background_hit);
 		} else {
 			switch(ship) {
 			case 0: mTransition.setBackgroundResource(R.drawable.background_sunk_patrol);

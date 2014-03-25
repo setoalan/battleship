@@ -36,4 +36,5 @@ public class BattleshipActivity extends Activity {
 		AlertDialog dialog = builder.create();
 		dialog.show();
 	}
+	
 }
