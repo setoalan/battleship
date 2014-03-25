@@ -5,9 +5,12 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnTouchListener;
 import android.widget.BaseAdapter;
+import android.widget.GridView;
 import android.widget.ImageView;
 
 public class BattleshipAdapter extends BaseAdapter {
@@ -34,7 +37,7 @@ public class BattleshipAdapter extends BaseAdapter {
 	}
 
 	@Override
-	public View getView(int position, View convertView, ViewGroup parent) {
+	public View getView(int position, View convertView, final ViewGroup parent) {
 		LayoutInflater inflater = (LayoutInflater) mContext
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		
@@ -71,6 +74,20 @@ public class BattleshipAdapter extends BaseAdapter {
 			Bitmap fin = Bitmap.createScaledBitmap(bmResult, 12*bmResult.getWidth()/10, 12*bmResult.getHeight()/10, true);
 			iv.setImageBitmap(fin);
 		}		
+		v.setOnTouchListener(new OnTouchListener() {
+			
+			@Override
+			public boolean onTouch(View arg0, MotionEvent event) {
+				// TODO Auto-generated method stub
+				if (event.getAction() == MotionEvent.ACTION_UP)
+				{
+					GridView theView = ((GridView) parent);
+					int pos = theView.getPositionForView(arg0);
+					theView.performItemClick(theView, pos, theView.getItemIdAtPosition(pos));		
+				}
+				return false;
+			}
+		});		
 		return v;
 	}
 }
