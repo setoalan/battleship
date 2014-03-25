@@ -144,4 +144,13 @@
 		android:background="@drawable/button_place_ship"
 		android:onClick="placeShip" />
 
+	<TextView
+	    android:id="@+id/current_player_place"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="30sp" 
+        android:textColor="@android:color/white"
+        android:text="" />
+	
 </LinearLayout>

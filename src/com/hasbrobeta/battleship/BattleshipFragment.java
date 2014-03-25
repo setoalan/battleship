@@ -49,7 +49,6 @@ public class BattleshipFragment extends Fragment {
 		mASKPlayerTwo = sharedPref.getBoolean("ask_player_two", false);
 		player = BattleshipFragment.sb.getPlayers();
 		mFiresLeft = player[CURRENT_PLAYER ? 1 : 0].getNumCurShips();
-
 		mGameType = sharedPref.getString("game_type", "0");
 
 		Intent i = new Intent(getActivity(), PlacementActivity.class);

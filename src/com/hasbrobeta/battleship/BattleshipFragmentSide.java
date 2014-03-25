@@ -12,10 +12,12 @@ import android.widget.TextView;
 
 public class BattleshipFragmentSide extends Fragment {
 	
-	static BattleshipAdapterSide mSideAdapter;
+	private static BattleshipAdapterSide mSideAdapter;
+	private static TextView mCurrentPlayer;
+	private SharedPreferences sharedPref;
+	
 	GridView mGridView;
 	TextView mGameType;
-	private SharedPreferences sharedPref;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -30,6 +32,9 @@ public class BattleshipFragmentSide extends Fragment {
 	
 		mGameType = (TextView) v.findViewById(R.id.game_type);
 		mGameType.setText("Game Type: " + getGameType());
+		
+		mCurrentPlayer = (TextView) v.findViewById(R.id.current_player);
+		mCurrentPlayer.setText("Player ONE");
 		
 		return v;
 	}
@@ -46,6 +51,10 @@ public class BattleshipFragmentSide extends Fragment {
 	}
 	
 	public static void refresh() {
+		if (BattleshipFragment.CURRENT_PLAYER)
+			mCurrentPlayer.setText("Player TWO");
+		else
+			mCurrentPlayer.setText("Player ONE");
 		mSideAdapter.notifyDataSetChanged();
 	}
 	

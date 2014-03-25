@@ -8,6 +8,7 @@ import android.graphics.Canvas;
 import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -20,7 +21,7 @@ import android.widget.Toast;
 public class PlacementActivity extends Activity {
 
 	GridView mGridView;
-	TextView mShipTV, mLocationTV;
+	TextView mShipTV, mLocationTV, mCurrentPlayerTV;
 	private boolean isDrawn = false;
 	private int lcoord = 0;
 	private int ncoord = 0;
@@ -40,6 +41,12 @@ public class PlacementActivity extends Activity {
 		
 		mShipTV = (TextView) findViewById(R.id.ship_text);
 		mLocationTV = (TextView) findViewById(R.id.location_text);
+		mCurrentPlayerTV = (TextView) findViewById(R.id.current_player_place);
+		Log.i("TAG", playerNum+"");
+		if (playerNum == 0)
+			mCurrentPlayerTV.setText("Player ONE");
+		else
+			mCurrentPlayerTV.setText("Player TWO");
 		
 		mGridView = (GridView) findViewById(R.id.grid_view);
 		mGridView.setOnItemClickListener(new OnItemClickListener() {
