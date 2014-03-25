@@ -22,35 +22,35 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class BattleshipFragment extends Fragment {
-	
-	public static SingletonBean sb;
+
 	public static final int PLAYER_ONE = 1;
 	public static final int PLAYER_TWO = 2;
 	public static boolean CURRENT_PLAYER = false;
+	public static SingletonBean sb;
 	
-	private boolean mHit;
-	private boolean mWin;
-	private int mShip;
-	private int mFiresLeft;
+	private boolean mHit, mWin, mASKPlayerOne, mASKPlayerTwo;
+	private int mShip, mFiresLeft;
+	private Board[] player;
 	private SharedPreferences sharedPref;
 	private String mGameType;
 	private String mdeclareType;
 	
 	BattleshipAdapter mAdapter;
-	GridView mGridView;
 	Button mTransition, mWinner;
+	GridView mGridView;
 	TextView mWinnerTV;
-	
-	Board[] player;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		sb = new SingletonBean();
-		player = BattleshipFragment.sb.getPlayers();
 		mWin = false;
-		
 		sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
+		mASKPlayerOne = sharedPref.getBoolean("ask_player_one", false);
+		mASKPlayerTwo = sharedPref.getBoolean("ask_player_two", false);
+		player = BattleshipFragment.sb.getPlayers();
+		mFiresLeft = player[CURRENT_PLAYER ? 1 : 0].getNumCurShips();
+
 		mGameType = sharedPref.getString("game_type", "0");
 		mdeclareType = sharedPref.getString("declare_type", "0");
 
@@ -93,15 +93,12 @@ public class BattleshipFragment extends Fragment {
 		
 		mAdapter = new BattleshipAdapter(getActivity());
 		
-		mFiresLeft = player[CURRENT_PLAYER ? 1 : 0].getNumCurShips();
-		
 		mGridView = (GridView) v.findViewById(R.id.grid_view);
 		mGridView.setAdapter(mAdapter);
 		mGridView.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-				if (player[CURRENT_PLAYER ? 1 : 0]
-						.getSquares()[position].isShot()) {
+				if (player[CURRENT_PLAYER ? 1 : 0].getSquares()[position].isShot()) {
 					Toast.makeText(getActivity(), "Square already shot, please select another square", Toast.LENGTH_SHORT).show();
 					return;
 				}
@@ -128,11 +125,10 @@ public class BattleshipFragment extends Fragment {
 						showAlert(mWin, mHit, mShip);
 					}
 				} else if (mGameType.equals("hitmiss")){
-					if (mHit) {
+					if (mHit)
 						mGridView.setEnabled(true);
-					} else {
+					else
 						showAlert(mWin, mHit, mShip);
-					}
 				} else {
 					showAlert(mWin, mHit, mShip);
 				}
@@ -205,6 +201,7 @@ public class BattleshipFragment extends Fragment {
 				@Override
 				public void onClick(View v) {
 					CURRENT_PLAYER = (CURRENT_PLAYER) ? false : true;
+					turnASKOnOff();
 					BattleshipFragmentSide.refresh();
 					mAdapter.notifyDataSetChanged();
 					mGridView.setEnabled(true);
@@ -226,13 +223,29 @@ public class BattleshipFragment extends Fragment {
 		dialog.setOnKeyListener(new OnKeyListener() {
 			@Override
 			public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
-				if (keyCode == KeyEvent.KEYCODE_BACK) {
-					// do nothing
-                }
+				if (keyCode == KeyEvent.KEYCODE_BACK) {}
                 return true;
 			}
 		});
 		dialog.show();
+	}
+	
+	private void turnASKOnOff() {
+		BattleshipActivity mBattleshipActivity = (BattleshipActivity) getActivity();
+		
+		if (!CURRENT_PLAYER) {
+			if (mASKPlayerOne)
+				mBattleshipActivity.turnOnScanning();
+			else
+				mBattleshipActivity.turnOffScanning();
+		} else {
+			if (mASKPlayerTwo)
+				mBattleshipActivity.turnOnScanning();
+			else
+				mBattleshipActivity.turnOffScanning();
+		}
+		
+		return;
 	}
 
 	private void setTransitionBackground(boolean hit, int ship) {
