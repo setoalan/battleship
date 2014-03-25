@@ -1,23 +1,33 @@
 package com.hasbrobeta.battleship;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
+import android.preference.PreferenceManager;
+import ask.scanninglibrary.ASKActivity;
 
-public class BattleshipActivity extends Activity {
+public class BattleshipActivity extends ASKActivity {
+	
+	private boolean mASKPlayerOne;
+	private SharedPreferences sharedPref;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_battleship);
+		
+		sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+		mASKPlayerOne = sharedPref.getBoolean("ask_player_one", false);
+		if (mASKPlayerOne)
+			turnOnScanning();
+		else
+			turnOffScanning();
 	}
 
 	@Override
 	public void onBackPressed() {
-		Log.i("TAG", "Back button pressed");
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setTitle("Quit game and return to main menu?");
 		builder.setPositiveButton("OK", new OnClickListener() {
