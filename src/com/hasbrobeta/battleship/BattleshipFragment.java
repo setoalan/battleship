@@ -231,7 +231,7 @@ public class BattleshipFragment extends Fragment {
 	private void turnASKOnOff() {
 		BattleshipActivity mBattleshipActivity = (BattleshipActivity) getActivity();
 		
-		if (CURRENT_PLAYER) {
+		if (!CURRENT_PLAYER) {
 			if (mASKPlayerOne)
 				mBattleshipActivity.turnOnScanning();
 			else
