@@ -58,10 +58,10 @@
         android:orientation="horizontal" >
 	    
 		<Button
-            android:id="@+id/left_button" 
+            android:id="@+id/rotate_button" 
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/button_left"
+            android:background="@drawable/button_rotate"
             android:onClick="rotate" />
 	   
 	</LinearLayout>

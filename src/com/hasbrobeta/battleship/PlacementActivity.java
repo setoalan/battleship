@@ -5,8 +5,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.media.AudioManager;
-import android.media.SoundPool;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -28,9 +26,6 @@ public class PlacementActivity extends Activity {
 	private int direction = 2;
 	private int shipType = 0;
 	private int playerNum;
-	private SoundPool soundPool;
-	private int selectID;
-	private int cancelID;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -56,19 +51,15 @@ public class PlacementActivity extends Activity {
 				else if (direction == 3) helper(10,num-1+10*le);
 				ncoord = num - 1;
 				lcoord = le;
-				Button holder = (Button) findViewById(R.id.left_button);
+				Button holder = (Button) findViewById(R.id.rotate_button);
 				if (!isDrawn) holder.performClick();
 			}
 		});	
-		
-		soundPool = new SoundPool(2, AudioManager.STREAM_MUSIC, 0);
-		selectID = soundPool.load(this, R.raw.menu_select, 1);
-		cancelID = soundPool.load(this, R.raw.menu_cancel, 1);
 	}
 	
 	private boolean helper(int adjust, int newCoord)
 	{//adjust -1 left, -10 up, 1 right, 10 down
-		soundPool.play(selectID, 1.0f, 1.0f, 1, 0, 1);
+		BattleshipMenu.playSound(BattleshipMenu.menu_select, 0);
 		int coord = ncoord + 10 * lcoord;
 		
 		int realadjust = 0;
@@ -150,7 +141,7 @@ public class PlacementActivity extends Activity {
 	}
 	
 	public void directionL(View view) {		
-		soundPool.play(selectID, 1.0f, 1.0f, 1, 0, 1);
+		BattleshipMenu.playSound(BattleshipMenu.menu_select, 0);
 		helper(-1,this.ncoord + 10 * this.lcoord);
 		TextView tv = (TextView) findViewById(R.id.direction_text);
 		tv.setText("Left");
@@ -158,7 +149,7 @@ public class PlacementActivity extends Activity {
 	}
 
 	public void directionR(View view) {
-		soundPool.play(selectID, 1.0f, 1.0f, 1, 0, 1);
+		BattleshipMenu.playSound(BattleshipMenu.menu_select, 0);
 		helper(1,this.ncoord + 10 * this.lcoord);
 		TextView tv = (TextView) findViewById(R.id.direction_text);
 		tv.setText("Right");
@@ -166,7 +157,7 @@ public class PlacementActivity extends Activity {
 	}
 
 	public void directionU(View view) {
-		soundPool.play(selectID, 1.0f, 1.0f, 1, 0, 1);
+		BattleshipMenu.playSound(BattleshipMenu.menu_select, 0);
 		helper(-10,this.ncoord + 10 * this.lcoord);
 		TextView tv = (TextView) findViewById(R.id.direction_text);
 		tv.setText("Up");
@@ -174,7 +165,7 @@ public class PlacementActivity extends Activity {
 	}
 
 	public void directionD(View view) {
-		soundPool.play(selectID, 1.0f, 1.0f, 1, 0, 1);
+		BattleshipMenu.playSound(BattleshipMenu.menu_select, 0);
 		helper(10,this.ncoord + 10 * this.lcoord);
 		TextView tv = (TextView) findViewById(R.id.direction_text);
 		tv.setText("Down");
@@ -247,7 +238,7 @@ public class PlacementActivity extends Activity {
 	}
 	
 	public void placeShip(View v) {
-		soundPool.play(selectID, 1.0f, 1.0f, 1, 0, 1);
+		BattleshipMenu.playSound(BattleshipMenu.menu_select, 0);
 		if (shipType == -1) {
 			Toast.makeText(this, "Please select a ship to place!", Toast.LENGTH_SHORT).show();
 	        return;
@@ -353,7 +344,7 @@ public class PlacementActivity extends Activity {
 	
 	@Override
 	public void onBackPressed() {
-		soundPool.play(cancelID, 1.0f, 1.0f, 1, 0, 1);
+		BattleshipMenu.playSound(BattleshipMenu.menu_cancel, 0);
 		setResult(Activity.RESULT_CANCELED);
 		finish();
 	}

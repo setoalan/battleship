@@ -249,7 +249,9 @@ public class BattleshipFragment extends Fragment {
 	}
 
 	private void setTransitionBackground(boolean hit, int ship) {
+		BattleshipMenu.playSound(BattleshipMenu.cannon, 0);
 		if (!hit) {
+			BattleshipMenu.playSound(BattleshipMenu.splash, 0);
 			mTransition.setBackgroundResource(R.drawable.background_miss);
 		} else if (mdeclareType.equals("none")) {
 			mTransition.setBackgroundResource(R.drawable.background_hit);
