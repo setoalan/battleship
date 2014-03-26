@@ -2,10 +2,12 @@ package com.hasbrobeta.battleship;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -28,6 +30,9 @@ public class PlacementActivity extends Activity {
 	private int shipType = 0;
 	private int playerNum;
 	
+	private SharedPreferences sharedPref;
+	private boolean multi_play;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -35,14 +40,21 @@ public class PlacementActivity extends Activity {
 
 		playerNum = getIntent().getIntExtra("PLAYER_NUM", 0);
 		
+		sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+		multi_play = sharedPref.getBoolean("player_mode", true);
+		
+		
 		mShipTV = (TextView) findViewById(R.id.ship_text);
 		mLocationTV = (TextView) findViewById(R.id.location_text);
 		mCurrentPlayerTV = (TextView) findViewById(R.id.current_player_place);
 		Log.i("TAG", playerNum+"");
 		if (playerNum == 0)
 			mCurrentPlayerTV.setText("Player ONE");
-		else
+		else if (multi_play)
 			mCurrentPlayerTV.setText("Player TWO");
+		else
+			mCurrentPlayerTV.setText("COMPUTER");
+		
 		
 		mGridView = (GridView) findViewById(R.id.grid_view);
 		mGridView.setOnItemClickListener(new OnItemClickListener() {
@@ -179,15 +191,6 @@ public class PlacementActivity extends Activity {
 		this.direction = 3;
 	}
 	
-	private void setText(String n, String l) {
-		mLocationTV.setText(n + l);
-	}
-	
-//	public void ship2(View view) {
-//		this.shipType = 0;
-//		mShipTV.setText(getResources().getString(R.string.patrol_boat));
-//	}
-	
 	private void ship3d() {
 		ImageView temp = (ImageView) findViewById(R.id.showShip);
 		temp.setImageResource(R.drawable.button_destroyer_pressed);
@@ -246,10 +249,10 @@ public class PlacementActivity extends Activity {
 	
 	public void placeShip(View v) {
 		BattleshipMenu.playSound(BattleshipMenu.menu_select, 0);
-		if (shipType == -1) {
-			Toast.makeText(this, "Please select a ship to place!", Toast.LENGTH_SHORT).show();
-	        return;
-		}
+		//if (shipType == -1) {
+		//	Toast.makeText(this, "Please select a ship to place!", Toast.LENGTH_SHORT).show();
+	     //   return;
+		//}
 		
 		int coord = ncoord + 10 * lcoord;
 		int adjust = 0;
@@ -283,51 +286,11 @@ public class PlacementActivity extends Activity {
 				BattleshipFragment.sb.getPlayers()[playerNum].getSquares()[coord+j*adjust].setShipSegmentNum(j);
 
 			}
-			//this looks like only the button call is separate in terms of the logic. Unless there's an unaccounted for
-			//else condition that for a ship type that matches none of them, much of this logic could be called after
-			//the different button possibilities in one place instead of copied+pasted 4 times
-			if (this.shipType == 0) {
-//				mShipBtn = (Button) findViewById(R.id.patrol_boat_button);
-//				mShipBtn.setEnabled(false);
-				char l = 'A'; for (int x = 0; x < lcoord; x++) l++;
-				char n = '1'; for (int x = 0; x < ncoord; x++) n++;
-				if (n != ':') Toast.makeText(this, "Patrol Boat placed starting at "+ l + n + "!", Toast.LENGTH_SHORT).show();
-				else Toast.makeText(this, "Patrol Boat placed starting at "+ l + "10!", Toast.LENGTH_SHORT).show();
-				BattleshipFragment.sb.getPlayers()[playerNum].addNumShipsPlaced();
-			} else if (this.shipType == 1) {
-//				mShipBtn = (Button) findViewById(R.id.destroyer_button);
-//				mShipBtn.setEnabled(false);
-				char l = 'A'; for (int x = 0; x < lcoord; x++) l++;
-				char n = '1'; for (int x = 0; x < ncoord; x++) n++;
-				if (n != ':') Toast.makeText(this, "Destroyer placed starting at "+ l + n + "!", Toast.LENGTH_SHORT).show();
-				else Toast.makeText(this, "Destroyer placed starting at "+ l + "10!", Toast.LENGTH_SHORT).show();
-				BattleshipFragment.sb.getPlayers()[playerNum].addNumShipsPlaced();
-			} else if (this.shipType == 2) {
-//				mShipBtn = (Button) findViewById(R.id.submarine_button);
-//				mShipBtn.setEnabled(false);
-				char l = 'A'; for (int x = 0; x < lcoord; x++) l++;
-				char n = '1'; for (int x = 0; x < ncoord; x++) n++;
-				if (n != ':') Toast.makeText(this, "Submarine placed starting at "+ l + n + "!", Toast.LENGTH_SHORT).show();
-				else Toast.makeText(this, "Submarine placed starting at "+ l + "10!", Toast.LENGTH_SHORT).show();
-				BattleshipFragment.sb.getPlayers()[playerNum].addNumShipsPlaced();
-			} else if (this.shipType == 3) {
-//				mShipBtn = (Button) findViewById(R.id.battleship_button);
-//				mShipBtn.setEnabled(false);
-				char l = 'A'; for (int x = 0; x < lcoord; x++) l++;
-				char n = '1'; for (int x = 0; x < ncoord; x++) n++;
-				if (n != ':') Toast.makeText(this, "Battleship placed starting at "+ l + n + "!", Toast.LENGTH_SHORT).show();
-				else Toast.makeText(this, "Battleship placed starting at "+ l + "10!", Toast.LENGTH_SHORT).show();
-				BattleshipFragment.sb.getPlayers()[playerNum].addNumShipsPlaced();
-			} else if (this.shipType == 4) {
-//				mShipBtn = (Button) findViewById(R.id.aircraft_carrier_button);
-//				mShipBtn.setEnabled(false);
-				char l = 'A'; for (int x = 0; x < lcoord; x++) l++;
-				char n = '1'; for (int x = 0; x < ncoord; x++) n++;
-				if (n != ':') Toast.makeText(this, "Aircraft Carrier placed starting at "+ l + n + "!", Toast.LENGTH_SHORT).show();
-				else Toast.makeText(this, "Aircraft Carrier placed starting at "+ l + "10!", Toast.LENGTH_SHORT).show();
+
+			if (this.shipType < 5) {
 				BattleshipFragment.sb.getPlayers()[playerNum].addNumShipsPlaced();
 			}
-//			this.shipType = -1;
+			
 			if (this.shipType == 0) {ship3d(); this.isDrawn = false;}
 			else if (this.shipType == 1) {ship3s(); this.isDrawn = false;}
 			else if (this.shipType == 2) {ship4(); this.isDrawn = false;}
@@ -335,16 +298,12 @@ public class PlacementActivity extends Activity {
 			else if (this.shipType == 4) {/*do nothing*/}
 
 			if (BattleshipFragment.sb.getPlayers()[playerNum].getNumShipsPlaced() == 5) {
-				//leave this activity go to next one,
-				//since we got all ships placed
 				Intent returnIntent = new Intent();
 				if (playerNum == 0) setResult(BattleshipFragment.PLAYER_ONE, returnIntent);
 				else setResult(BattleshipFragment.PLAYER_TWO, returnIntent);
 				finish();
 			}
 		} else {
-			//print some kind of message
-			//telling that we couldn't place it there
 			Toast.makeText(this, "You cannot place your ship that way!", Toast.LENGTH_SHORT).show();
 		}
 	}

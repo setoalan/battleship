@@ -28,7 +28,7 @@ public class BattleshipFragment extends Fragment {
 	public static boolean CURRENT_PLAYER = false;
 	public static SingletonBean sb;
 	
-	private boolean mHit, mWin, mASKPlayerOne, mASKPlayerTwo;
+	private boolean mHit, mWin, mASKPlayerOne, mASKPlayerTwo, multi_play;
 	private int mShip, mFiresLeft;
 	private Board[] player;
 	private SharedPreferences sharedPref;
@@ -47,6 +47,8 @@ public class BattleshipFragment extends Fragment {
 		mWin = false;
 		sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
 		mASKPlayerOne = sharedPref.getBoolean("ask_player_one", false);
+		
+		multi_play = sharedPref.getBoolean("player_mode", true);
 		mASKPlayerTwo = sharedPref.getBoolean("ask_player_two", false);
 		player = BattleshipFragment.sb.getPlayers();
 		mFiresLeft = player[CURRENT_PLAYER ? 1 : 0].getNumCurShips();
@@ -54,7 +56,8 @@ public class BattleshipFragment extends Fragment {
 		mdeclareType = sharedPref.getString("declare_type", "0");
 
 		Intent i = new Intent(getActivity(), PlacementActivity.class);
-		i.putExtra("PLAYER_NUM", 0);
+		if (multi_play)
+			i.putExtra("PLAYER_NUM", 0);
 		startActivityForResult(i, PLAYER_ONE);
 	}
 	
@@ -68,7 +71,13 @@ public class BattleshipFragment extends Fragment {
 		case PLAYER_ONE:
 			Intent i = new Intent(getActivity(), PlacementActivity.class);
 			i.putExtra("PLAYER_NUM", 1);
-			startActivityForResult(i, PLAYER_TWO);
+			if (!multi_play) {
+				
+				//ai placement here
+				
+			}
+			else
+				startActivityForResult(i, PLAYER_TWO);
 			return;
 		case PLAYER_TWO:
 			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -238,7 +247,7 @@ public class BattleshipFragment extends Fragment {
 			else
 				mBattleshipActivity.turnOffScanning();
 		} else {
-			if (mASKPlayerTwo)
+			if (mASKPlayerTwo && !multi_play)
 				mBattleshipActivity.turnOnScanning();
 			else
 				mBattleshipActivity.turnOffScanning();

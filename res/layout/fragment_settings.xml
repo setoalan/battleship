@@ -8,6 +8,12 @@
 	    android:title="@string/game_settings"
 	    android:key="game_settings" >
 	    
+        <CheckBoxPreference
+            android:key="player_mode"
+            android:title="Multiplayer or single player"
+            android:summary="If left unchecked, it will be single player"
+            android:defaultValue="true" />
+        
 		<ListPreference
 			android:key="game_type"
 			android:title="@string/game_type"
