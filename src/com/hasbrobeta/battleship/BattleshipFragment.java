@@ -190,9 +190,11 @@ public class BattleshipFragment extends Fragment {
 		final Dialog dialog = new Dialog(getActivity(), android.R.style.Theme_Black_NoTitleBar_Fullscreen);
 		if (win) {
 			dialog.setContentView(R.layout.dialog_winner);
-			mWinnerTV = (TextView) dialog.findViewById(R.id.winner_tv);
-			mWinnerTV.setText("Player " + (CURRENT_PLAYER ? 2 : 1) + " wins!");
 			mWinner = (Button) dialog.findViewById(R.id.winner);
+			if (CURRENT_PLAYER)
+				mTransition.setBackgroundResource(R.drawable.background_game_over_1);
+			else
+				mTransition.setBackgroundResource(R.drawable.background_game_over_2);
 			mWinner.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
