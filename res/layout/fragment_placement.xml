@@ -46,7 +46,6 @@
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/button01"
         android:enabled="false"
-        android:onClick="letterCoordSelectA"
         android:text="A" />
 
     <Button
@@ -56,7 +55,6 @@
         android:layout_height="40dp"
         android:layout_below="@+id/buttonA"
         android:enabled="false"
-        android:onClick="letterCoordSelectB"
         android:text="B" />
     
     <Button
@@ -66,7 +64,6 @@
         android:layout_height="40dp"
         android:layout_below="@+id/buttonB"
         android:enabled="false"
-        android:onClick="letterCoordSelectC"
         android:text="C" />
     
     <Button
@@ -76,7 +73,6 @@
         android:layout_height="40dp"
         android:layout_below="@+id/buttonC"
         android:enabled="false"
-        android:onClick="letterCoordSelectD"
         android:text="D" />
     
     <Button
@@ -86,7 +82,6 @@
         android:layout_height="40dp"
         android:layout_below="@+id/buttonD"
         android:enabled="false"
-        android:onClick="letterCoordSelectE"
         android:text="E" />
     
     <Button
@@ -96,7 +91,6 @@
         android:layout_height="40dp"
         android:layout_below="@+id/buttonE"
         android:enabled="false"
-        android:onClick="letterCoordSelectF"
         android:text="F" />
     
     <Button
@@ -106,7 +100,6 @@
         android:layout_height="40dp"
         android:layout_below="@+id/buttonF"
         android:enabled="false"
-        android:onClick="letterCoordSelectG"
         android:text="G" />
     
     <Button
@@ -116,7 +109,6 @@
         android:layout_height="40dp"
         android:layout_below="@+id/buttonG"
         android:enabled="false"
-        android:onClick="letterCoordSelectH"
         android:text="H" />
     
     <Button
@@ -126,7 +118,6 @@
         android:layout_height="40dp"
         android:layout_below="@+id/buttonH"
         android:enabled="false"
-        android:onClick="letterCoordSelectI"
         android:text="I" />
     
     <Button
@@ -136,7 +127,6 @@
         android:layout_height="40dp"
         android:layout_below="@+id/buttonI"
         android:enabled="false"
-        android:onClick="letterCoordSelectJ"
         android:text="J" />
 
     <Button
@@ -147,7 +137,6 @@
         android:layout_alignLeft="@+id/grid_view"
         android:layout_below="@+id/place_ship_button"
         android:enabled="false"
-        android:onClick="numberCoordSelect01"
         android:text="1" />
 
     <Button
@@ -158,7 +147,6 @@
         android:layout_above="@+id/grid_view"
         android:layout_toRightOf="@+id/button01"
         android:enabled="false"
-        android:onClick="numberCoordSelect02"
         android:text="2" />
 
     <Button
@@ -169,7 +157,6 @@
         android:layout_above="@+id/grid_view"
         android:layout_toRightOf="@+id/button02"
         android:enabled="false"
-        android:onClick="numberCoordSelect03"
         android:text="3" />
 
     <Button
@@ -191,7 +178,6 @@
         android:layout_alignLeft="@+id/rotate_button"
         android:layout_below="@+id/rotate_button"
         android:enabled="false"
-        android:onClick="numberCoordSelect05"
         android:text="5" />
 
     <Button
@@ -202,7 +188,6 @@
         android:layout_below="@+id/rotate_button"
         android:layout_toRightOf="@+id/button05"
         android:enabled="false"
-        android:onClick="numberCoordSelect06"
         android:text="6" />
 
     <Button
@@ -213,7 +198,6 @@
         android:layout_above="@+id/grid_view"
         android:layout_toRightOf="@+id/button06"
         android:enabled="false"
-        android:onClick="numberCoordSelect07"
         android:text="7" />
 
     <Button
@@ -224,7 +208,6 @@
         android:layout_above="@+id/grid_view"
         android:layout_toRightOf="@+id/button07"
         android:enabled="false"
-        android:onClick="numberCoordSelect8"
         android:text="8" />
 
     <Button
@@ -236,7 +219,6 @@
         android:layout_alignBottom="@+id/button08"
         android:layout_toRightOf="@+id/button08"
         android:enabled="false"
-        android:onClick="numberCoordSelect09"
         android:text="9" />
 
     <Button
@@ -247,9 +229,6 @@
         android:layout_above="@+id/grid_view"
         android:layout_alignRight="@+id/grid_view"
         android:enabled="false"
-        android:onClick="numberCoordSelect10"
         android:text="10" />
 
-
-    
 </RelativeLayout>

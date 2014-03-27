@@ -37,7 +37,7 @@ public class BattleshipFragment extends Fragment {
 	BattleshipAdapter mAdapter;
 	Button mTransition, mWinner;
 	GridView mGridView;
-	TextView mWinnerTV;
+	TextView mShotsRemaining;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {

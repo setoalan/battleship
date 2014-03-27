@@ -35,13 +35,21 @@
         android:textSize="12sp"
         android:text="@string/game_type" />
 	
-		<TextView 
+	<TextView 
 	    android:id="@+id/current_player"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:textColor="@android:color/white"
+        android:textSize="12sp" />
+	
+	<TextView 
+	    android:id="@+id/shots_remaining"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="@android:color/white"
         android:textSize="12sp"
-        android:text="@string/game_type" />
+        android:text="@string/shots_remaining" />
 		
 </LinearLayout>
