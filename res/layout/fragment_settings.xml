@@ -9,9 +9,9 @@
 	    android:key="game_settings" >
 	    
         <CheckBoxPreference
-            android:key="player_mode"
-            android:title="Multiplayer or single player"
-            android:summary="If left unchecked, it will be single player"
+            android:key="game_mode"
+            android:title="@string/game_mode"
+            android:summary="Check for multiplayer, uncheck for singleplayer"
             android:defaultValue="true" />
         
 		<ListPreference
@@ -23,8 +23,8 @@
 			android:entryValues="@array/game_variations_values" />
 		
 		<ListPreference
-			android:key="declare_type"
-			android:title="@string/game_display_hit"
+			android:key="game_declare_type"
+			android:title="@string/game_declare_type"
 			android:summary="Declare ship type on hit during the transition"
 			android:defaultValue="Declare On Hit"
 			android:entries="@array/declare_variations"

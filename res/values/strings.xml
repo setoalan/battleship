@@ -31,13 +31,11 @@
 	<string name="ask_on_off">Turn on ASK Scanning Library</string>
 	<string name="ask_player_one">Player 1 ASK Scanning Library</string>
 	<string name="ask_player_two">Player 2 ASK Scanning Library</string>
+	<string name="game_mode">Game Mode</string>
 	<string name="game_settings">Game Settings</string>
 	<string name="game_type">Game Type</string>
 	<string name="game_type_salvo">Salvo</string>
 	<string name="game_type_fire_until_miss">Fire Until Miss</string>
-	<string name="game_display_hit">Ship Hit</string>
-	<string name="declare_type">Declare Type</string>
-	
-	
+	<string name="game_declare_type">Declare Type</string>
 	
 </resources>
