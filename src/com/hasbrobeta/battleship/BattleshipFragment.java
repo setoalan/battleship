@@ -192,9 +192,9 @@ public class BattleshipFragment extends Fragment {
 			dialog.setContentView(R.layout.dialog_winner);
 			mWinner = (Button) dialog.findViewById(R.id.winner);
 			if (CURRENT_PLAYER)
-				mTransition.setBackgroundResource(R.drawable.background_game_over_1);
+				mWinner.setBackgroundResource(R.drawable.background_game_over_2);
 			else
-				mTransition.setBackgroundResource(R.drawable.background_game_over_2);
+				mWinner.setBackgroundResource(R.drawable.background_game_over_1);
 			mWinner.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
