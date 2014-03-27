@@ -18,17 +18,20 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import ask.scanninglibrary.ASKActivity;
 
-public class PlacementActivity extends Activity {
+public class PlacementActivity extends ASKActivity {
 
 	GridView mGridView;
 	TextView mShipTV, mLocationTV, mCurrentPlayerTV;
+	private boolean mASKPlayerOne, mASKPlayerTwo;
 	private boolean isDrawn = false;
 	private int lcoord = 0;
 	private int ncoord = 0;
 	private int direction = 2;
 	private int shipType = 0;
 	private int playerNum;
+	private boolean CURRENT_PLAYER = false;
 	
 	private SharedPreferences sharedPref;
 	private boolean multi_play;
@@ -74,6 +77,23 @@ public class PlacementActivity extends Activity {
 				if (!isDrawn) holder.performClick();
 			}
 		});	
+		sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+		mASKPlayerOne = sharedPref.getBoolean("ask_player_one", false);
+		mASKPlayerTwo = sharedPref.getBoolean("ask_player_two", false);
+		if (playerNum == 0)
+		{	
+			if (mASKPlayerOne)
+				turnOnScanning();
+			else 
+				turnOffScanning();
+		}
+		else
+		{
+			if (mASKPlayerTwo)
+				turnOnScanning();
+			else 
+				turnOffScanning();
+		}
 	}
 	
 	private boolean helper(int adjust, int newCoord)
@@ -314,5 +334,6 @@ public class PlacementActivity extends Activity {
 		setResult(Activity.RESULT_CANCELED);
 		finish();
 	}
+	
 
 }
