@@ -12,7 +12,9 @@
             android:key="game_mode"
             android:title="@string/game_mode"
             android:summary="Check for multiplayer, uncheck for singleplayer"
-            android:defaultValue="true" />
+            android:defaultValue="true" 
+            android:selectable="false"/>
+        
         
 		<ListPreference
 			android:key="game_type"
