@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    android:baselineAligned="true" >
+    android:baselineAligned="true"
+    android:background="@drawable/background_game" >
     
     <fragment 
         android:id="@+id/side_fragment"
