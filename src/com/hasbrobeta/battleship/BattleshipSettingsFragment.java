@@ -12,8 +12,6 @@ public class BattleshipSettingsFragment extends PreferenceFragment {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		addPreferencesFromResource(R.layout.fragment_settings);
-		
-		//sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
 	}
 	
 }

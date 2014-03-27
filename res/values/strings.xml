@@ -37,5 +37,6 @@
 	<string name="game_type_salvo">Salvo</string>
 	<string name="game_type_fire_until_miss">Fire Until Miss</string>
 	<string name="game_declare_type">Declare Type</string>
+	<string name="play_music">Play Music</string>
 	
 </resources>

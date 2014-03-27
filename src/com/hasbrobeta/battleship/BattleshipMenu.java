@@ -6,12 +6,13 @@ import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.SoundPool;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 
 public class BattleshipMenu extends Activity {
 	
 	private static SoundPool soundPool;
-	private MediaPlayer mediaPlayer;
+	public static MediaPlayer mediaPlayer;
 	public static int cannon,
 				menu_cancel,
 				menu_select,
@@ -32,7 +33,28 @@ public class BattleshipMenu extends Activity {
 		splash = soundPool.load(this, R.raw.splash, 1);
 		mediaPlayer = MediaPlayer.create(this, R.raw.must_persevere);
 		mediaPlayer.setLooping(true);
-		mediaPlayer.start();
+		if (PreferenceManager.getDefaultSharedPreferences(this).getBoolean("play_music", false))
+			if (!mediaPlayer.isPlaying())
+				mediaPlayer.start();
+	}
+	
+//	@Override
+//	public void onPause() {
+//		super.onPause();
+//		if (mediaPlayer.isPlaying() && this.isFinishing()) {
+//			mediaPlayer.pause();
+//		}
+//	}
+	
+	@Override
+	public void onResume() {
+		super.onResume();
+		if (PreferenceManager.getDefaultSharedPreferences(this).getBoolean("play_music", false)) {
+			mediaPlayer.start();
+		} else if (mediaPlayer.isPlaying()) {
+			mediaPlayer.pause();
+			mediaPlayer.seekTo(0);
+		}
 	}
 	
 	public void startGame(View view) {

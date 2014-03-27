@@ -18,7 +18,7 @@
 			android:key="game_type"
 			android:title="@string/game_type"
 			android:summary="Select the game type"
-			android:defaultValue="Classic"
+			android:defaultValue="classic"
 			android:entries="@array/game_variations"
 			android:entryValues="@array/game_variations_values" />
 		
@@ -26,9 +26,15 @@
 			android:key="game_declare_type"
 			android:title="@string/game_declare_type"
 			android:summary="Declare ship type on hit during the transition"
-			android:defaultValue="Declare On Hit"
+			android:defaultValue="hit"
 			android:entries="@array/declare_variations"
 			android:entryValues="@array/declare_variations_values" />
+		
+		<CheckBoxPreference
+            android:key="play_music"
+            android:title="@string/play_music"
+            android:summary="Play background music"
+            android:defaultValue="true" />
         
 	</PreferenceCategory>
     
