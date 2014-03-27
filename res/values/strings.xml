@@ -3,16 +3,11 @@
 
     <string name="app_name">Battleship</string>
     <string name="action_settings">Settings</string>
-    <string name="fleet">Fleet</string>
     <string name="aircraft_carrier">Aircraft Carrier (5)</string>
     <string name="battleship">Battleship (4)</string>
     <string name="destroyer">Destroyer (3)</string>
     <string name="submarine">Submarine (3)</string>
     <string name="patrol_boat">Patrol Boat (2)</string>
-    <string name="you">You</string>
-    <string name="opponent">Opponent</string>
-    <string name="floating">O</string>
-    <string name="sank">X</string>
     <string name="place_ships">Please place your ships!</string>
     <string name="direction_origin">Direction From Origin</string>
     <string name="up">Up</string>
