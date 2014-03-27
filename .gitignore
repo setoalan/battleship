@@ -18,7 +18,6 @@ tmp/
 *.swp
 *~.nib
 local.properties
-project.properties
 .settings/
 .loadpath
 .externalToolBuilders/
