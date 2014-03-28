@@ -31,7 +31,7 @@
             android:screenOrientation="landscape" >
         </activity>
 		<activity
-            android:name=".BattleshipSettingsActivity"
+            android:name=".SettingsActivity"
             android:screenOrientation="landscape" >
         </activity>
     </application>

@@ -65,7 +65,7 @@ public class BattleshipMenu extends Activity {
 	
 	public void settings(View view) {
 		playSound(menu_select, 0);
-		Intent i = new Intent(this, BattleshipSettingsActivity.class);
+		Intent i = new Intent(this, SettingsActivity.class);
 		startActivity(i);
 	}
 	
