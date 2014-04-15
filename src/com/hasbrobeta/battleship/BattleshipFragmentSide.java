@@ -15,9 +15,11 @@ public class BattleshipFragmentSide extends Fragment {
 	private static BattleshipAdapterSide mSideAdapter;
 	private static TextView mCurrentPlayer;
 	private SharedPreferences sharedPref;
+	private String mGameType;
 	
 	GridView mGridView;
-	TextView mGameType;
+	TextView mGameTypeTV;
+	static TextView mShotsRemaining;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -30,11 +32,21 @@ public class BattleshipFragmentSide extends Fragment {
 		mGridView.setAdapter(mSideAdapter);
 		mGridView.setEnabled(false);
 	
-		mGameType = (TextView) v.findViewById(R.id.game_type);
-		mGameType.setText("Game Type: " + getGameType());
+		mGameTypeTV = (TextView) v.findViewById(R.id.game_type);
+		mGameTypeTV.setText("Game Type: " + getGameType());
 		
 		mCurrentPlayer = (TextView) v.findViewById(R.id.current_player);
 		mCurrentPlayer.setText("Player ONE");
+		
+		mGameType = sharedPref.getString("game_type", "0");
+		mShotsRemaining = (TextView) v.findViewById(R.id.shots_remaining);
+		if (mGameType.equals("salvo")) {
+			mShotsRemaining.setText("Shots Remaining: 5");
+		} else if (mGameType.equals("hitmiss")) {
+			mShotsRemaining.setText("Shots Remaining: ~");
+		} else {
+			mShotsRemaining.setText("Shots Remaining: 1");
+		}
 		
 		return v;
 	}
@@ -48,6 +60,14 @@ public class BattleshipFragmentSide extends Fragment {
 		} else {
 			return "Hit Until Miss";
 		}
+	}
+	
+	public static void decrementFiresLeft(int shotsRemain) {
+		mShotsRemaining.setText("Shots Remaining: " + shotsRemain);
+	}
+	
+	public static void resetFiresLeft(int remainingShips) {
+		mShotsRemaining.setText("Shots Remaining: " + remainingShips);
 	}
 	
 	public static void refresh() {

@@ -18,7 +18,6 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.GridView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 public class BattleshipFragment extends Fragment {
@@ -37,19 +36,19 @@ public class BattleshipFragment extends Fragment {
 	BattleshipAdapter mAdapter;
 	Button mTransition, mWinner;
 	GridView mGridView;
-	TextView mShotsRemaining;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		sb = new SingletonBean();
 		mWin = false;
+		player = BattleshipFragment.sb.getPlayers();
+		mFiresLeft = player[CURRENT_PLAYER ? 1 : 0].getNumCurShips(); 
+		
 		sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
 		mASKPlayerOne = sharedPref.getBoolean("ask_player_one", false);
 		mASKPlayerTwo = sharedPref.getBoolean("ask_player_two", false);
 		multi_play = sharedPref.getBoolean("game_mode", true);
-		player = BattleshipFragment.sb.getPlayers();
-		mFiresLeft = player[CURRENT_PLAYER ? 1 : 0].getNumCurShips();
 		mGameType = sharedPref.getString("game_type", "0");
 		mDeclareType = sharedPref.getString("game_declare_type", "0");
 
@@ -126,6 +125,7 @@ public class BattleshipFragment extends Fragment {
 				if (mGameType.equals("salvo")) {
 					mGridView.setEnabled(true);
 					mFiresLeft--;
+					BattleshipFragmentSide.decrementFiresLeft(mFiresLeft);
 					if (mFiresLeft == 0) {
 						mFiresLeft = player[CURRENT_PLAYER ? 1 : 0].getNumCurShips();
 						showAlert(mWin, mHit, mShip);
@@ -212,6 +212,8 @@ public class BattleshipFragment extends Fragment {
 					turnASKOnOff();
 					BattleshipFragmentSide.refresh();
 					mAdapter.notifyDataSetChanged();
+					if (mGameType.equals("salvo"))
+						BattleshipFragmentSide.resetFiresLeft(player[CURRENT_PLAYER ? 0 : 1].getNumCurShips());
 					mGridView.setEnabled(true);
 					Thread timer = new Thread() {
 						public void run() {
