@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -117,8 +118,12 @@ public class BattleshipFragment extends Fragment {
 						showAlert(mWin, mHit, mShip);
 					}
 					mShip = shipSank(player[CURRENT_PLAYER ? 0 : 1].getSquares()[position]);
+					if (mDeclareType.equals("hit") && !mGameType.equals("classic") && mShip != 0)
+						Toast.makeText(getActivity(), "You hit their " + getShipName(mShip), Toast.LENGTH_SHORT).show();
+					BattleshipMenu.playSound(BattleshipMenu.cannon, 0);
 					mHit = true;
 				} else {
+					BattleshipMenu.playSound(BattleshipMenu.splash, 0);
 					mHit = false;
 				}
 				mAdapter.notifyDataSetChanged();
@@ -149,6 +154,7 @@ public class BattleshipFragment extends Fragment {
 		case 0:
 			player[CURRENT_PLAYER ? 1 : 0].getShips().subPatrolBoat();
 			if (player[CURRENT_PLAYER ? 1 : 0].getShips().getPatrolBoat() == 0) {
+				Toast.makeText(getActivity(), "Sank Patrol Boat!", Toast.LENGTH_SHORT).show();
 				player[CURRENT_PLAYER ? 1 : 0].subNumCurShips();
 				return 0;
 			}
@@ -156,6 +162,7 @@ public class BattleshipFragment extends Fragment {
 		case 1:
 			player[CURRENT_PLAYER ? 1 : 0].getShips().subDestroyer();
 			if (player[CURRENT_PLAYER ? 1 : 0].getShips().getDestroyer() == 0) {
+				Toast.makeText(getActivity(), "Sank Destroyer!", Toast.LENGTH_SHORT).show();
 				player[CURRENT_PLAYER ? 1 : 0].subNumCurShips();
 				return 1;
 			}
@@ -163,6 +170,7 @@ public class BattleshipFragment extends Fragment {
 		case 2:
 			player[CURRENT_PLAYER ? 1 : 0].getShips().subSubmarine();
 			if (player[CURRENT_PLAYER ? 1 : 0].getShips().getSubmarine() == 0) {
+				Toast.makeText(getActivity(), "Sank Submarine!", Toast.LENGTH_SHORT).show();
 				player[CURRENT_PLAYER ? 1 : 0].subNumCurShips();
 				return 2;
 			}
@@ -170,6 +178,7 @@ public class BattleshipFragment extends Fragment {
 		case 3:
 			player[CURRENT_PLAYER ? 1 : 0].getShips().subBattleship();
 			if (player[CURRENT_PLAYER ? 1 : 0].getShips().getBattleship() == 0) {
+				Toast.makeText(getActivity(), "Sank Battleship!", Toast.LENGTH_SHORT).show();
 				player[CURRENT_PLAYER ? 1 : 0].subNumCurShips();
 				return 3;
 			}
@@ -177,6 +186,7 @@ public class BattleshipFragment extends Fragment {
 		case 4:
 			player[CURRENT_PLAYER ? 1 : 0].getShips().subAircraftCarrier();
 			if (player[CURRENT_PLAYER ? 1 : 0].getShips().getAircraftCarrier() == 0) {
+				Toast.makeText(getActivity(), "Sank Aircraft Carrier!", Toast.LENGTH_SHORT).show();
 				player[CURRENT_PLAYER ? 1 : 0].subNumCurShips();
 				return 4;
 			}
@@ -184,6 +194,23 @@ public class BattleshipFragment extends Fragment {
 		default:
 			return -1;
 		}
+	}
+	
+	private String getShipName(int mShip) {
+		Log.i("TAG", "" + mShip);
+		switch (mShip) {
+			case 5:
+				return "Patrol Boat!";
+			case 6:
+				return "Destroyer!";
+			case 7:
+				return "Submarine!";
+			case 8:
+				return "Battleship!";
+			case 9:
+				return "Aircraft Carrier!";
+		}
+		return null;
 	}
 	
 	private void showAlert(boolean win, boolean hit, int ship) {
@@ -259,9 +286,7 @@ public class BattleshipFragment extends Fragment {
 	}
 
 	private void setTransitionBackground(boolean hit, int ship) {
-		BattleshipMenu.playSound(BattleshipMenu.cannon, 0);
 		if (!hit) {
-			BattleshipMenu.playSound(BattleshipMenu.splash, 0);
 			mTransition.setBackgroundResource(R.drawable.background_miss);
 		} else if (mDeclareType.equals("none")) {
 			mTransition.setBackgroundResource(R.drawable.background_hit);
