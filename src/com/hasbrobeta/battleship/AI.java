@@ -6,8 +6,8 @@ public class AI{
 	
 	public int play() {
 		for(int i = 0; i < 100; i++) {
-			if (BattleshipFragment.sb.getPlayers()[0].getSquares()[i].isOccupied() == true
-					&& BattleshipFragment.sb.getPlayers()[0].getSquares()[i].isShot() == false) {
+			if (BattleshipFragment.singletonBean.getPlayers()[0].getSquares()[i].isOccupied() == true
+					&& BattleshipFragment.singletonBean.getPlayers()[0].getSquares()[i].isShot() == false) {
 				
 				return i;
 			}
@@ -25,7 +25,7 @@ public class AI{
         do {
         	System.out.print("loop");
             int start = rand.nextInt(100);
-            boolean square = BattleshipFragment.sb.getPlayers()[1].getSquares()[start].isOccupied();
+            boolean square = BattleshipFragment.singletonBean.getPlayers()[1].getSquares()[start].isOccupied();
             
             if (square == false) {
 
@@ -37,7 +37,7 @@ public class AI{
                         canPlace = false;     
                     if (canPlace){
                         for (int i = start; i < start + shipSz; i++) {
-                            if (BattleshipFragment.sb.getPlayers()[1].getSquares()[i].isOccupied() == true) {
+                            if (BattleshipFragment.singletonBean.getPlayers()[1].getSquares()[i].isOccupied() == true) {
                                 canPlace = false;
                                 break;  
                             }
@@ -48,7 +48,7 @@ public class AI{
                         System.out.print("YES");
                         
                         for(int i = start; i < start + shipSz; i++){
-                        	BattleshipFragment.sb.getPlayers()[1].getSquares()[i].setOccupied(true);
+                        	BattleshipFragment.singletonBean.getPlayers()[1].getSquares()[i].setOccupied(true);
                         }
 
                         allPlaced++;
@@ -61,7 +61,7 @@ public class AI{
                         canPlace = false;
                     if (canPlace == true) {
                         for (int i = start; i < start + (shipSz * 10); i += 10) {
-                            if (BattleshipFragment.sb.getPlayers()[1].getSquares()[i].isOccupied() == true){
+                            if (BattleshipFragment.singletonBean.getPlayers()[1].getSquares()[i].isOccupied() == true){
                                 canPlace = false;
                                 break;
                             }
@@ -71,7 +71,7 @@ public class AI{
                     if (canPlace == true) {
                     	System.out.print("YES");
                         for(int i = start; i < start + (shipSz * 10); i += 10) {
-                        	BattleshipFragment.sb.getPlayers()[1].getSquares()[i].setOccupied(true);
+                        	BattleshipFragment.singletonBean.getPlayers()[1].getSquares()[i].setOccupied(true);
                         }
 
                         allPlaced++;

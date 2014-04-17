@@ -23,35 +23,34 @@ public class BattleshipFragment extends Fragment {
 	public static final int PLAYER_ONE = 1;
 	public static final int PLAYER_TWO = 2;
 	public static boolean CURRENT_PLAYER = false;
-	public static SingletonBean sb;
+	public static SingletonBean singletonBean;
 	
-	private boolean mHit, mWin, mASKPlayerOne, mASKPlayerTwo, multi_play;
+	private boolean mHit, mWin = false, mASKPlayerOne, mASKPlayerTwo, mMultiPlay;
 	private int mShip, mFiresLeft;
+	private String mGameType, mDeclareType;
+	private BattleshipAdapter mAdapter;
 	private Board[] player;
 	private SharedPreferences sharedPref;
-	private String mGameType, mDeclareType;
 	
-	BattleshipAdapter mAdapter;
 	Button mTransition;
 	GridView mGridView;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		sb = new SingletonBean();
-		mWin = false;
-		player = BattleshipFragment.sb.getPlayers();
+		singletonBean = new SingletonBean();
+		player = BattleshipFragment.singletonBean.getPlayers();
 		mFiresLeft = player[CURRENT_PLAYER ? 1 : 0].getNumCurShips(); 
 		
 		sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
-		mASKPlayerOne = sharedPref.getBoolean("ask_player_one", false);
-		mASKPlayerTwo = sharedPref.getBoolean("ask_player_two", false);
-		multi_play = sharedPref.getBoolean("game_mode", true);
 		mGameType = sharedPref.getString("game_type", "0");
 		mDeclareType = sharedPref.getString("game_declare_type", "0");
+		mMultiPlay = sharedPref.getBoolean("game_mode", true);
+		mASKPlayerOne = sharedPref.getBoolean("ask_player_one", false);
+		mASKPlayerTwo = sharedPref.getBoolean("ask_player_two", false);
 
 		Intent i = new Intent(getActivity(), PlacementActivity.class);
-		if (multi_play)
+		if (mMultiPlay)
 			i.putExtra("PLAYER_NUM", 0);
 		startActivityForResult(i, PLAYER_ONE);
 	}
@@ -66,10 +65,8 @@ public class BattleshipFragment extends Fragment {
 		case PLAYER_ONE:
 			Intent i = new Intent(getActivity(), PlacementActivity.class);
 			i.putExtra("PLAYER_NUM", 1);
-			if (!multi_play) {
-				
+			if (!mMultiPlay) {
 				//ai placement here
-				
 			} else {
 				startActivityForResult(i, PLAYER_TWO);
 			}
@@ -156,7 +153,7 @@ public class BattleshipFragment extends Fragment {
 			player[CURRENT_PLAYER ? 1 : 0].getShips().subPatrolBoat();
 			if (player[CURRENT_PLAYER ? 1 : 0].getShips().getPatrolBoat() == 0) {
 				if (!mDeclareType.equals("none"))
-					Toast.makeText(getActivity(), "Sank Patrol Boat!", Toast.LENGTH_SHORT).show();
+					Toast.makeText(getActivity(), "Sunk Patrol Boat!", Toast.LENGTH_SHORT).show();
 				player[CURRENT_PLAYER ? 1 : 0].subNumCurShips();
 				return 0;
 			}
@@ -165,7 +162,7 @@ public class BattleshipFragment extends Fragment {
 			player[CURRENT_PLAYER ? 1 : 0].getShips().subDestroyer();
 			if (player[CURRENT_PLAYER ? 1 : 0].getShips().getDestroyer() == 0) {
 				if (!mDeclareType.equals("none"))
-					Toast.makeText(getActivity(), "Sank Destroyer!", Toast.LENGTH_SHORT).show();
+					Toast.makeText(getActivity(), "Sunk Destroyer!", Toast.LENGTH_SHORT).show();
 				player[CURRENT_PLAYER ? 1 : 0].subNumCurShips();
 				return 1;
 			}
@@ -174,7 +171,7 @@ public class BattleshipFragment extends Fragment {
 			player[CURRENT_PLAYER ? 1 : 0].getShips().subSubmarine();
 			if (player[CURRENT_PLAYER ? 1 : 0].getShips().getSubmarine() == 0) {
 				if (!mDeclareType.equals("none"))
-					Toast.makeText(getActivity(), "Sank Submarine!", Toast.LENGTH_SHORT).show();
+					Toast.makeText(getActivity(), "Sunk Submarine!", Toast.LENGTH_SHORT).show();
 				player[CURRENT_PLAYER ? 1 : 0].subNumCurShips();
 				return 2;
 			}
@@ -183,7 +180,7 @@ public class BattleshipFragment extends Fragment {
 			player[CURRENT_PLAYER ? 1 : 0].getShips().subBattleship();
 			if (player[CURRENT_PLAYER ? 1 : 0].getShips().getBattleship() == 0) {
 				if (!mDeclareType.equals("none"))
-					Toast.makeText(getActivity(), "Sank Battleship!", Toast.LENGTH_SHORT).show();
+					Toast.makeText(getActivity(), "Sunk Battleship!", Toast.LENGTH_SHORT).show();
 				player[CURRENT_PLAYER ? 1 : 0].subNumCurShips();
 				return 3;
 			}
@@ -192,7 +189,7 @@ public class BattleshipFragment extends Fragment {
 			player[CURRENT_PLAYER ? 1 : 0].getShips().subAircraftCarrier();
 			if (player[CURRENT_PLAYER ? 1 : 0].getShips().getAircraftCarrier() == 0) {
 				if (!mDeclareType.equals("none"))
-					Toast.makeText(getActivity(), "Sank Aircraft Carrier!", Toast.LENGTH_SHORT).show();
+					Toast.makeText(getActivity(), "Sunk Aircraft Carrier!", Toast.LENGTH_SHORT).show();
 				player[CURRENT_PLAYER ? 1 : 0].subNumCurShips();
 				return 4;
 			}
@@ -281,7 +278,7 @@ public class BattleshipFragment extends Fragment {
 			else
 				mBattleshipActivity.turnOffScanning();
 		} else {
-			if (mASKPlayerTwo && multi_play)
+			if (mASKPlayerTwo && mMultiPlay)
 				mBattleshipActivity.turnOnScanning();
 			else
 				mBattleshipActivity.turnOffScanning();

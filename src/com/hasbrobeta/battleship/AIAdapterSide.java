@@ -38,7 +38,7 @@ public class AIAdapterSide extends BaseAdapter {
 		
 		View v = inflater.inflate(R.layout.view_square_side, parent, false);
 		ImageView iv = (ImageView) v.findViewById(R.id.view_square_side);
-		if (BattleshipFragment.sb.getPlayers()[BattleshipFragment.CURRENT_PLAYER ? 0 : 1]
+		if (BattleshipFragment.singletonBean.getPlayers()[BattleshipFragment.CURRENT_PLAYER ? 0 : 1]
 				.getSquares()[position].isOccupied()) {
 			iv.setBackgroundColor(Color.RED);
 		}
