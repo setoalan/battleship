@@ -276,7 +276,7 @@ public class BattleshipFragment extends Fragment {
 			else
 				mBattleshipActivity.turnOffScanning();
 		} else {
-			if (mASKPlayerTwo && !multi_play)
+			if (mASKPlayerTwo && multi_play)
 				mBattleshipActivity.turnOnScanning();
 			else
 				mBattleshipActivity.turnOffScanning();
