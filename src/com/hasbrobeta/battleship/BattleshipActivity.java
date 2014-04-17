@@ -12,6 +12,7 @@ import android.widget.TextView;
 import ask.scanninglibrary.ASKActivity;
 import ask.scanninglibrary.Scannable;
 import ask.scanninglibrary.ScannableFactory;
+import ask.scanninglibrary.ScannableViewCustom;
 
 public class BattleshipActivity extends ASKActivity {
 	
@@ -59,10 +60,12 @@ public class BattleshipActivity extends ASKActivity {
 		dialog.show();
 	}
 	
+	
 	@Override
 	public Scannable createScannable() {
-		Log.wtf("BattleShipt Activity", "My create scannable");
-		LinearLayout ll = (LinearLayout) findViewById(R.layout.fragment_battleship);
-		return ScannableFactory.createScannable(ll);
+		Log.wtf("BattleShipt Activity", "My create scannable new");
+		View ROOT = findViewById(android.R.id.content).getRootView();
+		View lll = findViewById(R.id.grid_view_side);
+		return new ScannableViewCustom(ROOT,lll);
 	}
 }
