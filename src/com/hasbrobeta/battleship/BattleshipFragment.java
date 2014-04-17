@@ -1,10 +1,8 @@
 package com.hasbrobeta.battleship;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.Fragment;
 import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
 import android.content.DialogInterface.OnKeyListener;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -34,7 +32,7 @@ public class BattleshipFragment extends Fragment {
 	private String mGameType, mDeclareType;
 	
 	BattleshipAdapter mAdapter;
-	Button mTransition, mWinner;
+	Button mTransition;
 	GridView mGridView;
 	
 	@Override
@@ -77,16 +75,20 @@ public class BattleshipFragment extends Fragment {
 			}
 			return;
 		case PLAYER_TWO:
-			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-			builder.setMessage("Please hand tablet to player one.");
-			builder.setPositiveButton("OK", new OnClickListener() {
+			final Dialog dialog = new Dialog(getActivity(), android.R.style.Theme_Black_NoTitleBar_Fullscreen);
+			dialog.setContentView(R.layout.dialog_transition);
+			mTransition = (Button) dialog.findViewById(R.id.transition);
+			// NEED "PASS TABLET TO PLAYER ONE" BACKGROUND
+			mTransition.setBackgroundResource(R.drawable.background_game_over);
+			mTransition.setOnClickListener(new View.OnClickListener() {
 				@Override
-				public void onClick(DialogInterface dialog, int which) {
+				public void onClick(View v) {
 					BattleshipFragmentSide.refresh();
 					mAdapter.notifyDataSetChanged();
+					dialog.dismiss();
 				}
 			});
-			builder.show();
+			dialog.show();
 			return;
 		}
 	}
@@ -219,13 +221,13 @@ public class BattleshipFragment extends Fragment {
 	private void showAlert(boolean win, boolean hit, int ship) {
 		final Dialog dialog = new Dialog(getActivity(), android.R.style.Theme_Black_NoTitleBar_Fullscreen);
 		if (win) {
-			dialog.setContentView(R.layout.dialog_winner);
-			mWinner = (Button) dialog.findViewById(R.id.winner);
+			dialog.setContentView(R.layout.dialog_transition);
+			mTransition = (Button) dialog.findViewById(R.id.transition);
 			if (CURRENT_PLAYER)
-				mWinner.setBackgroundResource(R.drawable.background_game_over_2);
+				mTransition.setBackgroundResource(R.drawable.background_game_over_2);
 			else
-				mWinner.setBackgroundResource(R.drawable.background_game_over_1);
-			mWinner.setOnClickListener(new View.OnClickListener() {
+				mTransition.setBackgroundResource(R.drawable.background_game_over_1);
+			mTransition.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					getActivity().finish();
