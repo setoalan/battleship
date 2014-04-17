@@ -136,7 +136,7 @@ public class PlacementActivity extends ASKActivity {
 			for (int j = 0; j < i; j++) {												
 				GridView g = (GridView) findViewById(R.id.grid_view);
 				LinearLayout nv = (LinearLayout) g.getChildAt(coord+j*realadjust);
-				if (nv != null && !BattleshipFragment.sb.getPlayers()[playerNum].getSquares()[coord+j*realadjust].isOccupied())
+				if (nv != null && !BattleshipFragment.singletonBean.getPlayers()[playerNum].getSquares()[coord+j*realadjust].isOccupied())
 				{
 					ImageView nvv = (ImageView) nv.findViewById(R.id.usquare);
 					nvv.setImageResource(R.drawable.bg);
@@ -144,13 +144,13 @@ public class PlacementActivity extends ASKActivity {
 			}
 			this.isDrawn = false;
 		}
-		if (BattleshipFragment.sb.getPlayers()[playerNum].getSquares()[newCoord].isOccupied() == false &&
+		if (BattleshipFragment.singletonBean.getPlayers()[playerNum].getSquares()[newCoord].isOccupied() == false &&
 				newCoord+(i-1)*adjust <= 99 &&
 				newCoord+(i-1)*adjust >= 0 &&
 				(adjust != -1 || newCoord - i + 1 >= 10*((int)(newCoord/10))) &&//need + 1 to allow ships along left edge (PB E1E2 for example)
 				(adjust != 1 || newCoord + i <= 10+10*((int)(newCoord/10)))) {//+1 or -1 apparently not needed here, seems to be working fine
 			for (int k = 0; k < i; k++) {
-				if (BattleshipFragment.sb.getPlayers()[playerNum].getSquares()[newCoord+k*adjust].isOccupied()) {
+				if (BattleshipFragment.singletonBean.getPlayers()[playerNum].getSquares()[newCoord+k*adjust].isOccupied()) {
 					//Toast.makeText(this, "You cannot place your ship that way!", Toast.LENGTH_SHORT).show();
 					return false;
 				}
@@ -306,28 +306,28 @@ public class PlacementActivity extends ASKActivity {
 		else if (this.shipType == 3) i = 4;
 		else if (this.shipType == 4) i = 5;
 
-		if (BattleshipFragment.sb.getPlayers()[playerNum].getSquares()[coord].isOccupied() == false &&
+		if (BattleshipFragment.singletonBean.getPlayers()[playerNum].getSquares()[coord].isOccupied() == false &&
 				coord+(i-1)*adjust <= 99 &&
 				coord+(i-1)*adjust >= 0 &&
 				(this.direction!= 0 || coord - i + 1 >= 10*((int)(coord/10))) &&//need + 1 to allow ships along left edge (PB E1E2 for example)
 				(this.direction!= 2 || coord + i <= 10+10*((int)(coord/10)))) {//+1 or -1 apparently not needed here, seems to be working fine
 			for (int k = 0; k < i; k++) {
-				if (BattleshipFragment.sb.getPlayers()[playerNum].getSquares()[coord+k*adjust].isOccupied()) {
+				if (BattleshipFragment.singletonBean.getPlayers()[playerNum].getSquares()[coord+k*adjust].isOccupied()) {
 					Toast.makeText(this, "You cannot place your ship that way!", Toast.LENGTH_SHORT).show();
 					return;
 				}
 			}
 			
 			for (int j = 0; j < i; j++) {
-				BattleshipFragment.sb.getPlayers()[playerNum].getSquares()[coord+j*adjust].setOccupied(true);
-				BattleshipFragment.sb.getPlayers()[playerNum].getSquares()[coord+j*adjust].setShipNum(this.shipType);
-				BattleshipFragment.sb.getPlayers()[playerNum].getSquares()[coord+j*adjust].setShipDirection(this.direction);//0 if horizontal, 1 if vertical
-				BattleshipFragment.sb.getPlayers()[playerNum].getSquares()[coord+j*adjust].setShipSegmentNum(j);
+				BattleshipFragment.singletonBean.getPlayers()[playerNum].getSquares()[coord+j*adjust].setOccupied(true);
+				BattleshipFragment.singletonBean.getPlayers()[playerNum].getSquares()[coord+j*adjust].setShipNum(this.shipType);
+				BattleshipFragment.singletonBean.getPlayers()[playerNum].getSquares()[coord+j*adjust].setShipDirection(this.direction);//0 if horizontal, 1 if vertical
+				BattleshipFragment.singletonBean.getPlayers()[playerNum].getSquares()[coord+j*adjust].setShipSegmentNum(j);
 
 			}
 
 			if (this.shipType < 5) {
-				BattleshipFragment.sb.getPlayers()[playerNum].addNumShipsPlaced();
+				BattleshipFragment.singletonBean.getPlayers()[playerNum].addNumShipsPlaced();
 			}
 			
 			if (this.shipType == 0) {ship3d(); this.isDrawn = false;}
@@ -336,7 +336,7 @@ public class PlacementActivity extends ASKActivity {
 			else if (this.shipType == 3) {ship5(); this.isDrawn = false;}
 			else if (this.shipType == 4) {/*do nothing*/}
 
-			if (BattleshipFragment.sb.getPlayers()[playerNum].getNumShipsPlaced() == 5) {
+			if (BattleshipFragment.singletonBean.getPlayers()[playerNum].getNumShipsPlaced() == 5) {
 				Intent returnIntent = new Intent();
 				if (playerNum == 0) setResult(BattleshipFragment.PLAYER_ONE, returnIntent);
 				else setResult(BattleshipFragment.PLAYER_TWO, returnIntent);

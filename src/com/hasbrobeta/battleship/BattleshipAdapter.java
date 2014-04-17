@@ -47,9 +47,9 @@ public class BattleshipAdapter extends BaseAdapter {
 		Bitmap bgsq = Bitmap.createScaledBitmap(bgbig, 12*bgbig.getWidth()/10, 12*bgbig.getHeight()/10, true);
 		iv.setImageBitmap(bgsq);
 		
-		if (BattleshipFragment.sb.getPlayers()[BattleshipFragment.CURRENT_PLAYER ? 1 : 0]
+		if (BattleshipFragment.singletonBean.getPlayers()[BattleshipFragment.CURRENT_PLAYER ? 1 : 0]
 				.getSquares()[position].isShot() && 
-				BattleshipFragment.sb.getPlayers()[BattleshipFragment.CURRENT_PLAYER ? 0 : 1]
+				BattleshipFragment.singletonBean.getPlayers()[BattleshipFragment.CURRENT_PLAYER ? 0 : 1]
 						.getSquares()[position].isOccupied()) {
 			Bitmap bmpOriginal = BitmapFactory.decodeResource(mContext.getResources(),R.drawable.bg);
 			Bitmap bmpunoc = BitmapFactory.decodeResource(mContext.getResources(),R.drawable.peg_hit);
@@ -61,7 +61,7 @@ public class BattleshipAdapter extends BaseAdapter {
 			Bitmap fin = Bitmap.createScaledBitmap(bmResult, 12*bmResult.getWidth()/10, 12*bmResult.getHeight()/10, true);
 			iv.setImageBitmap(fin);
 
-		} else if (BattleshipFragment.sb.getPlayers()[BattleshipFragment.CURRENT_PLAYER ? 1 : 0]
+		} else if (BattleshipFragment.singletonBean.getPlayers()[BattleshipFragment.CURRENT_PLAYER ? 1 : 0]
 				.getSquares()[position].isShot()) {
 			// Missed Shots
 			Bitmap bmpOriginal = BitmapFactory.decodeResource(mContext.getResources(),R.drawable.bg);

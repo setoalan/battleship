@@ -136,14 +136,14 @@ public class BattleshipAdapterSide extends BaseAdapter {
 		
 		
 		
-		if (BattleshipFragment.sb.getPlayers()[BattleshipFragment.CURRENT_PLAYER ? 1 : 0]
+		if (BattleshipFragment.singletonBean.getPlayers()[BattleshipFragment.CURRENT_PLAYER ? 1 : 0]
 				.getSquares()[position].isOccupied())
 		{
-			int snum = BattleshipFragment.sb.getPlayers()[BattleshipFragment.CURRENT_PLAYER ? 1 : 0]
+			int snum = BattleshipFragment.singletonBean.getPlayers()[BattleshipFragment.CURRENT_PLAYER ? 1 : 0]
 					.getSquares()[position].getShipNum();
-			int sdir = BattleshipFragment.sb.getPlayers()[BattleshipFragment.CURRENT_PLAYER ? 1 : 0]
+			int sdir = BattleshipFragment.singletonBean.getPlayers()[BattleshipFragment.CURRENT_PLAYER ? 1 : 0]
 					.getSquares()[position].getShipDirection();
-			int sseg = BattleshipFragment.sb.getPlayers()[BattleshipFragment.CURRENT_PLAYER ? 1 : 0]
+			int sseg = BattleshipFragment.singletonBean.getPlayers()[BattleshipFragment.CURRENT_PLAYER ? 1 : 0]
 					.getSquares()[position].getShipSegmentNum();
 			Bitmap bmpunoc = BitmapFactory.decodeResource(mContext.getResources(),getPic(snum,sdir,sseg));
 			Bitmap bmpOriginal = BitmapFactory.decodeResource(mContext.getResources(),R.drawable.bg);
@@ -163,7 +163,7 @@ public class BattleshipAdapterSide extends BaseAdapter {
 			}
 			tempCanvas.drawBitmap(bmpOriginal,0,0,null);
 			tempCanvas.drawBitmap(bmpunoc,0,0,null);			
-			if (BattleshipFragment.sb.getPlayers()[BattleshipFragment.CURRENT_PLAYER ? 0 : 1]
+			if (BattleshipFragment.singletonBean.getPlayers()[BattleshipFragment.CURRENT_PLAYER ? 0 : 1]
 							.getSquares()[position].isShot()) {
 				Bitmap bmpPeg = BitmapFactory.decodeResource(mContext.getResources(),R.drawable.peg_hit);
 				tempCanvas.drawBitmap(bmpPeg,0,0,null);				
@@ -172,7 +172,7 @@ public class BattleshipAdapterSide extends BaseAdapter {
 			iv.setImageBitmap(finbit);
 		}
 		
-		else if (BattleshipFragment.sb.getPlayers()[BattleshipFragment.CURRENT_PLAYER ? 0 : 1]
+		else if (BattleshipFragment.singletonBean.getPlayers()[BattleshipFragment.CURRENT_PLAYER ? 0 : 1]
 				.getSquares()[position].isShot()) {
 			Bitmap bmpOriginal = BitmapFactory.decodeResource(mContext.getResources(),R.drawable.bg);
 			Bitmap bmResult = Bitmap.createBitmap(bmpOriginal.getWidth(), bmpOriginal.getHeight(), Bitmap.Config.ARGB_8888);
