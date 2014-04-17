@@ -63,6 +63,10 @@ public class PlacementActivity extends ASKActivity {
 		mGridView.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+				int directionStored = direction;
+				int lcoordStored = lcoord;
+				int ncoordStored = ncoord;
+				
 				int num = 1 + position % 10;
 				int le = position / 10;
 				char l = (char) ('A' + le);
@@ -75,6 +79,21 @@ public class PlacementActivity extends ASKActivity {
 				lcoord = le;
 				Button holder = (Button) findViewById(R.id.rotate_button);
 				if (!isDrawn) holder.performClick();
+				if (!isDrawn)//if here, then this is not a valid placement
+				{//so we undo it
+					direction = directionStored;
+					lcoord = lcoordStored;
+					ncoord = ncoordStored;
+					View vvv = null;
+					if (direction == 0) directionL(vvv);
+					else if (direction == 1) directionU(vvv);
+					else if (direction == 2) directionR(vvv);
+					else if (direction == 3) directionD(vvv);
+					l = (char) ('A'+lcoord);
+					mLocationTV.setText("" + (ncoord+1)+l);
+					
+					//Toast.makeText(PlacementActivity.this, "You cannot place your ship that way!", Toast.LENGTH_SHORT).show();
+				}
 			}
 		});	
 		sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
