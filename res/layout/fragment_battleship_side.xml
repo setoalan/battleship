@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:textColor="@android:color/white"
-        android:textSize="30sp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/app_name" />
     
    	<GridView 
@@ -27,21 +27,21 @@
     </GridView>
 
 	<TextView 
-	    android:id="@+id/game_type"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:textColor="@android:color/white"
-        android:textSize="12sp"
-        android:text="@string/game_type" />
-	
-	<TextView 
 	    android:id="@+id/current_player"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:textColor="@android:color/white"
-        android:textSize="12sp" />
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+   	
+	<TextView 
+	    android:id="@+id/game_type"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="@android:color/white"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/game_type" />
 	
 	<TextView 
 	    android:id="@+id/shots_remaining"
@@ -49,7 +49,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:textColor="@android:color/white"
-        android:textSize="12sp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/shots_remaining" />
 		
 </LinearLayout>
