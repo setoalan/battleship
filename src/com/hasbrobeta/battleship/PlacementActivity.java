@@ -25,7 +25,7 @@ public class PlacementActivity extends ASKActivity {
 	GridView mGridView;
 	TextView mShipTV, mLocationTV, mCurrentPlayerTV;
 	private boolean mASKPlayerOne, mASKPlayerTwo;
-	private boolean isDrawn = false;
+	private boolean isDrawn = true;
 	private int lcoord = 0;
 	private int ncoord = 0;
 	private int direction = 2;
