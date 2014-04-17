@@ -1,13 +1,14 @@
 package com.hasbrobeta.battleship;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
+import android.app.Dialog;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import ask.scanninglibrary.ASKActivity;
 import ask.scanninglibrary.Scannable;
 import ask.scanninglibrary.ScannableFactory;
@@ -16,6 +17,8 @@ public class BattleshipActivity extends ASKActivity {
 	
 	private boolean mASKPlayerOne;
 	private SharedPreferences sharedPref;
+	
+	TextView mOK, mCancel;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -32,24 +35,28 @@ public class BattleshipActivity extends ASKActivity {
 
 	@Override
 	public void onBackPressed() {
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setTitle("Quit game and return to main menu?");
-		builder.setPositiveButton("OK", new OnClickListener() {
+		final Dialog dialog = new Dialog(this, android.R.style.Theme_Black_NoTitleBar_Fullscreen);
+		dialog.setContentView(R.layout.dialog_quit);
+		mOK = (Button) dialog.findViewById(R.id.ok_btn);
+		// NEED IMAGE FOR "OK"
+		mOK.setBackgroundResource(R.drawable.background_game_over_1);
+		mOK.setOnClickListener(new View.OnClickListener() {
 			@Override
-			public void onClick(DialogInterface dialog, int which) {
+			public void onClick(View v) {
 				finish();
 			}
 		});
-		builder.setNegativeButton("Cancel", new OnClickListener() {
+		mCancel = (Button) dialog.findViewById(R.id.cancel_btn);
+		// NEED IMAGE FOR "Cancel"
+		mCancel.setBackgroundResource(R.drawable.background_game_over_2);
+		mCancel.setOnClickListener(new View.OnClickListener() {
 			@Override
-			public void onClick(DialogInterface dialog, int which) {
+			public void onClick(View v) {
 				dialog.dismiss();
 				dialog.cancel();
 			}
 		});
-		AlertDialog dialog = builder.create();
 		dialog.show();
-	
 	}
 	
 	@Override
