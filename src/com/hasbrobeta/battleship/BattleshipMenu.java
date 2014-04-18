@@ -12,6 +12,7 @@ import android.view.View;
 public class BattleshipMenu extends Activity {
 	
 	private static SoundPool soundPool;
+	private static boolean soundsEnabled;
 	public static MediaPlayer mediaPlayer;
 	public static int cannon,
 				menu_cancel,
@@ -19,7 +20,8 @@ public class BattleshipMenu extends Activity {
 				splash;
 	
 	public static void playSound(int soundID, int loop) {
-		soundPool.play(soundID, 1.0f, 1.0f, 1, loop, 1);
+		if (soundsEnabled)
+			soundPool.play(soundID, 1.0f, 1.0f, 1, loop, 1);
 	}
 	
 	@Override
@@ -36,6 +38,7 @@ public class BattleshipMenu extends Activity {
 		if (PreferenceManager.getDefaultSharedPreferences(this).getBoolean("play_music", false))
 			if (!mediaPlayer.isPlaying())
 				mediaPlayer.start();
+		soundsEnabled = PreferenceManager.getDefaultSharedPreferences(this).getBoolean("play_sounds", true);
 	}
 	
 //	@Override
@@ -55,6 +58,7 @@ public class BattleshipMenu extends Activity {
 			mediaPlayer.pause();
 			mediaPlayer.seekTo(0);
 		}
+		soundsEnabled = PreferenceManager.getDefaultSharedPreferences(this).getBoolean("play_sounds", true);
 	}
 	
 	public void startGame(View view) {

@@ -26,7 +26,7 @@
 		<ListPreference
 			android:key="game_declare_type"
 			android:title="@string/game_declare_type"
-			android:summary="Declare ship type on hit during the transition"
+			android:summary="Should ship be identified on hit or sink or at all?"
 			android:defaultValue="hit"
 			android:entries="@array/declare_variations"
 			android:entryValues="@array/declare_variations_values" />
@@ -35,6 +35,12 @@
             android:key="play_music"
             android:title="@string/play_music"
             android:summary="Play background music"
+            android:defaultValue="true" />
+		
+		<CheckBoxPreference
+            android:key="play_sounds"
+            android:title="@string/play_sounds"
+            android:summary="Play sound effects"
             android:defaultValue="true" />
         
 	</PreferenceCategory>

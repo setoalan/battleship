@@ -2,9 +2,9 @@
 <resources>
 
 	<string-array name="game_variations">
-		<item>Classic</item>
-		<item>Salvo</item>
-		<item>Hit Until Miss</item>
+		<item>Classic (one shot/turn)</item>
+		<item>Salvo (one shot/surviving ship)</item>
+		<item>Hit Until Miss (fire until miss)</item>
 	</string-array>
 	
 	<string-array name="game_variations_values">
