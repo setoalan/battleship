@@ -28,13 +28,13 @@ public class ScannableViewCustom implements Scannable {
 		if (view == null) return;
 		System.out.print("here");
 		for(View childView : ROOT_VIEW.getTouchables()) {
-			if (!(childView instanceof ViewGroup) || ((ViewGroup)childView).getTouchables().size() == 0) {
+			if (!(childView.getParent()).equals(exclude) && (!(childView instanceof ViewGroup) || ((ViewGroup)childView).getTouchables().size() == 0)) {
 				boolean added = false;
 	
 				for (ArrayList<View> row : mRows) {
 					if (intersect(row.get(0), childView)) {
-//						if (childView == exclude) break;
-						if ((childView.getParent()).equals(exclude)) break;
+						//if ((childView.getParent()).equals(exclude)) break;
+						//if ((childView.getParent()).equals(exclude)) 
 						row.add(childView);
 						added = true;
 						break;
@@ -42,13 +42,12 @@ public class ScannableViewCustom implements Scannable {
 				}
 	
 				if (!added) {
-//					if (childView != exclude)
-					if (!((childView.getParent()).equals(exclude)))
-					{//childView.getParent();//try this then give up
+					//if (!((childView.getParent()).equals(exclude)))
+					//{
 						ArrayList<View> newRow = new ArrayList<View>();
 						newRow.add(childView);
 						mRows.add(newRow);
-					}
+					//}
 				}
 			}
 		}
@@ -161,11 +160,15 @@ public class ScannableViewCustom implements Scannable {
 		float x1_max = view1.getHeight() + x1_min;
 		float x2_min = x2[1];
 		float x2_max = view2.getHeight() + x2_min;
-		
-		if (x2_min >= x1_min && x2_min <= x1_max) return true;
+		//Log.wtf("kl;","x1_min: "+x1_min+", x1_max: "+x1_max+", x2_min: "+x2_min+", x2_max: "+x2_max);
+		if (x2_min >= x1_min && x2_min < x1_max) return true;
 		if (x2_max >= x1_min && x2_max <= x1_max) return true;
 		if (x1_min >= x2_min && x1_min <= x2_max) return true;
-		if (x1_max >= x2_min && x1_max <= x2_max) return true;
+		if (x1_max > x2_min && x1_max <= x2_max) return true;
 		return false;
+		//if (x1_min == x2_min && x1_max == x2_max) return true;
+		//else return false;//this would probably work as well 
+		//and be more intuitive but I don't feel like testing 
+		//it right now and the current iteration works
 	}
 }
