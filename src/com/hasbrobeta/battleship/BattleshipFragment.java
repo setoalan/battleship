@@ -63,12 +63,36 @@ public class BattleshipFragment extends Fragment {
 		}
 		switch (requestCode) {
 		case PLAYER_ONE:
-			Intent i = new Intent(getActivity(), PlacementActivity.class);
-			i.putExtra("PLAYER_NUM", 1);
 			if (!mMultiPlay) {
 				//ai placement here
 			} else {
-				startActivityForResult(i, PLAYER_TWO);
+				final Dialog dialog = new Dialog(getActivity(), android.R.style.Theme_Black_NoTitleBar_Fullscreen);
+				dialog.setContentView(R.layout.dialog_transition);
+				mTransition = (Button) dialog.findViewById(R.id.transition);
+				// NEED "PASS TABLET TO PLAYER TWO" BACKGROUND
+				mTransition.setBackgroundResource(R.drawable.background_game_over);
+				mTransition.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						Thread timer = new Thread() {
+							public void run() {
+								try {
+									Intent i = new Intent(getActivity(), PlacementActivity.class);
+									i.putExtra("PLAYER_NUM", 1);
+									startActivityForResult(i, PLAYER_TWO);
+									sleep(500);
+								} catch(InterruptedException e) {
+									e.printStackTrace();
+								} finally {
+									dialog.dismiss();
+								}
+							}
+						};
+						timer.start();
+					}
+				});
+				dialog.show();
+				
 			}
 			return;
 		case PLAYER_TWO:
