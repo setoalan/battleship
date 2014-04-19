@@ -38,6 +38,7 @@ public class BattleshipFragment extends Fragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		CURRENT_PLAYER = false;
 		singletonBean = new SingletonBean();
 		player = BattleshipFragment.singletonBean.getPlayers();
 		mFiresLeft = player[CURRENT_PLAYER ? 1 : 0].getNumCurShips(); 
@@ -92,7 +93,6 @@ public class BattleshipFragment extends Fragment {
 					}
 				});
 				dialog.show();
-				
 			}
 			return;
 		case PLAYER_TWO:
