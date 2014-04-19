@@ -8,7 +8,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -31,7 +30,6 @@ public class PlacementActivity extends ASKActivity {
 	private int direction = 2;
 	private int shipType = 0;
 	private int playerNum;
-	private boolean CURRENT_PLAYER = false;
 	
 	private SharedPreferences sharedPref;
 	private boolean multi_play;
@@ -46,18 +44,15 @@ public class PlacementActivity extends ASKActivity {
 		sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
 		multi_play = sharedPref.getBoolean("player_mode", true);
 		
-		
 		mShipTV = (TextView) findViewById(R.id.ship_text);
 		mLocationTV = (TextView) findViewById(R.id.location_text);
 		mCurrentPlayerTV = (TextView) findViewById(R.id.current_player_place);
-		Log.i("TAG", playerNum+"");
 		if (playerNum == 0)
 			mCurrentPlayerTV.setText("Player ONE");
 		else if (multi_play)
 			mCurrentPlayerTV.setText("Player TWO");
 		else
 			mCurrentPlayerTV.setText("COMPUTER");
-		
 		
 		mGridView = (GridView) findViewById(R.id.grid_view);
 		mGridView.setOnItemClickListener(new OnItemClickListener() {
@@ -113,6 +108,20 @@ public class PlacementActivity extends ASKActivity {
 			else 
 				turnOffScanning();
 		}
+	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		if (BattleshipMenu.musicEnabled)
+			BattleshipMenu.mediaPlayer.start();
+	}
+	
+	@Override
+	protected void onPause() {
+		super.onPause();
+		if (BattleshipMenu.mediaPlayer.isPlaying())
+			BattleshipMenu.mediaPlayer.pause();
 	}
 	
 	private boolean helper(int adjust, int newCoord)

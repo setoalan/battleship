@@ -66,4 +66,5 @@ public class BattleshipActivity extends ASKActivity {
 		View lll = findViewById(R.id.grid_view_side);
 		return new ScannableViewCustom(ROOT,lll);
 	}
+	
 }

@@ -49,11 +49,28 @@ public class BattleshipFragment extends Fragment {
 		mMultiPlay = sharedPref.getBoolean("game_mode", true);
 		mASKPlayerOne = sharedPref.getBoolean("ask_player_one", false);
 		mASKPlayerTwo = sharedPref.getBoolean("ask_player_two", false);
+		
+		if (BattleshipMenu.musicEnabled)
+				BattleshipMenu.mediaPlayer.start();
 
 		Intent i = new Intent(getActivity(), PlacementActivity.class);
 		if (mMultiPlay)
 			i.putExtra("PLAYER_NUM", 0);
 		startActivityForResult(i, PLAYER_ONE);
+	}
+	
+	@Override
+	public void onStart() {
+		super.onStart();
+		if (BattleshipMenu.musicEnabled)
+			BattleshipMenu.mediaPlayer.start();
+	}
+	
+	@Override
+	public void onPause() {
+		super.onPause();
+		if (BattleshipMenu.mediaPlayer.isPlaying())
+			BattleshipMenu.mediaPlayer.pause();
 	}
 	
 	@Override
