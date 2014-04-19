@@ -14,18 +14,4 @@ public class SettingsFragment extends PreferenceFragment {
 		addPreferencesFromResource(R.layout.fragment_settings);
 	}
 	
-	@Override
-	public void onStart() {
-		super.onStart();
-		if (BattleshipMenu.musicEnabled)
-			BattleshipMenu.mediaPlayer.start();
-	}
-	
-	@Override
-	public void onPause() {
-		super.onPause();
-		if (BattleshipMenu.mediaPlayer.isPlaying())
-			BattleshipMenu.mediaPlayer.pause();
-	}
-	
 }
