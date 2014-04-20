@@ -87,8 +87,7 @@ public class BattleshipFragment extends Fragment {
 				final Dialog dialog = new Dialog(getActivity(), android.R.style.Theme_Black_NoTitleBar_Fullscreen);
 				dialog.setContentView(R.layout.dialog_transition);
 				mTransition = (Button) dialog.findViewById(R.id.transition);
-				// NEED "PASS TABLET TO PLAYER TWO" BACKGROUND
-				mTransition.setBackgroundResource(R.drawable.background_game_over);
+				mTransition.setBackgroundResource(R.drawable.background_setup_complete_2);
 				mTransition.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
@@ -116,8 +115,7 @@ public class BattleshipFragment extends Fragment {
 			final Dialog dialog = new Dialog(getActivity(), android.R.style.Theme_Black_NoTitleBar_Fullscreen);
 			dialog.setContentView(R.layout.dialog_transition);
 			mTransition = (Button) dialog.findViewById(R.id.transition);
-			// NEED "PASS TABLET TO PLAYER ONE" BACKGROUND
-			mTransition.setBackgroundResource(R.drawable.background_game_over);
+			mTransition.setBackgroundResource(R.drawable.background_setup_complete_1);
 			mTransition.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {

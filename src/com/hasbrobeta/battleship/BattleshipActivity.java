@@ -38,7 +38,7 @@ public class BattleshipActivity extends ASKActivity {
 		dialog.setContentView(R.layout.dialog_quit);
 		mOK = (Button) dialog.findViewById(R.id.ok_btn);
 		// NEED IMAGE FOR "OK"
-		mOK.setBackgroundResource(R.drawable.background_game_over_1);
+		mOK.setBackgroundResource(R.drawable.panel_menu);
 		mOK.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -47,7 +47,7 @@ public class BattleshipActivity extends ASKActivity {
 		});
 		mCancel = (Button) dialog.findViewById(R.id.cancel_btn);
 		// NEED IMAGE FOR "Cancel"
-		mCancel.setBackgroundResource(R.drawable.background_game_over_2);
+		mCancel.setBackgroundResource(R.drawable.panel_cancel);
 		mCancel.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
