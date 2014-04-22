@@ -54,8 +54,8 @@ public class BattleshipFragment extends Fragment {
 				BattleshipMenu.mediaPlayer.start();
 
 		Intent i = new Intent(getActivity(), PlacementActivity.class);
-		if (mMultiPlay)
-			i.putExtra("PLAYER_NUM", 0);
+
+		i.putExtra("PLAYER_NUM", 0);
 		startActivityForResult(i, PLAYER_ONE);
 	}
 	
@@ -79,42 +79,45 @@ public class BattleshipFragment extends Fragment {
 			getActivity().finish();
 			return;
 		}
+		
+		final Dialog dialog = new Dialog(getActivity(), android.R.style.Theme_Black_NoTitleBar_Fullscreen);
+		dialog.setContentView(R.layout.dialog_transition);
+		mTransition = (Button) dialog.findViewById(R.id.transition);
+		
 		switch (requestCode) {
 		case PLAYER_ONE:
+
 			if (!mMultiPlay) {
-				//ai placement here
-			} else {
-				final Dialog dialog = new Dialog(getActivity(), android.R.style.Theme_Black_NoTitleBar_Fullscreen);
-				dialog.setContentView(R.layout.dialog_transition);
-				mTransition = (Button) dialog.findViewById(R.id.transition);
-				mTransition.setBackgroundResource(R.drawable.background_setup_complete_2);
-				mTransition.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						Thread timer = new Thread() {
-							public void run() {
-								try {
-									Intent i = new Intent(getActivity(), PlacementActivity.class);
-									i.putExtra("PLAYER_NUM", 1);
-									startActivityForResult(i, PLAYER_TWO);
-									sleep(500);
-								} catch(InterruptedException e) {
-									e.printStackTrace();
-								} finally {
-									dialog.dismiss();
-								}
-							}
-						};
-						timer.start();
-					}
-				});
-				dialog.show();
+				AI ai = new AI();
+				ai.AIPlacement();
+				BattleshipFragmentSide.refresh();
+				mAdapter.notifyDataSetChanged();
+				return;
 			}
-			return;
+			
+			mTransition.setBackgroundResource(R.drawable.background_setup_complete_2);
+			mTransition.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					Thread timer = new Thread() {
+						public void run() {
+							try {
+								Intent i = new Intent(getActivity(), PlacementActivity.class);
+								i.putExtra("PLAYER_NUM", 1);
+								startActivityForResult(i, PLAYER_TWO);
+								sleep(500);
+							} catch(InterruptedException e) {
+								e.printStackTrace();
+							} finally {
+								dialog.dismiss();
+							}
+						}
+					};
+					timer.start();
+				}
+			});
+			break;
 		case PLAYER_TWO:
-			final Dialog dialog = new Dialog(getActivity(), android.R.style.Theme_Black_NoTitleBar_Fullscreen);
-			dialog.setContentView(R.layout.dialog_transition);
-			mTransition = (Button) dialog.findViewById(R.id.transition);
 			mTransition.setBackgroundResource(R.drawable.background_setup_complete_1);
 			mTransition.setOnClickListener(new View.OnClickListener() {
 				@Override
@@ -124,9 +127,10 @@ public class BattleshipFragment extends Fragment {
 					dialog.dismiss();
 				}
 			});
-			dialog.show();
-			return;
+			break;
 		}
+		dialog.show();
+		return;
 	}
 	
 	@Override
@@ -141,6 +145,7 @@ public class BattleshipFragment extends Fragment {
 		mGridView.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+				
 				if (player[CURRENT_PLAYER ? 1 : 0].getSquares()[position].isShot()) {
 					Toast.makeText(getActivity(), "Square already shot, please select another square", Toast.LENGTH_SHORT).show();
 					return;
@@ -276,8 +281,20 @@ public class BattleshipFragment extends Fragment {
 			mTransition.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					CURRENT_PLAYER = (CURRENT_PLAYER) ? false : true;
-					turnASKOnOff();
+					if (mMultiPlay){
+						CURRENT_PLAYER = (CURRENT_PLAYER) ? false : true; //changes player 
+						turnASKOnOff();
+					}
+					else {
+						
+						AI ai = new AI();
+						ai.play();
+						if (player[1].getHitCounter() == 17) {
+							mWin = true;
+							CURRENT_PLAYER = true;
+							showAlert(mWin, mHit, mShip);
+						}
+					}
 					BattleshipFragmentSide.refresh();
 					mAdapter.notifyDataSetChanged();
 					if (mGameType.equals("salvo"))
@@ -327,7 +344,13 @@ public class BattleshipFragment extends Fragment {
 	}
 
 	private void setTransitionBackground(boolean hit, int ship) {
-		if (!hit) {
+		
+		if (!mMultiPlay) {
+			
+			mTransition.setBackgroundResource(R.drawable.background_menu);
+			//make toast
+		}
+		else if (!hit) {
 			mTransition.setBackgroundResource(R.drawable.background_miss);
 		} else if (mDeclareType.equals("none")) {
 			mTransition.setBackgroundResource(R.drawable.background_hit);

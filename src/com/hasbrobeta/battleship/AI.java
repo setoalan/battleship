@@ -4,16 +4,17 @@ import java.util.Random;
 
 public class AI{
 	
-	public int play() {
+	public void play() {
+		Board[] players = BattleshipFragment.singletonBean.getPlayers();  
 		for(int i = 0; i < 100; i++) {
-			if (BattleshipFragment.singletonBean.getPlayers()[0].getSquares()[i].isOccupied() == true
-					&& BattleshipFragment.singletonBean.getPlayers()[0].getSquares()[i].isShot() == false) {
-				
-				return i;
+			Square square = players[0].getSquares()[i];
+			if (square.isOccupied() && !square.isShot()) {
+				square.setShot(true);
+				players[1].addHitCounter();
 			}
-			
+	
 		}
-		return 0; //should never get here
+		//throw error
 	}
 
     public void AIPlacement() {
