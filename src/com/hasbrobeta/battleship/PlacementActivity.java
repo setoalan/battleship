@@ -32,7 +32,6 @@ public class PlacementActivity extends ASKActivity {
 	private int playerNum;
 	
 	private SharedPreferences sharedPref;
-	private boolean multi_play;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -42,17 +41,14 @@ public class PlacementActivity extends ASKActivity {
 		playerNum = getIntent().getIntExtra("PLAYER_NUM", 0);
 		
 		sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-		multi_play = sharedPref.getBoolean("player_mode", true);
 		
 		mShipTV = (TextView) findViewById(R.id.ship_text);
 		mLocationTV = (TextView) findViewById(R.id.location_text);
 		mCurrentPlayerTV = (TextView) findViewById(R.id.current_player_place);
 		if (playerNum == 0)
 			mCurrentPlayerTV.setText("Player ONE");
-		else if (multi_play)
+		else 
 			mCurrentPlayerTV.setText("Player TWO");
-		else
-			mCurrentPlayerTV.setText("COMPUTER");
 		
 		mGridView = (GridView) findViewById(R.id.grid_view);
 		mGridView.setOnItemClickListener(new OnItemClickListener() {

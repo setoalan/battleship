@@ -7,13 +7,6 @@
     <PreferenceCategory
 	    android:title="@string/game_settings"
 	    android:key="game_settings" >
-	    
-        <CheckBoxPreference
-            android:key="game_mode"
-            android:title="@string/game_mode"
-            android:summary="Check for multiplayer, uncheck for singleplayer"
-            android:defaultValue="true" 
-            android:selectable="true"/>
 
 		<ListPreference
 			android:key="game_type"

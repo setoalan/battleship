@@ -5,12 +5,14 @@
 		<item>Classic (one shot/turn)</item>
 		<item>Salvo (one shot/surviving ship)</item>
 		<item>Hit Until Miss (fire until miss)</item>
+		<item>Single Player</item>
 	</string-array>
 	
 	<string-array name="game_variations_values">
 		<item>classic</item>
 		<item>salvo</item>
 		<item>hitmiss</item>
+		<item>multiplay</item>
 	</string-array>
 	
 	<string-array name="declare_variations">

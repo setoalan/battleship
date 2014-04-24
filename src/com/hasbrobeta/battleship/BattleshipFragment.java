@@ -46,7 +46,8 @@ public class BattleshipFragment extends Fragment {
 		sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
 		mGameType = sharedPref.getString("game_type", "0");
 		mDeclareType = sharedPref.getString("game_declare_type", "0");
-		mMultiPlay = sharedPref.getBoolean("game_mode", true);
+		mMultiPlay = !mGameType.equals("multiplay");
+		
 		mASKPlayerOne = sharedPref.getBoolean("ask_player_one", false);
 		mASKPlayerTwo = sharedPref.getBoolean("ask_player_two", false);
 		
@@ -91,7 +92,6 @@ public class BattleshipFragment extends Fragment {
 				AI ai = new AI();
 				ai.AIPlacement();
 				BattleshipFragmentSide.refresh();
-				//mAdapter.notifyDataSetChanged();
 				return;
 			}
 			
@@ -160,7 +160,7 @@ public class BattleshipFragment extends Fragment {
 						showAlert(mWin, mHit, mShip);
 					}
 					mShip = shipSank(player[CURRENT_PLAYER ? 0 : 1].getSquares()[position]);
-					if (mDeclareType.equals("hit") && !mGameType.equals("classic") && mShip != 0 && getShipName(mShip) != null)
+					if (mDeclareType.equals("hit") && !mGameType.equals("classic") && mShip != 0 && getShipName(mShip) != null && !mMultiPlay)
 						Toast.makeText(getActivity(), "You hit their " + getShipName(mShip), Toast.LENGTH_SHORT).show();
 					BattleshipMenu.playSound(BattleshipMenu.cannon, 0);
 					mHit = true;
