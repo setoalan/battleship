@@ -91,7 +91,7 @@ public class BattleshipFragment extends Fragment {
 				AI ai = new AI();
 				ai.AIPlacement();
 				BattleshipFragmentSide.refresh();
-				mAdapter.notifyDataSetChanged();
+				//mAdapter.notifyDataSetChanged();
 				return;
 			}
 			
@@ -293,6 +293,7 @@ public class BattleshipFragment extends Fragment {
 							mWin = true;
 							CURRENT_PLAYER = true;
 							showAlert(mWin, mHit, mShip);
+							return;
 						}
 					}
 					BattleshipFragmentSide.refresh();

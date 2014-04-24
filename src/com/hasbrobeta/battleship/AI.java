@@ -5,12 +5,14 @@ import java.util.Random;
 public class AI{
 	
 	public void play() {
-		Board[] players = BattleshipFragment.singletonBean.getPlayers();  
+		Board[] players = BattleshipFragment.singletonBean.getPlayers();
 		for(int i = 0; i < 100; i++) {
-			Square square = players[0].getSquares()[i];
-			if (square.isOccupied() && !square.isShot()) {
-				square.setShot(true);
+			Square otherSquare = players[0].getSquares()[i];
+			Square mySquare = players[1].getSquares()[i];
+			if (otherSquare.isOccupied() && !mySquare.isShot()) {
+				mySquare.setShot(true);
 				players[1].addHitCounter();
+				return;
 			}
 	
 		}
@@ -57,7 +59,7 @@ public class AI{
                     }
                 }
 
-                else { //veritcal
+                else { //vertical
                     if (start + shipSz * 10 > 100) 
                         canPlace = false;
                     if (canPlace == true) {
