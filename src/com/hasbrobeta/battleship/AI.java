@@ -6,17 +6,40 @@ public class AI{
 	
 	public void play() {
 		Board[] players = BattleshipFragment.singletonBean.getPlayers();
-		for(int i = 0; i < 100; i++) {
-			Square otherSquare = players[0].getSquares()[i];
-			Square mySquare = players[1].getSquares()[i];
-			if (otherSquare.isOccupied() && !mySquare.isShot()) {
-				mySquare.setShot(true);
-				players[1].addHitCounter();
-				return;
+		
+		Random rand = new Random();
+		int guess = rand.nextInt(4);
+		if (guess == 2) {
+			for(int i = 0; i < 100; i++) {
+				Square otherSquare = players[0].getSquares()[i];
+				Square mySquare = players[1].getSquares()[i];
+				
+				if (otherSquare.isOccupied() && !mySquare.isShot()) {
+					mySquare.setShot(true);
+					players[1].addHitCounter();
+					return;
+				}
 			}
-	
 		}
-		//throw error
+			
+		else {
+			//make a random guess 
+			boolean keep_guessing = true;
+			do {
+				Random sq = new Random();
+				int j = sq.nextInt(100);
+				Square bomb = players[1].getSquares()[j];
+				
+				if (!bomb.isShot()) {
+					keep_guessing = false;
+					bomb.setShot(true);
+					if (players[0].getSquares()[j].isOccupied())
+						players[1].addHitCounter();	
+				}
+				
+			} while(keep_guessing);				
+		}
+			return;
 	}
 
     public void AIPlacement() {
