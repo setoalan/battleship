@@ -61,15 +61,6 @@
 			android:summary="@string/ask_on_off"
 			android:defaultValue="false" />
 	    
-	    <EditTextPreference
-	        android:id="@+id/ask_speed"
-	        android:key="ask_speed"
-	        android:title="@string/ask_speed"
-	        android:summary="Change the scanning speed of ASK"
-	        android:dialogTitle="Scanning Speed (ms)"
-	        android:inputType="number"
-	        android:defaultValue="5000" />
-	    
 	</PreferenceCategory>
 	
 </PreferenceScreen>
